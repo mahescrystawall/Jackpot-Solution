@@ -1,0 +1,33 @@
+{
+    "data": {
+        "menu": [
+            { "id": 4, "name": "Cricket" },
+            { "id": 1, "name": "Football" },
+            { "id": 2, "name": "Tennis" },
+            { "id": 99995, "name": "I Casino" },
+            { "id": 99999, "name": "Casino" },
+            { "id": 99998, "name": "Int Casino" },
+            { "id": 99991, "name": "Sports book" },
+            { "id": 7, "name": "Horse Racing" },
+            { "id": 4339, "name": "Greyhound Racing" },
+            { "id": 99990, "name": "Binary" },
+            { "id": 99994, "name": "Kabaddi" },
+            { "id": 2378961, "name": "Politics" },
+            { "id": 7522, "name": "Basketball" },
+            { "id": 7511, "name": "Baseball" },
+            { "id": 20, "name": "Table Tennis" },
+            { "id": 998917, "name": "Volleyball" },
+            { "id": 7524, "name": "Ice Hockey" },
+            { "id": 5, "name": "Rugby" },
+            { "id": 26420387, "name": "Mixed Martial Arts" },
+            { "id": 3503, "name": "Darts" },
+            { "id": 29, "name": "Futsal" },
+            { "id": 99997, "name": "Casino Vivo" }
+        ]
+    },
+    "status": true,
+    "error": {
+        "message": "",
+        "code": 0
+    }
+}

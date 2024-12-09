@@ -1,0 +1,133 @@
+{
+    "status": true,
+    "data": {
+        "access_token": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9...",
+        "user": {
+            "id": 1522309,
+            "name": "Amrutha",
+            "username": "Amrutha",
+            "balance": 0,
+            "bonus_amount": 0,
+            "balance_postfix": "PTI",
+            "is_coins": 1,
+            "expose": "0.00",
+            "pl": "677.10",
+            "branch_panel_active": 0,
+            "wager_active": 0,
+            "contact_info": "",
+            "available_balance": 677.1
+        },
+        "stakes": {
+            "stake_name_1": "100",
+            "stake_name_2": "200",
+            "stake_name_3": "500",
+            "stake_name_4": "1000",
+            "stake_name_5": "2000",
+            "stake_name_6": "5000",
+            "stake_name_7": "10000",
+            "stake_name_8": "25000",
+            "stake_amount_1": 100,
+            "stake_amount_2": 200,
+            "stake_amount_3": 500,
+            "stake_amount_4": 1000,
+            "stake_amount_5": 2000,
+            "stake_amount_6": 5000,
+            "stake_amount_7": 10000,
+            "stake_amount_8": 25000
+        },
+        "event_type_settings": [
+            {
+                "id": 4,
+                "name": "Cricket"
+            },
+            {
+                "id": 1,
+                "name": "Football"
+            },
+            {
+                "id": 2,
+                "name": "Tennis"
+            },
+            {
+                "id": 99995,
+                "name": "I Casino"
+            },
+            {
+                "id": 99998,
+                "name": "Int Casino"
+            },
+            {
+                "id": 99991,
+                "name": "Sports book"
+            },
+            {
+                "id": 7,
+                "name": "Horse Racing"
+            },
+            {
+                "id": 4339,
+                "name": "Greyhound Racing"
+            },
+            {
+                "id": 99990,
+                "name": "Binary"
+            },
+            {
+                "id": 99994,
+                "name": "Kabaddi"
+            },
+            {
+                "id": 2378961,
+                "name": "Politics"
+            },
+            {
+                "id": 7522,
+                "name": "Basketball"
+            },
+            {
+                "id": 7511,
+                "name": "Baseball"
+            },
+            {
+                "id": 20,
+                "name": "Table Tennis"
+            },
+            {
+                "id": 998917,
+                "name": "Volleyball"
+            },
+            {
+                "id": 7524,
+                "name": "Ice Hockey"
+            },
+            {
+                "id": 5,
+                "name": "Rugby"
+            },
+            {
+                "id": 26420387,
+                "name": "Mixed Martial Arts"
+            },
+            {
+                "id": 3503,
+                "name": "Darts"
+            },
+            {
+                "id": 29,
+                "name": "Futsal"
+            },
+            {
+                "id": 99997,
+                "name": "Casino Vivo"
+            }
+        ],
+        "message": "\ud83c\udfbe \ud835\udc15\ud835\udc08\ud835\udc11\ud835\udc13\ud835\udc14\ud835\udc00\ud835\udc0b \ud835\udc13\ud835\udc04\ud835\udc0d\ud835\udc0d\ud835\udc08\ud835\udc12 \ud835\udc0d\ud835\udc0e\ud835\udc16 \ud835\udc00\ud835\udc15\ud835\udc00\ud835\udc08\ud835\udc0b\ud835\udc00\ud835\udc01\ud835\udc0b\ud835\udc04 \ud835\udc08\ud835\udc0d \ud835\udc0e\ud835\udc14\ud835\udc11 \ud835\udc04\ud835\udc17\ud835\udc02\ud835\udc07\ud835\udc00\ud835\udc0d\ud835\udc06\ud835\udc04 \ud83c\udfbe\u00a0\ud83e\udd3c\u200d\u2642 \ud835\udc0f\ud835\udc11\ud835\udc0e \ud835\udc0a\ud835\udc00\ud835\udc01\ud835\udc00\ud835\udc03\ud835\udc03\ud835\udc08 \ud83e\udd3c\u200d\u2642 \ud835\udc01\ud835\udc0e\ud835\udc0e\ud835\udc0a\ud835\udc0c\ud835\udc00\ud835\udc0a\ud835\udc04\ud835\udc11 \ud835\udc00\ud835\udc0d\ud835\udc03 \ud835\udc0f\ud835\udc11\ud835\udc04\ud835\udc0c\ud835\udc08\ud835\udc14\ud835\udc0c \ud835\udc0c\ud835\udc00\ud835\udc11\ud835\udc0a\ud835\udc04\ud835\udc13\ud835\udc12 \ud835\udc00\ud835\udc15\ud835\udc00\ud835\udc08\ud835\udc0b\ud835\udc00\ud835\udc01\ud835\udc0b\ud835\udc04 \ud835\udc08\ud835\udc0d \ud835\udc0e\ud835\udc14\ud835\udc11 \ud835\udc04\ud835\udc17\ud835\udc02\ud835\udc07\ud835\udc00\ud835\udc0d\ud835\udc06\ud835\udc04 \ud83c\udfcf \ud835\udc0e\ud835\udc14\ud835\udc11 \ud835\udc04\ud835\udc17\ud835\udc02\ud835\udc0b\ud835\udc14\ud835\udc12\ud835\udc08\ud835\udc15\ud835\udc04 \ud835\udc0f\ud835\udc11\ud835\udc04\ud835\udc0c\ud835\udc08\ud835\udc14\ud835\udc0c \ud835\udc0c\ud835\udc00\ud835\udc11\ud835\udc0a\ud835\udc04\ud835\udc13 \ud835\udc05\ud835\udc0e\ud835\udc11 (\ud835\udc12\ud835\udc11\ud835\udc0b) \ud835\udc08\ud835\udc12 \ud835\udc0d\ud835\udc0e\ud835\udc16 \ud835\udc12\ud835\udc13\ud835\udc00\ud835\udc11\ud835\udc13\ud835\udc04\ud835\udc03 \ud835\udc08\ud835\udc0d \ud835\udc0e\ud835\udc14\ud835\udc11 \ud835\udc04\ud835\udc17\ud835\udc02\ud835\udc07\ud835\udc00\ud835\udc0d\ud835\udc06\ud835\udc04 , \ud835\udc03\ud835\udc11\ud835\udc04\ud835\udc00\ud835\udc0c \ud835\udc01\ud835\udc08\ud835\udc06 \ud835\udc16\ud835\udc08\ud835\udc0d \ud835\udc01\ud835\udc08\ud835\udc06 \ud83d\udcb0",
+        "terms": null,
+        "sb_multiplier": 100,
+        "multi_markets": [],
+        "chat_token": "044fd02eb17faff43e35a9a2e0dc64459e0008f020954c53719c2df6a267eff8",
+        "chat_id": "Amrutha_1522309:1522189:",
+        "created_at": 1731931984
+    },
+        "message": "Sample message."
+    }

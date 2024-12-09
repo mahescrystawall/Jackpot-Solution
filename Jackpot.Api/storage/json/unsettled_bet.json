@@ -1,0 +1,66 @@
+{
+    "data": {
+        "orders": {
+            "current_page": 1,
+            "data": [
+                {
+                    "id": 74824282,
+                    "market_id": "9.1212537573",
+                    "event_id": 33815465,
+                    "selection_name": "30 Over Odd Run Bhav IND (2)",
+                    "market_type_id": "FANCY",
+                    "betting_type": "F",
+                    "rate": "1.00",
+                    "average_rate_matched": "1.00",
+                    "price": "98.00",
+                    "stake": "100.00",
+                    "stake_matched": "100.00",
+                    "stake_cancelled": "0.00",
+                    "bet_type": 1,
+                    "win": "98.00",
+                    "lose": "100.00",
+                    "is_matched": 1,
+                    "requested_at": "2024-12-07 11:33:00",
+                    "matched_at": "2024-12-07 11:33:01",
+                    "event_name": "Australia v India",
+                    "event_type_id": 4,
+                    "status": 0,
+                    "matched_at_format": "2024-12-07T11:33:01.000000Z",
+                    "requested_at_format": "2024-12-07T11:33:00.000000Z"
+                }
+            ],
+            "first_page_url": "https:\/\/api.d99hub.com\/api\/client\/orders?page=1",
+            "from": 1,
+            "last_page": 1,
+            "last_page_url": "https:\/\/api.d99hub.com\/api\/client\/orders?page=1",
+            "links": [
+                {
+                    "url": null,
+                    "label": "&laquo; Previous",
+                    "active": false
+                },
+                {
+                    "url": "https:\/\/api.d99hub.com\/api\/client\/orders?page=1",
+                    "label": "1",
+                    "active": true
+                },
+                {
+                    "url": null,
+                    "label": "Next &raquo;",
+                    "active": false
+                }
+            ],
+            "next_page_url": null,
+            "path": "https:\/\/api.d99hub.com\/api\/client\/orders",
+            "per_page": 100,
+            "prev_page_url": null,
+            "to": 1,
+            "total": 1
+        }
+    },
+    "status": true,
+    "error": {
+        "message": "",
+        "code": 0
+    }
+}
