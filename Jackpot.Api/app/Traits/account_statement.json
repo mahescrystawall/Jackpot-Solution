@@ -1,0 +1,139 @@
+{
+    "data": {
+      "transactions": {
+        "current_page": 1,
+        "data": [
+          {
+            "created_at": "2024-11-30 07:25:39",
+            "total": "200.00",
+            "balance": "200.10",
+            "type": 1,
+            "amount": "200.00",
+            "commission_in_amount": "0.00",
+            "commission_out_amount": "0.00",
+            "description": "B-Deposit From Up-line",
+            "trans_type": 3,
+            "event_type_id": null,
+            "market_id": null,
+            "market_type_id": null,
+            "ref_id": null,
+            "event_id": null,
+            "created_at_format": "2024-11-30T07:25:39.000000Z"
+          },
+          {
+            "created_at": "2024-11-20 08:44:46",
+            "total": "0.00",
+            "balance": "0.10",
+            "type": 1,
+            "amount": "0.00",
+            "commission_in_amount": "0.00",
+            "commission_out_amount": "0.00",
+            "description": "iCasino -R- MAC88-CAVB101 [955441c2-f732-43bf-9cd3-379ecca80fd3]",
+            "trans_type": 2,
+            "event_type_id": 99995,
+            "market_id": "W2c1bf6f6-bd80-4a4b-a93f-fb4fb7131387",
+            "market_type_id": "955441c2-f732-43bf-9cd3-379ecca80fd3",
+            "ref_id": "2c1bf6f6-bd80-4a4b-a93f-fb4fb7131387",
+            "event_id": 320922658051522400,
+            "created_at_format": "2024-11-20T08:44:46.000000Z"
+          },
+          {
+            "created_at": "2024-11-20 08:44:25",
+            "total": "-100.00",
+            "balance": "0.10",
+            "type": 0,
+            "amount": "-100.00",
+            "commission_in_amount": "0.00",
+            "commission_out_amount": "0.00",
+            "description": "iCasino -B- MAC88-CAVB101 [955441c2-f732-43bf-9cd3-379ecca80fd3]",
+            "trans_type": 2,
+            "event_type_id": 99995,
+            "market_id": "2c1bf6f6-bd80-4a4b-a93f-fb4fb7131387",
+            "market_type_id": "955441c2-f732-43bf-9cd3-379ecca80fd3",
+            "ref_id": null,
+            "event_id": 320922658051522400,
+            "created_at_format": "2024-11-20T08:44:25.000000Z"
+          },
+          {
+            "created_at": "2024-11-20 08:44:05",
+            "total": "0.00",
+            "balance": "100.10",
+            "type": 1,
+            "amount": "0.00",
+            "commission_in_amount": "0.00",
+            "commission_out_amount": "0.00",
+            "description": "iCasino -R- MAC88-CAVB101 [aaff41a1-0c4f-4e94-b491-fba314538965]",
+            "trans_type": 2,
+            "event_type_id": 99995,
+            "market_id": "W652168d4-03f6-4419-8800-37c20806fb54",
+            "market_type_id": "aaff41a1-0c4f-4e94-b491-fba314538965",
+            "ref_id": "652168d4-03f6-4419-8800-37c20806fb54",
+            "event_id": 320922056401522400,
+            "created_at_format": "2024-11-20T08:44:05.000000Z"
+          },
+          {
+            "created_at": "2024-11-20 08:43:52",
+            "total": "100.00",
+            "balance": "100.10",
+            "type": 1,
+            "amount": "100.00",
+            "commission_in_amount": "0.00",
+            "commission_out_amount": "0.00",
+            "description": "B-Deposit From Up-line",
+            "trans_type": 3,
+            "event_type_id": null,
+            "market_id": null,
+            "market_type_id": null,
+            "ref_id": null,
+            "event_id": null,
+            "created_at_format": "2024-11-20T08:43:52.000000Z"
+          }
+        ],
+        "first_page_url": "https://api.d99hub.com/api/client/report/statement?page=1",
+        "from": 1,
+        "last_page": 1,
+        "last_page_url": "https://api.d99hub.com/api/client/report/statement?page=1",
+        "links": [
+          {
+            "url": null,
+            "label": "&laquo; Previous",
+            "active": false
+          },
+          {
+            "url": "https://api.d99hub.com/api/client/report/statement?page=1",
+            "label": "1",
+            "active": true
+          },
+          {
+            "url": null,
+            "label": "Next &raquo;",
+            "active": false
+          }
+        ],
+        "next_page_url": null,
+        "path": "https://api.d99hub.com/api/client/report/statement",
+        "per_page": 100,
+        "prev_page_url": null,
+        "to": 31,
+        "total": 31
+      },
+      "event_type_ids": [
+        {
+          "id": [
+            99999,
+            67720,
+            87564,
+            56767,
+            67564,
+            98789
+          ],
+          "url": "https://api.d99hub.com/api/client/casino_bet_history/:market_id"
+        }
+      ]
+    },
+    "status": true,
+    "error": {
+      "message": "",
+      "code": 0
+    }
+  }
