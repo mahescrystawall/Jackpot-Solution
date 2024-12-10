@@ -7,6 +7,8 @@ use App\Interfaces\IBetService;
 use App\Services\BetService;
 use App\Interfaces\IProfitLossService;
 use App\Services\ProfitLossService;
+use App\Interfaces\IPriceValueService;
+use App\Services\PriceValueService;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -18,6 +20,7 @@ class AppServiceProvider extends ServiceProvider
 
         $this->app->bind(\App\Interfaces\IBetService::class, \App\Services\BetService::class);
         $this->app->bind(IProfitLossService::class, ProfitLossService::class);
+        $this->app->bind(IPriceValueService::class, PriceValueService::class);
     }
 
     /**
