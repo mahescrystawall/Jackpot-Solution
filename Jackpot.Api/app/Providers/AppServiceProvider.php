@@ -11,6 +11,8 @@ use App\Interfaces\IPriceValueService;
 use App\Services\PriceValueService;
 use App\Interfaces\IMenuService;
 use App\Services\MenuService;
+use App\Interfaces\IEventService;
+use App\Services\EventService;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -24,6 +26,7 @@ class AppServiceProvider extends ServiceProvider
         $this->app->bind(IProfitLossService::class, ProfitLossService::class);
         $this->app->bind(IPriceValueService::class, PriceValueService::class);
         $this->app->bind(IMenuService::class, MenuService::class);
+        $this->app->bind(IEventService::class, EventService::class);
     }
 
     /**
