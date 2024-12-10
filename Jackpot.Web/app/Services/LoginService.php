@@ -9,7 +9,7 @@ class LoginService
 {
     public function getloginData()
     {
-        $baseUrl = config('app.api_url', env('API_URL'));
+        $baseUrl = env('API_URL');
         
         $loginData = Http::timeout(60)->get($baseUrl.'/api/login-data');
 
