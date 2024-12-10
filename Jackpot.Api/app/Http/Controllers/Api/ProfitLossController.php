@@ -3,33 +3,30 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
+use App\Interfaces\IProfitLossService;
 
 class ProfitLossController extends Controller
 {
-   /**
+    protected $_profitLossService;
+
+    public function __construct(IProfitLossService $profitLossService)
+    {
+        $this->_profitLossService = $profitLossService;
+    }
+
+    /**
      * Fetch profit and loss data from the JSON file.
      *
      * @return \Illuminate\Http\JsonResponse
      */
     public function getProfitLoss()
     {
-        // Path to the profit and loss JSON file
-        $path = storage_path('json/profit_loss.json');
+        $data = $this->_profitLossService->getProfitLossData();
 
-        // Check if file exists
-        if (file_exists($path)) {
-            // Read the file content
-            $json = file_get_contents($path);
-
-            // Decode JSON to array
-            $data = json_decode($json, true);
-
-            // Return JSON response
-            return response()->json($data, 200);
-        } else {
-            // Return error if file not found
-            return response()->json(['message' => 'File not found'], 404);
+        if (isset($data['message']) && $data['message'] === 'File not found') {
+            return response()->json($data, 404);
         }
+
+        return response()->json($data, 200);
     }
 }

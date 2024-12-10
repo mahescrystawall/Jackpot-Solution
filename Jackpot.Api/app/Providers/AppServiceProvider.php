@@ -5,6 +5,8 @@ namespace App\Providers;
 use Illuminate\Support\ServiceProvider;
 use App\Interfaces\IBetService;
 use App\Services\BetService;
+use App\Interfaces\IProfitLossService;
+use App\Services\ProfitLossService;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -15,6 +17,7 @@ class AppServiceProvider extends ServiceProvider
     {
 
         $this->app->bind(\App\Interfaces\IBetService::class, \App\Services\BetService::class);
+        $this->app->bind(IProfitLossService::class, ProfitLossService::class);
     }
 
     /**
