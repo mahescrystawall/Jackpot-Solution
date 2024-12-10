@@ -3,33 +3,30 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
+use App\Interfaces\IPriceValueService;
 
 class PriceValueController extends Controller
 {
-     /**
+    protected $_priceValueService;
+
+    public function __construct(IPriceValueService $priceValueService)
+    {
+        $this->_priceValueService = $priceValueService;
+    }
+
+    /**
      * Fetch the stakes data from a JSON file and return it as a JSON response.
      *
      * @return \Illuminate\Http\JsonResponse
      */
     public function getStakes()
     {
-        // Path to the JSON file
-        $path = storage_path('json/stakes.json');
+        $data = $this->_priceValueService->getStakesData();
 
-        // Check if the file exists
-        if (file_exists($path)) {
-            // Read the contents of the file
-            $json = file_get_contents($path);
-
-            // Decode the JSON data to an array
-            $data = json_decode($json, true);
-
-            // Return the data as a JSON response
-            return response()->json($data, 200);
-        } else {
-            // Return an error response if the file is not found
-            return response()->json(['message' => 'File not found'], 404);
+        if (isset($data['message']) && $data['message'] === 'File not found') {
+            return response()->json($data, 404);
         }
+
+        return response()->json($data, 200);
     }
 }

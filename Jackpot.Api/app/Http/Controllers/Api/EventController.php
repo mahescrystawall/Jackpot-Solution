@@ -3,25 +3,30 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
+use App\Interfaces\IEventService;
 
 class EventController extends Controller
 {
-   /**
+    protected $_eventService;
+
+    public function __construct(IEventService $eventService)
+    {
+        $this->_eventService = $eventService;
+    }
+
+    /**
      * Fetch event data from the JSON file.
      *
      * @return \Illuminate\Http\JsonResponse
      */
     public function getEvents()
     {
-        $path = storage_path('json/events.json');
+        $data = $this->_eventService->getEventData();
 
-        if (file_exists($path)) {
-            $json = file_get_contents($path);
-            $data = json_decode($json, true);
-            return response()->json($data, 200);
-        } else {
-            return response()->json(['message' => 'File not found'], 404);
+        if (isset($data['message']) && $data['message'] === 'File not found') {
+            return response()->json($data, 404);
         }
+
+        return response()->json($data, 200);
     }
 }
