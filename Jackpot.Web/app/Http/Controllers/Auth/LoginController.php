@@ -39,13 +39,11 @@ class LoginController extends Controller
                         'message'=>$response1['data']['message']
                     ]);
 
-                    return redirect('/home');
+            return redirect('/home');
 
         }
         else{
-            return back()->withErrors([
-                        'error' => $response['message'] ?? 'Invalid Credentials or API Error.',
-                    ]);
+            return back()->withErrors(['error' => $response['message'] ?? 'Invalid Credentials or API Error.',]);
         }
     }
     public function logout()
