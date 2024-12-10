@@ -20,6 +20,7 @@ class BetHistoryController extends Controller
     public function index(Request $request)
     {
         $betHistoryData = $this->betHistoryService->getbetHistoryData();
+        $allSports=$this->betHistoryService->getAllSports();
         if (empty($betHistoryData['error'])) {
             return view('user/bet_history', [
                 'events' => [],
@@ -29,7 +30,7 @@ class BetHistoryController extends Controller
         }
         $events = $betHistoryData['data']['orders'];
         $pagination = $betHistoryData['data']['orders']['links'];
-        return view('user/bet_history', compact('events','pagination'));
+        return view('user/bet_history', compact('events','pagination','allSports'));
     }
 }
 ?>

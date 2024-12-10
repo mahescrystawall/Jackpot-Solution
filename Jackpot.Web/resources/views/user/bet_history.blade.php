@@ -8,9 +8,11 @@
                 <div class="row row5 mt-2">
                     <div class="col-md-2">
                         <div class="form-group mb-0">
-                            <select  name="reportType" id="event_type_id" class="custom-select">
-                                <option  value="ALL">All Sports</option>
-                                <option  value="4">Cricket</option>
+                            <select name="reportType" id="event_type_id" class="custom-select">
+                                <option value="ALL">All Sports</option>
+                                @foreach($allSports['data']['menu'] as $sport)
+                                    <option value="{{ $sport['id'] }}">{{ $sport['name'] }}</option>
+                                @endforeach
                             </select>
                         </div>
                     </div>
@@ -65,7 +67,7 @@
                                     </tr>
                                 </thead>
                                 @if($events && !empty($events['data']))
-                                
+
                                     <tbody  role="rowgroup">
                                         @foreach($events['data'] as $event)
                                             <tr>
@@ -77,8 +79,8 @@
                                                 <td>{{ $event['result'] }}</td>
                                                 <td>{{ $event['matched_at'] }}</td>
                                                 <td>{{ $event['matched_at'] }}</td>
-                                                
-                                                
+
+
                                             </tr>
                                         @endforeach
                                     </tbody>
@@ -102,7 +104,7 @@
              var is_matched = $('#is_matched').val();
              var event_type_id = $('#event_type_id').val();
 
-        });  
+        });
     });
     </script>
 @endsection

@@ -9,10 +9,23 @@ class BetHistoryService
 {
     public function getbetHistoryData()
     {
-    
-        $baseUrl = config('app.api_url', env('API_URL'));
-        
+
+        $baseUrl = env('API_URL');
+
         $response = Http::timeout(60)->get($baseUrl.'/api/bet_history');
+         // Check if the response is successful
+         if ($response->successful()) {
+            return $response->json(); // Return response as an array
+        }
+        return ['error' => 'Failed to fetch data'];
+    }
+    public function getAllSports()
+    {
+
+        $baseUrl = env('API_URL');
+
+        $response = Http::timeout(60)->get($baseUrl.'/api/menu');
+
          // Check if the response is successful
          if ($response->successful()) {
             return $response->json(); // Return response as an array
