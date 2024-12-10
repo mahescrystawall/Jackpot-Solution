@@ -20,7 +20,7 @@
             <section>
                 <div class="flex flex-col items-center justify-center px-6 py-8 mx-auto md:h-screen lg:py-0 bg-black-600 rounded-3xl ">
 
-                    <div class="w-full bg-white border rounded-lg shadow-[10px_10px_0px_0_rgba(28,100,242,1)] dark:border md:mt-0 sm:max-w-md xl:p-0 relative" >
+                    <div class="w-full bg-white border rounded-lg shadow-[10px_10px_0px_0_rgba(0,173,181,1)] dark:border md:mt-0 sm:max-w-md xl:p-0 relative" >
                         
                         <div class="p-6 space-y-4 md:space-y-6 sm:p-8">
                             <div class="w-[100%] text-left">
@@ -52,7 +52,7 @@
                                 </div>
                                 <div class="flex gap-5 self-stretch mt-6 font-semibold uppercase max-md:mr-2">
                                     <button type="submit"
-                                        class="px-12 py-2 text-xl text-white whitespace-nowrap bg-blue-600 rounded-xl max-md:px-5 hover:bg-blue-700 focus:ring-2 focus:ring-blue-500 focus:ring-offset-2">
+                                        class="px-12 py-2 text-xl text-white whitespace-nowrap bg-jblue1 rounded-xl max-md:px-5 hover:bg-jblue1-700 focus:ring-2 focus:ring-blue-500 focus:ring-offset-2">
                                         Login
                                     </button>
                                     <div class="flex flex-col my-auto text-base text-black">
