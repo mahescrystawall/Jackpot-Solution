@@ -14,7 +14,7 @@
 
 <body>
 
-    <main class="w-[100vw] h-[100vh]">
+    <main class="w-[100vw] h-[100vh] bg-jcolor8">
         <div
             class="px-4 mx-auto max-w-screen-xl md:max-w-screen-lg 2xl:max-w-screen-xl text-center h-full content-center ">
             <section>
@@ -67,8 +67,8 @@
                                             aria-hidden="true"></div>
                                     </div>
                                 </div>
-                                <div class="mt-16 text-base text-black max-md:mt-10">
-                                    <span class="text-stone-500 text-left">For Support:</span>
+                                <div class="mt-16 text-base text-black max-md:mt-10 text-left">
+                                    <span class="text-stone-500">For Support:</span>
                                     <a href="#"
                                         class="hover:text-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500">
                                         <span class="border-b border-gray-600">info.live@gmail.com</span></a>
