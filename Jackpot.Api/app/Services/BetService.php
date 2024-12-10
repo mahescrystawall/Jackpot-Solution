@@ -1,28 +1,14 @@
 <?php
-
 namespace App\Services;
 
-use Illuminate\Support\Facades\File;
+use App\Interfaces\IBetService;
 use App\Traits\FileHelper;
 
-class BetService
+class BetService implements IBetService
 {
-
     use FileHelper;
 
-    /**
-     * Fetch the data from the given JSON file.
-     *
-     * @param string $fileName
-     * @return array
-     */
-    /**
-     * Fetch the data from the given JSON file.
-     *
-     * @param string $fileName
-     * @return array
-     */
-    public function getBetData(string $fileName)
+    public function getBetData(string $fileName): array
     {
         return $this->getDataFromFile($fileName);
     }
