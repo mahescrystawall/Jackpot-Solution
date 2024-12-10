@@ -7,16 +7,21 @@ use Illuminate\Support\Facades\File;
 
 class BetHistoryService
 {
-    public function getbetHistoryData()
+    public function getbetHistoryData($sportId = null)
     {
-
         $baseUrl = env('API_URL');
+        $url = $baseUrl . '/api/bet_history';
 
-        $response = Http::timeout(60)->get($baseUrl.'/api/bet_history');
-         // Check if the response is successful
-         if ($response->successful()) {
+        if ($sportId) {
+            $url .= '?event_type_id=' . $sportId;
+        }
+
+        $response = Http::timeout(60)->get($url);
+
+        if ($response->successful()) {
             return $response->json(); // Return response as an array
         }
+
         return ['error' => 'Failed to fetch data'];
     }
     public function getAllSports()

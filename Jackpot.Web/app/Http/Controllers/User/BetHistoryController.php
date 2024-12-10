@@ -19,17 +19,27 @@ class BetHistoryController extends Controller
 
     public function index(Request $request)
     {
-        $betHistoryData = $this->betHistoryService->getbetHistoryData();
-        $allSports=$this->betHistoryService->getAllSports();
-        if (empty($betHistoryData['error'])) {
-            return view('user/bet_history', [
-                'events' => [],
-                'pagination' => [],
-                'error' => $betHistoryData['error'], // Pass error message to view
-            ]);
+        $eventTypeId ='';
+        $events = null;
+        if($request->get('event_type_id')){
+            $eventTypeId = $request->get('event_type_id');
         }
-        $events = $betHistoryData['data']['orders'];
-        $pagination = $betHistoryData['data']['orders']['links'];
+        $allSports=$this->betHistoryService->getAllSports();
+        $betHistoryData = $this->betHistoryService->getbetHistoryData($eventTypeId);
+         $events = $betHistoryData;
+        // / dd($betHistoryData['links']);
+         $pagination = $betHistoryData;
+
+
+
+        // if (empty($betHistoryData['error'])) {
+        //     return view('user/bet_history', [
+        //         'events' => [],
+        //         'pagination' => [],
+        //         'error' => $betHistoryData['error'], // Pass error message to view
+        //     ]);
+        // }
+
         return view('user/bet_history', compact('events','pagination','allSports'));
     }
 }

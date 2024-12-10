@@ -8,7 +8,7 @@
                 <div class="row row5 mt-2">
                     <div class="col-md-2">
                         <div class="form-group mb-0">
-                            <select name="reportType" id="event_type_id" class="custom-select">
+                            <select name="event_type_id" id="event_type_id" class="custom-select">
                                 <option value="ALL">All Sports</option>
                                 @foreach($allSports['data']['menu'] as $sport)
                                     <option value="{{ $sport['id'] }}">{{ $sport['name'] }}</option>
@@ -97,14 +97,46 @@
 @endsection
 @section('scripts')
 <script>
-    $(document).ready(function() {
-        // alert('dfjhj');
-        $(document).on('change', '.custom-select', function(event) {
-            event.preventDefault();
-             var is_matched = $('#is_matched').val();
-             var event_type_id = $('#event_type_id').val();
+$(document).ready(function () {
+    $('#event_type_id').change(function (event) {
+        event.preventDefault();
+        var eventTypeId = $(this).val();
 
+        $.ajax({
+            url: "{{ route('bet-history') }}",
+            type: 'GET',
+            data: {
+                event_type_id: eventTypeId,
+            },
+            success: function (data) {
+                // Check if the API returned data and populate the table
+                if (data && data.data && data.data.length > 0) {
+                    var tableRows = '';
+                    $.each(data.data, function(index, event) {
+                        tableRows += `<tr>
+                                        <td>${event.event_name}</td>
+                                        <td>${event.selection_name}</td>
+                                        <td>${event.bet_type ? 'back' : 'lay'}</td>
+                                        <td>${event.rate}</td>
+                                        <td>${event.stake}</td>
+                                        <td>${event.result}</td>
+                                        <td>${event.matched_at}</td>
+                                        <td>${event.matched_at}</td>
+                                    </tr>`;
+                    });
+
+                    $('table tbody').html(tableRows); // Insert the rows into the table
+                } else {
+                    // If no data, display a message in the table
+                    $('table tbody').html('<tr><td colspan="8">No Data To Display</td></tr>');
+                }
+            },
+            error: function (error) {
+                console.error(error); // Log any error in the console
+            }
         });
     });
+});
+
     </script>
 @endsection

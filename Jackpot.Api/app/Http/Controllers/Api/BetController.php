@@ -39,10 +39,11 @@ class BetController extends Controller
      *
      * @return \Illuminate\Http\JsonResponse
      */
-    public function getBetHistory()
+    public function getBetHistory(Request $request)
     {
-        // Use the BetService to get the bet history
-        $data = $this->_betService->getBetData('bet_history.json');
+        $eventTypeId = $request->query('event_type_id');
+
+        $data = $this->_betService->getBetHistoryData('bet_history.json', $eventTypeId);
 
         if (isset($data['error_message'])) {
             return response()->json($data, 400);
