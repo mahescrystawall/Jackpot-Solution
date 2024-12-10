@@ -30,8 +30,8 @@
                                 <span>
                             </div>
                             <h1
-                                class="text-xl font-bold leading-tight tracking-tight text-gray-900 md:text-2xl text-left">
-                                SIGN IN
+                                class="text-xl font-bold leading-tight tracking-tight text-gray-900 md:text-2xl text-left uppercase">
+                                Sign In
                             </h1>
                             <form class="max-w-md mx-auto" action="{{ route('postlogin') }}" method="POST">
                                 @csrf
@@ -52,13 +52,13 @@
                                 </div>
                                 <div class="flex gap-5 self-stretch mt-6 font-semibold uppercase max-md:mr-2">
                                     <button type="submit"
-                                        class="px-12 py-2 text-xl text-white whitespace-nowrap bg-jblue1 rounded-xl max-md:px-5 hover:bg-jblue1-700 focus:ring-2 focus:ring-blue-500 focus:ring-offset-2">
+                                        class="px-12 py-2 text-xl text-white whitespace-nowrap bg-jblue1 rounded-xl max-md:px-5 hover:bg-jblue1-700 focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 uppercase">
                                         Login
                                     </button>
                                     <div class="flex flex-col my-auto text-base text-black">
                                         <button type="submit"
                                             class="flex gap-3 hover:text-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2">
-                                            <span>Login with Demo</span>
+                                            <span class="uppercase">Login with Demo</span>
                                             <img loading="lazy"
                                                 src="https://cdn.builder.io/api/v1/image/assets/b19d10cba04e44e6a290692865305dd3/bf5702d17dbb663aab58d2eba6ad73a7b65884a4ae39eeeb4f0e97d56ab5b09b?apiKey=b19d10cba04e44e6a290692865305dd3&"
                                                 class="object-contain shrink-0 my-auto aspect-[3.23] w-[29px]" alt="" />
