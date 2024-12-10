@@ -6,11 +6,11 @@ use App\Interfaces\IMenuService;
 
 class MenuController extends Controller
 {
-    protected $menuService;
+    protected $_menuService;
 
     public function __construct(IMenuService $menuService)
     {
-        $this->menuService = $menuService;
+        $this->_menuService = $menuService;
     }
 
     /**
@@ -20,7 +20,7 @@ class MenuController extends Controller
      */
     public function getMenu()
     {
-        $data = $this->menuService->getMenuData();
+        $data = $this->_menuService->getMenuData();
 
         if (isset($data['message']) && $data['message'] === 'File not found') {
             return response()->json($data, 404);
