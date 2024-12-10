@@ -40,7 +40,7 @@ export default {
             'jcolor6': '#252728',
             'jcolor7': '#222222',
             'jcolor8': '#1B1B1B',
-            'jcolor9': '#1B1A1B',
+            'jcolor9': '#A4A4A4',
             
           },
       

@@ -8,10 +8,18 @@
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         @vite(['resources/css/app.css','resources/js/app.js'])
+
+        @yield('css_content')
     </head>
     <body>
-        <div id="app" class="h-[100vh] w-[100vw] bg-dark">
+        <div id="app" class="h-[100vh] w-[100vw] bg-jcolor8">
+            @include('layouts.header')
+            
+            @include('layouts.side_menu.side_menu')
+            
+            @yield('content')
             
         </div>
-    </body>
+        @yield('js_content')
+    </body> 
 </html>
