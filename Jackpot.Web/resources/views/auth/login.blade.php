@@ -14,13 +14,13 @@
 
 <body>
 
-    <main class="w-[100vw] h-[100vh]">
+    <main class="w-[100vw] h-[100vh] bg-jcolor8">
         <div
             class="px-4 mx-auto max-w-screen-xl md:max-w-screen-lg 2xl:max-w-screen-xl text-center h-full content-center ">
             <section>
                 <div class="flex flex-col items-center justify-center px-6 py-8 mx-auto md:h-screen lg:py-0 bg-black-600 rounded-3xl ">
 
-                    <div class="w-full bg-white border rounded-lg shadow-[10px_10px_0px_0_rgba(28,100,242,1)] dark:border md:mt-0 sm:max-w-md xl:p-0 relative" >
+                    <div class="w-full bg-white border rounded-lg shadow-[10px_10px_0px_0_rgba(0,173,181,1)] dark:border md:mt-0 sm:max-w-md xl:p-0 relative" >
                         
                         <div class="p-6 space-y-4 md:space-y-6 sm:p-8">
                             <div class="w-[100%] text-left">
@@ -30,8 +30,8 @@
                                 <span>
                             </div>
                             <h1
-                                class="text-xl font-bold leading-tight tracking-tight text-gray-900 md:text-2xl text-left">
-                                SIGN IN
+                                class="text-xl font-bold leading-tight tracking-tight text-gray-900 md:text-2xl text-left uppercase">
+                                Sign In
                             </h1>
                             <form class="max-w-md mx-auto" action="{{ route('postlogin') }}" method="POST">
                                 @csrf
@@ -52,13 +52,13 @@
                                 </div>
                                 <div class="flex gap-5 self-stretch mt-6 font-semibold uppercase max-md:mr-2">
                                     <button type="submit"
-                                        class="px-12 py-2 text-xl text-white whitespace-nowrap bg-blue-600 rounded-xl max-md:px-5 hover:bg-blue-700 focus:ring-2 focus:ring-blue-500 focus:ring-offset-2">
+                                        class="px-12 py-2 text-xl text-white whitespace-nowrap bg-jblue1 rounded-xl max-md:px-5 hover:bg-jblue1-700 focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 uppercase">
                                         Login
                                     </button>
                                     <div class="flex flex-col my-auto text-base text-black">
                                         <button type="submit"
                                             class="flex gap-3 hover:text-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2">
-                                            <span>Login with Demo</span>
+                                            <span class="uppercase">Login with Demo</span>
                                             <img loading="lazy"
                                                 src="https://cdn.builder.io/api/v1/image/assets/b19d10cba04e44e6a290692865305dd3/bf5702d17dbb663aab58d2eba6ad73a7b65884a4ae39eeeb4f0e97d56ab5b09b?apiKey=b19d10cba04e44e6a290692865305dd3&"
                                                 class="object-contain shrink-0 my-auto aspect-[3.23] w-[29px]" alt="" />
@@ -67,8 +67,8 @@
                                             aria-hidden="true"></div>
                                     </div>
                                 </div>
-                                <div class="mt-16 text-base text-black max-md:mt-10">
-                                    <span class="text-stone-500 text-left">For Support:</span>
+                                <div class="mt-16 text-base text-black max-md:mt-10 text-left">
+                                    <span class="text-stone-500">For Support:</span>
                                     <a href="#"
                                         class="hover:text-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500">
                                         <span class="border-b border-gray-600">info.live@gmail.com</span></a>
