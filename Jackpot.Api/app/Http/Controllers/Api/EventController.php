@@ -7,11 +7,11 @@ use App\Interfaces\IEventService;
 
 class EventController extends Controller
 {
-    protected $eventService;
+    protected $_eventService;
 
     public function __construct(IEventService $eventService)
     {
-        $this->eventService = $eventService;
+        $this->_eventService = $eventService;
     }
 
     /**
@@ -21,7 +21,7 @@ class EventController extends Controller
      */
     public function getEvents()
     {
-        $data = $this->eventService->getEventData();
+        $data = $this->_eventService->getEventData();
 
         if (isset($data['message']) && $data['message'] === 'File not found') {
             return response()->json($data, 404);

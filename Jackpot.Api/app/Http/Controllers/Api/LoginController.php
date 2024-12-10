@@ -3,32 +3,31 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
-use App\Services\LoginService;
+use App\Interfaces\ILoginService;
 
 class LoginController extends Controller
 {
-    protected $loginService;
+    protected $_loginService;
 
-    public function __construct(LoginService $loginService)
+    public function __construct(ILoginService $loginService)
     {
-        $this->loginService = $loginService;
+        $this->_loginService = $loginService;
     }
 
-     /**
-     * Fetch the unsettled bets from the JSON file and return them as a JSON response.
-     *
+    /**
+     * Fetch the login data from the JSON file and return it as a JSON response.
      *
      * @return \Illuminate\Http\JsonResponse
      */
     public function getLoginData()
     {
-        // Use the LoginService to get the auth user
-        $data = $this->loginService->getLoginData('login.json');
+        // Use the LoginService to get the login data
+        $data = $this->_loginService->getLoginData('login.json');
 
         if (isset($data['error_message'])) {
             return response()->json($data, 400);
         }
+
         return response()->json($data, 200);
     }
 }

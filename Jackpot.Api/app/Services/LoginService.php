@@ -1,11 +1,11 @@
 <?php
 
 namespace App\Services;
-
+use App\Interfaces\ILoginService;
 use Illuminate\Support\Facades\File;
 use App\Traits\FileHelper;
 
-class LoginService
+class LoginService implements ILoginService
 {
 
     use FileHelper;
