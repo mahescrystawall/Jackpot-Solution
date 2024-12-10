@@ -4,15 +4,17 @@ namespace App\Http\Controllers\Api;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
+use App\Interfaces\IBetService;
 use App\Services\BetService;
 
 class BetController extends Controller
 {
-    protected $betService;
+    public $_betService;
 
-    public function __construct(BetService $betService)
+    public function __construct(IBetService $betService)
     {
-        $this->betService = $betService;
+
+        $this->_betService = $betService;
     }
 
     /**
@@ -24,7 +26,7 @@ class BetController extends Controller
     public function getUnsettledBets()
     {
         // Use the BetService to get the unsettled bets
-        $data = $this->betService->getBetData('unsettled_bet.json');
+        $data = $this->_betService->getBetData('unsettled_bet.json');
 
         if (isset($data['error_message'])) {
             return response()->json($data, 400);
@@ -40,7 +42,7 @@ class BetController extends Controller
     public function getBetHistory()
     {
         // Use the BetService to get the bet history
-        $data = $this->betService->getBetData('bet_history.json');
+        $data = $this->_betService->getBetData('bet_history.json');
 
         if (isset($data['error_message'])) {
             return response()->json($data, 400);
