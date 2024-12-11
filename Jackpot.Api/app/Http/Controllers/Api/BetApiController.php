@@ -8,7 +8,7 @@ use App\Interfaces\IBetService;
 use Carbon\Carbon;
 use GuzzleHttp\Psr7\Message;
 
-class BetController extends Controller
+class BetApiController extends Controller
 {
     public $_betService;
 

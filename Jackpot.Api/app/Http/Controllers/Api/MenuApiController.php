@@ -4,7 +4,7 @@ namespace App\Http\Controllers\Api;
 use App\Http\Controllers\Controller;
 use App\Interfaces\IMenuService;
 
-class MenuController extends Controller
+class MenuApiController extends Controller
 {
     protected $_menuService;
 

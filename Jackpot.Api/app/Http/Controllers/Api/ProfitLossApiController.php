@@ -5,7 +5,7 @@ namespace App\Http\Controllers\Api;
 use App\Http\Controllers\Controller;
 use App\Interfaces\IProfitLossService;
 
-class ProfitLossController extends Controller
+class ProfitLossApiController extends Controller
 {
     protected $_profitLossService;
 

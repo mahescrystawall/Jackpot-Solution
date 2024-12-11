@@ -5,7 +5,7 @@ namespace App\Http\Controllers\Api;
 use App\Http\Controllers\Controller;
 use App\Interfaces\ILoginService;
 
-class LoginController extends Controller
+class LoginApiController extends Controller
 {
     protected $_loginService;
 
