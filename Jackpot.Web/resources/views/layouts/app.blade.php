@@ -15,7 +15,7 @@
         <div id="app" class="h-[100vh] w-[100vw] bg-jcolor8">
             @include('layouts.header')
             
-            @include('layouts.side_menu.side_menu')
+            @include('layouts.side_menu.index')
             
             @yield('content')
             
