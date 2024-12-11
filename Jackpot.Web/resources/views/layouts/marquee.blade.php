@@ -1,0 +1,1 @@
+<marquee scrollamount="3" class="text-white text-xs font-semibold uppercase tracking-wide">{{ session('message')}}</marquee>
