@@ -31,14 +31,6 @@ class BetHistoryController extends Controller
         $betHistoryData = $this->betHistoryService->getbetHistoryData($eventTypeId, $startDate, $endDate, $isMatched);
         $events = $betHistoryData;
         $pagination = $betHistoryData;
-        // if (empty($betHistoryData['error'])) {
-        //     return view('user/bet_history', [
-        //         'events' => [],
-        //         'pagination' => [],
-        //         'error' => $betHistoryData['error'], // Pass error message to view
-        //     ]);
-        // }
-
         return view('user/bet_history', compact('events', 'pagination', 'allSports','startDatecal','endDatecal'));
     }
 }
