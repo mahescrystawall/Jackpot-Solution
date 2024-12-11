@@ -32,7 +32,7 @@
                             <div class="mx-datepicker">
                                 <div class="mx-input-wrapper">
                                     <input formcontrolname="start_date" name="start_date" type="date" autocomplete="off"
-                                        placeholder="Select Date" class="mx-input ng-untouched ng-pristine ng-valid">
+                                        value={{$startDatecal}} "Select Date" class="mx-input ng-untouched ng-pristine ng-valid">
                                     <span class="mx-input-append mx-clear-wrapper"><i
                                             class="mx-input-icon mx-clear-icon"></i></span>
                                 </div>
@@ -44,7 +44,7 @@
                             <div class="mx-datepicker">
                                 <div class="mx-input-wrapper">
                                     <input formcontrolname="end_date" name="end_date" type="date" autocomplete="off"
-                                        placeholder="Select Date" class="mx-input ng-untouched ng-pristine ng-valid">
+                                    value={{$endDatecal}} placeholder="Select Date" class="mx-input ng-untouched ng-pristine ng-valid">
                                     <span class="mx-input-append mx-clear-wrapper"><i
                                             class="mx-input-icon mx-clear-icon"></i></span>
                                 </div>

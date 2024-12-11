@@ -5,7 +5,7 @@ namespace App\Http\Controllers\User;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Services\BetHistoryService;
-
+use Carbon\Carbon;
 class BetHistoryController extends Controller
 {
     protected $betHistoryService;
@@ -17,6 +17,8 @@ class BetHistoryController extends Controller
 
     public function index(Request $request)
     {
+        $startDatecal = Carbon::now()->subDays(5)->toDateString();
+        $endDatecal = Carbon::now()->toDateString();
         $eventTypeId = $startDate = $endDate = $isMatched = '';
         $events = null;
         if ($request->get('event_type_id')) {
@@ -37,6 +39,6 @@ class BetHistoryController extends Controller
         //     ]);
         // }
 
-        return view('user/bet_history', compact('events', 'pagination', 'allSports'));
+        return view('user/bet_history', compact('events', 'pagination', 'allSports','startDatecal','endDatecal'));
     }
 }
