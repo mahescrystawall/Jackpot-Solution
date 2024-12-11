@@ -27,7 +27,7 @@ Route::get('/events', [EventController::class, 'getEvents']);
 
 Route::get('/profit-loss', [ProfitLossController::class, 'getProfitLoss']);
 
-Route::get('/bet_history', [BetController::class, 'getBetHistory']);
+Route::post('/bet_history', [BetController::class, 'getBetHistory']);
 
 Route::get('/login-data', [LoginController::class, 'getLoginData']);
 
