@@ -6,10 +6,17 @@ use Illuminate\Support\Facades\Http;
 
 class BetHistoryService
 {
+    protected $baseUrl;
+
+    public function __construct()
+    {
+        $this->baseUrl = env('API_URL');
+    }
+
     public function getbetHistoryData($eventTypeId = null, $startDate = null, $endDate = null, $isMatched = null)
     {
-        $baseUrl = env('API_URL');
-        $url = $baseUrl . '/api/bet_history';
+
+        $url = $this->baseUrl . '/api/bet_history';
 
 
         if ($eventTypeId) {
@@ -39,8 +46,8 @@ class BetHistoryService
     public function getAllSports()
     {
 
-        $baseUrl = env('API_URL');
-        $response = Http::timeout(60)->get($baseUrl . '/api/menu');
+
+        $response = Http::timeout(60)->get( $this->baseUrl . '/api/menu');
         if ($response->successful()) {
             return $response->json();
         }
