@@ -84,9 +84,9 @@
                                             Date</th><!---->
                                     </tr>
                                 </thead>
-                                @if ($events && !empty($events['data']))
+                                @if ($events)
                                     <tbody role="rowgroup">
-                                        @foreach ($events['data'] as $event)
+                                        @foreach ($events as $event)
                                             <tr>
                                                 <td>{{ $event['event_name'] }}</td>
                                                 <td>{{ $event['selection_name'] }}</td>

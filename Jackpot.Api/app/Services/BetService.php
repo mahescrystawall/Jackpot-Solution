@@ -24,7 +24,7 @@ class BetService implements IBetService
      * @param Carbon $endDate
      * @return array
      */
-    public function getBetHistoryData(string $fileName, array $queryParams = [], Carbon $startDate = null, Carbon $endDate = null): array
+    public function getBetHistoryData(string $fileName, array $queryParams = [],  $startDate = null,  $endDate = null): array
     {
         $filePath = storage_path('json/' . $fileName);
 

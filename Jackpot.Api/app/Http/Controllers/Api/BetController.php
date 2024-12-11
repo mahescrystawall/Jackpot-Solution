@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Interfaces\IBetService;
 use Carbon\Carbon;
+use GuzzleHttp\Psr7\Message;
 
 class BetController extends Controller
 {
@@ -42,11 +43,22 @@ class BetController extends Controller
     {
 
         $postData = $request->all();
+
         try {
-            $startDate = Carbon::parse($postData['start_date']);
-            $endDate = Carbon::parse($postData['end_date']);
+            if (!empty($postData['start_date']) && !empty($postData['end_date'])) {
+                $startDate = Carbon::parse($postData['start_date']);
+                $endDate = Carbon::parse($postData['end_date']);
+            } else {
+                $postData['event_type_id']=4;
+                $postData['type']=4;
+                $startDate=$postData['start_date']= Carbon::now()->subDays(5)->toDateString();
+                $endDate=$postData['end_date']= Carbon::now()->toDateString();
+                $postData['is_matched']=1;
+
+            }
+
         } catch (\Exception $e) {
-            return response()->json(['error_message' => 'Invalid date format'], 400);
+            return response()->json(['error_message' => $e->getMessage()], 400);
         }
         $data = $this->_betService->getBetHistoryData('bet_history.json', $postData, $startDate, $endDate);
 

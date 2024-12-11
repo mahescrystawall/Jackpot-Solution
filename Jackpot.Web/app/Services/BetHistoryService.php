@@ -36,7 +36,8 @@ class BetHistoryService
         // $queryParams['start_date'] = "2024-01-01";
         // $queryParams['end_date']  = "2024-12-11";
 
-        $response = Http::timeout(60)->get($url, $queryParams);
+        $response = Http::timeout(60)->post($url, $queryParams);
+
         if ($response->successful()) {
             return $response->json();
         }
