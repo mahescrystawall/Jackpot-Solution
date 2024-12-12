@@ -12,6 +12,8 @@
 
 @php
    use Illuminate\Support\Collection;
+
+   $images = ['image1.jpg', 'image2.jpg', 'image3.jpg', 'image4.jpg'];
    
    $popular_sports_cricket = collect([
       [
@@ -58,12 +60,13 @@
 
 @section('content')
    <div class="mt-200">
-      <div class="p-2 pt-0 sm:ml-64 mt-14 h-screen">
+      <div class="p-2 pt-6 sm:ml-64 mt-14 h-screen">
          @include('layouts.marquee')
 
          @include('casino.popular_sports')
 
-         <h1>fdjslpfdaspofas</h1>
+         @include('casino.popular_games')
+
       </div>
    </div>
 @endsection
