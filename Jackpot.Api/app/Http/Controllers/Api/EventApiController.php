@@ -5,7 +5,7 @@ namespace App\Http\Controllers\Api;
 use App\Http\Controllers\Controller;
 use App\Interfaces\IEventService;
 
-class EventController extends Controller
+class EventApiController extends Controller
 {
     protected $_eventService;
 

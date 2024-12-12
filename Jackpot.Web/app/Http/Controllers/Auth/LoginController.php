@@ -24,12 +24,12 @@ class LoginController extends Controller
     }
     public function getLoginData(Request $request)
     {
-       
+
         // Fetch login data by calling the service method
         $response1 = $this->loginservice->getloginData();
-    
+
         // Validate login credentials (use a more secure validation method in production)
-        if ($request->username === 'Amrutha' && $request->password === 'Amr@2024') {
+        if ($request->username === 'm' && $request->password === 'm') {
 
             session([
                         'user_data' => $response1['data']['user'],
