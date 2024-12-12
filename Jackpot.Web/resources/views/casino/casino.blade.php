@@ -63,6 +63,8 @@
       <div class="p-2 pt-6 sm:ml-64 mt-14 h-screen">
          @include('layouts.marquee')
 
+         @include('layouts.slider')
+
          @include('casino.popular_sports')
 
          @include('casino.popular_games')
