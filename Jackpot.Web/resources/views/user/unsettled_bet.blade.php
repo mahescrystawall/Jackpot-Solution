@@ -2,52 +2,23 @@
 @section('content')
     <div class="card mt-1">
         <div class="card-header">
-            <h4 class="mb-0">Bet History </h4>
+            <h4 class="mb-0">Unsettled Bets </h4>
         </div>
         <div class="card-body container-fluid container-fluid-5">
             <!-- Filter Form -->
-            <form id="filter_form" method="GET" action="{{ route('bet-history') }}" class="">
+            <form id="filter_form" method="GET" action="{{ route('unsettled_bets') }}" class="">
                 <div class="row row5 mt-2">
+
                     <div class="col-md-2">
                         <div class="form-group mb-0">
-                            <select name="event_type_id" id="event_type_id" class="custom-select">
-                                <option value="ALL">All Sports</option>
-                                @foreach ($allSports['data']['menu'] as $sport)
-                                    <option value="{{ $sport['id'] }}">{{ $sport['name'] }}</option>
-                                @endforeach
-                            </select>
-                        </div>
-                    </div>
-                    <div class="col-md-2">
-                        <div class="form-group mb-0">
-                            <select name="reportType" id="is_matched" class="custom-select">
-                                <option value="" disabled="disabled">Bet Status</option>
-                                <option value="1">Matched</option>
-                                <option value="0">Un Matched</option>
-                            </select>
-                        </div>
-                    </div>
-                    <div class="col-md-2">
-                        <div class="form-group mb-0">
-                            <div class="mx-datepicker">
-                                <div class="mx-input-wrapper">
-                                    <input formcontrolname="start_date" name="start_date" type="date" autocomplete="off"
-                                        value={{$startDatecal}} "Select Date" class="mx-input ng-untouched ng-pristine ng-valid">
-                                    <span class="mx-input-append mx-clear-wrapper"><i
-                                            class="mx-input-icon mx-clear-icon"></i></span>
-                                </div>
+                            <label class="d-block">Bet Status</label>
+                            <div>
+                                <input type="radio" id="matched" name="reportType" value="1">
+                                <label for="matched">Matched</label>
                             </div>
-                        </div>
-                    </div>
-                    <div class="col-md-2">
-                        <div class="form-group mb-0">
-                            <div class="mx-datepicker">
-                                <div class="mx-input-wrapper">
-                                    <input formcontrolname="end_date" name="end_date" type="date" autocomplete="off"
-                                    value={{$endDatecal}} placeholder="Select Date" class="mx-input ng-untouched ng-pristine ng-valid">
-                                    <span class="mx-input-append mx-clear-wrapper"><i
-                                            class="mx-input-icon mx-clear-icon"></i></span>
-                                </div>
+                            <div>
+                                <input type="radio" id="unmatched" name="reportType" value="0">
+                                <label for="unmatched">Unmatched</label>
                             </div>
                         </div>
                     </div>
@@ -76,8 +47,8 @@
                                             Rate</th>
                                         <th role="columnheader" scope="col" aria-colindex="1" class="text-center">Amount
                                         </th>
-                                        <th role="columnheader" scope="col" aria-colindex="1" class="text-center">
-                                            Profit/loss</th>
+                                        <th role="columnheader" scope="col" aria-colindex="1" class="text-center">Event
+                                            Market Name</th>
                                         <th role="columnheader" scope="col" aria-colindex="1" class="text-center">Place
                                             Date</th>
                                         <th role="columnheader" scope="col" aria-colindex="1" class="text-center">Match
@@ -87,13 +58,13 @@
                                 @if ($events)
                                     <tbody role="rowgroup">
                                         @foreach ($events as $event)
-                                            <tr>
+                                            <tr class="lay">
                                                 <td>{{ $event['event_name'] }}</td>
                                                 <td>{{ $event['selection_name'] }}</td>
                                                 <td>{{ $event['bet_type'] ? 'back' : 'lay' }}</td>
                                                 <td>{{ $event['rate'] }}</td>
                                                 <td>{{ $event['stake'] }}</td>
-                                                <td>{{ $event['result'] }}</td>
+                                                <td>{{ $event['market_type_id'] }}</td>
                                                 <td>{{ $event['matched_at'] }}</td>
                                                 <td>{{ $event['matched_at'] }}</td>
 
@@ -119,30 +90,19 @@
 @section('scripts')
     <script>
         document.addEventListener("DOMContentLoaded", function() {
-            const eventTypeSelect = document.getElementById('event_type_id');
             const betStatusSelect = document.getElementById('is_matched');
-            const startDateInput = document.querySelector('input[name="start_date"]');
-            const endDateInput = document.querySelector('input[name="end_date"]');
             const filterForm = document.getElementById('filter_form');
             const submitButton = document.querySelector('#submitBtn');
 
             // Attach an event listener to the submit button
             submitButton.addEventListener('click', function(event) {
-                const eventTypeId = eventTypeSelect.value;
                 const betStatus = betStatusSelect.value;
-                const startDate = startDateInput.value;
-                const endDate = endDateInput.value;
-                const type = "ALL";
-
-                // Prepare the payload for the POST request
+                 // Prepare the payload for the POST request
                 const payload = {
-                    start_date: startDate,
-                    end_date: endDate,
-                    event_type_id: eventTypeId,
-                    type: type,
+
                     is_matched: betStatus
                 };
-                fetch('http://127.0.0.1:8081/api/bet_history', {
+                fetch('http://127.0.0.1:8081/api/unsettled_bets', {
                         method: 'POST', // HTTP method
                         headers: {
                             'Content-Type': 'application/json' // Set content type as JSON
