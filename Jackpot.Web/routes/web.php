@@ -7,6 +7,7 @@ use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\User\BetHistoryController;
 use App\Http\Controllers\User\AccountStatementController;
 use App\Http\Controllers\User\StakeController;
+use App\Http\Controllers\User\ProfitLossController;
 
 
 Route::get('/', [LoginController::class, 'showLoginForm']);
@@ -17,6 +18,7 @@ Route::middleware(['client'])->group(function () {
 
     
     Route::get('/account-statement', [AccountStatementController::class,'index'])->name('account-statement');
+    Route::get('/profit-loss', [ProfitLossController::class,'index'])->name('profit-loss');
     Route::get('/bet-history', [BetHistoryController::class,'index'])->name('bet-history');
     Route::get('/change-price-value', [StakeController::class,'showForm'])->name('change-price-value');
     Route::post('/stakes/update', [StakeController::class, 'updateStakeValue'])->name('stakes.update');
