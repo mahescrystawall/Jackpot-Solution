@@ -132,6 +132,8 @@
 
          @include('casino.slot_games')
 
+         @include('casino.casino_tabs')
+
       </div>
    </div>
 @endsection

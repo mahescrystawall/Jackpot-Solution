@@ -15,7 +15,7 @@ html, body {
         @apply px-4 py-2 !important;
     } 
     .dropdown-search option{
-        @apply bg-black text-white !important;
+        @apply bg-[#1b1b1b] text-white border border-[#525252] !important;
     } 
      
 }
