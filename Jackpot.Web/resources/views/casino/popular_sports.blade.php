@@ -14,7 +14,7 @@
 
         
         <div class="text-sm">
-            <div id="splide-slider" class="splide w-full px-1">
+            <div id="casino-popular-live-sports" class="splide w-full px-1">
                 <!-- Splide Track -->
                 <div class="splide__track">
                     <ul class="splide__list">

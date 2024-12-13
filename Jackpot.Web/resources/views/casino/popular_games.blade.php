@@ -11,18 +11,16 @@
     </div>
 
     <div class="text-sm">
-
-        
         <div class="text-sm">
-            <div id="splide-slider" class="splide w-full px-1">
+            <div id="casino-popular-games" class="splide w-full px-1">
                 <!-- Splide Track -->
                 <div class="splide__track">
                     <ul class="splide__list">
-                        @foreach ($images as $image)
+                        @foreach($popular_games as $popular_game)
                             <li class="splide__slide">
-                                <div class="">
-                                    <div class="w-full p-6 bg- border-t rounded-xl shadow text-white bg-[radial-gradient(circle_at_top,_#00383b,_#252728,_#252728)]">
-                                        <img src="{{ asset('images/' . $image) }}" alt="Image {{ $loop->iteration }}">
+                                <div >
+                                    <div class="w-full p-">
+                                        <img src="{{ asset('assets/images/CASINO/POPULAR_GAMES/' . $popular_game) }}" alt="Image 1">
                                     </div>
                                 </div>
                             </li>
@@ -31,8 +29,5 @@
                 </div>
             </div>
         </div>
-        
-        
-    </div>
-    
+    </div>    
  </section>
