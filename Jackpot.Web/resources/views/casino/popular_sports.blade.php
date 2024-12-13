@@ -13,200 +13,96 @@
     <div class="text-sm">
 
         
-        <div class=" text-sm">
-            <div class="swiper-container w-full max-w-screen-xl px-1">
-                <!-- Swiper Wrapper -->
-                <div class="swiper-wrapper" >
-                    @foreach ($collection as $item)
-                    <div class="swiper-slide">
-                        <div class="w-full p-6 bg- border-t rounded-xl shadow text-white bg-[radial-gradient(circle_at_top,_#00383b,_#252728,_#252728)]">
-                            <div class="grid grid-cols-2 px-5">
-                                <div class="flex items-center gap-1">
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" fill="none">
-                                        <path d="M2.44666 10.8405L2.80666 11.1938L2.39333 11.6005C2.56061 11.8613 2.74784 12.1087 2.95333 12.3405L12.34 2.94718C12.1074 2.74759 11.8624 2.56279 11.6067 2.39385L11.1933 2.80052L10.84 2.44718L11.16 2.12718C9.89744 1.44823 8.44967 1.19433 7.03142 1.40315C5.61318 1.61196 4.30002 2.27237 3.28674 3.2864C2.27345 4.30044 1.61401 5.61408 1.40625 7.03248C1.19848 8.45088 1.45345 9.89846 2.13333 11.1605L2.44666 10.8405ZM9.90666 3.38052L10.26 3.73385L9.33333 4.66718L8.98 4.31385L9.90666 3.38052ZM8.04666 5.24718L8.39333 5.60052L7.46666 6.53385L7.11333 6.18052L8.04666 5.24718ZM6.18 7.11385L6.53333 7.46718L5.6 8.39385L5.24666 8.04052L6.18 7.11385ZM4.31333 8.97385L4.66666 9.33385L3.73333 10.2672L3.38 9.91385L4.31333 8.97385ZM4.39333 13.6072L4.80666 13.2005L5.16 13.5538L4.84 13.8738C6.10255 14.5528 7.55033 14.8067 8.96857 14.5979C10.3868 14.3891 11.7 13.7287 12.7133 12.7146C13.7265 11.7006 14.386 10.3869 14.5937 8.96855C14.8015 7.55016 14.5465 6.10257 13.8667 4.84052L13.5533 5.16052L13.1933 4.80718L13.6067 4.40052C13.4394 4.13976 13.2522 3.89235 13.0467 3.66052L3.66 13.0538C3.89264 13.2534 4.13756 13.4382 4.39333 13.6072ZM12.2667 5.74052L12.62 6.09385L11.6867 7.02718L11.3333 6.66718L12.2667 5.74052ZM10.4 7.60718L10.7533 7.96052L9.82 8.88718L9.46666 8.53385L10.4 7.60718ZM8.53333 9.46718L8.88666 9.82052L7.96 10.7538L7.6 10.4005L8.53333 9.46718ZM6.66666 11.3338L7.02 11.6872L6.08666 12.6205L5.73333 12.2672L6.66666 11.3338Z" fill="#ffffff"/>
-                                    </svg>
-                                    Cricket ODI
-                                </div>
-                                <div class="flex items-center gap-1 justify-end">
-                                    <div class="bg-jlay2 px-3 py-1 rounded-md">
-                                        &#8226;
-                                        LIVE
+        <div class="text-sm">
+            <div id="splide-slider" class="splide w-full px-1">
+                <!-- Splide Track -->
+                <div class="splide__track">
+                    <ul class="splide__list">
+                        @foreach ($popular_sports_cricket as $item)
+                            <li class="splide__slide">
+                                <div class="">
+                                    <div class="w-full p-6 bg- border-t rounded-xl shadow text-white bg-[radial-gradient(circle_at_top,_#00383b,_#252728,_#252728)]">
+                                        <div class="grid grid-cols-2 px-5">
+                                            <div class="flex items-center gap-1">
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" fill="none">
+                                                    <path d="M2.44666 10.8405L2.80666 11.1938L2.39333 11.6005C2.56061 11.8613 2.74784 12.1087 2.95333 12.3405L12.34 2.94718C12.1074 2.74759 11.8624 2.56279 11.6067 2.39385L11.1933 2.80052L10.84 2.44718L11.16 2.12718C9.89744 1.44823 8.44967 1.19433 7.03142 1.40315C5.61318 1.61196 4.30002 2.27237 3.28674 3.2864C2.27345 4.30044 1.61401 5.61408 1.40625 7.03248C1.19848 8.45088 1.45345 9.89846 2.13333 11.1605L2.44666 10.8405ZM9.90666 3.38052L10.26 3.73385L9.33333 4.66718L8.98 4.31385L9.90666 3.38052ZM8.04666 5.24718L8.39333 5.60052L7.46666 6.53385L7.11333 6.18052L8.04666 5.24718ZM6.18 7.11385L6.53333 7.46718L5.6 8.39385L5.24666 8.04052L6.18 7.11385ZM4.31333 8.97385L4.66666 9.33385L3.73333 10.2672L3.38 9.91385L4.31333 8.97385ZM4.39333 13.6072L4.80666 13.2005L5.16 13.5538L4.84 13.8738C6.10255 14.5528 7.55033 14.8067 8.96857 14.5979C10.3868 14.3891 11.7 13.7287 12.7133 12.7146C13.7265 11.7006 14.386 10.3869 14.5937 8.96855C14.8015 7.55016 14.5465 6.10257 13.8667 4.84052L13.5533 5.16052L13.1933 4.80718L13.6067 4.40052C13.4394 4.13976 13.2522 3.89235 13.0467 3.66052L3.66 13.0538C3.89264 13.2534 4.13756 13.4382 4.39333 13.6072ZM12.2667 5.74052L12.62 6.09385L11.6867 7.02718L11.3333 6.66718L12.2667 5.74052ZM10.4 7.60718L10.7533 7.96052L9.82 8.88718L9.46666 8.53385L10.4 7.60718ZM8.53333 9.46718L8.88666 9.82052L7.96 10.7538L7.6 10.4005L8.53333 9.46718ZM6.66666 11.3338L7.02 11.6872L6.08666 12.6205L5.73333 12.2672L6.66666 11.3338Z" fill="#ffffff"/>
+                                                </svg>
+                                                Cricket ODI
+                                            </div>
+                                            <div class="flex items-center gap-1 justify-end">
+                                                <div class="bg-jlay2 px-3 py-1 rounded-md">
+                                                    &#8226;
+                                                    LIVE
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="my-4 px-5">
+                                            <hr class="border border-gray-700">
+                                        </div>
+                                        <div class="grid grid-cols-2 my-4 px-5">
+                                            <div class="flex items-center gap-1">
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="17" height="17" viewBox="0 0 17 17" fill="none">
+                                                    <g clip-path="url(#clip0_45_164)">
+                                                    <path d="M16.1667 12.5004C16.1667 12.9719 15.9794 13.4241 15.646 13.7575C15.3126 14.0909 14.8604 14.2782 14.3889 14.2782H1.94446C1.47297 14.2782 1.02078 14.0909 0.687386 13.7575C0.353988 13.4241 0.166687 12.9719 0.166687 12.5004V4.50043C0.166687 4.02894 0.353988 3.57675 0.687386 3.24336C1.02078 2.90996 1.47297 2.72266 1.94446 2.72266H14.3889C14.8604 2.72266 15.3126 2.90996 15.646 3.24336C15.9794 3.57675 16.1667 4.02894 16.1667 4.50043V12.5004Z" fill="#006A4D"/>
+                                                    <path d="M7.2778 11.3892C8.99602 11.3892 10.3889 9.99632 10.3889 8.2781C10.3889 6.55988 8.99602 5.16699 7.2778 5.16699C5.55958 5.16699 4.16669 6.55988 4.16669 8.2781C4.16669 9.99632 5.55958 11.3892 7.2778 11.3892Z" fill="#F42A41"/>
+                                                    </g>
+                                                    <defs>
+                                                    <clipPath id="clip0_45_164">
+                                                    <rect width="16" height="16" fill="white" transform="translate(0.166687 0.5)"/>
+                                                    </clipPath>
+                                                    </defs>
+                                                </svg>
+                                                {{$item['team2']}}
+                                            </div>
+                                            <div class="flex items-center gap-1 justify-end">
+                                                {{$item['team2_score']}}
+                                            </div>
+                                        </div>
+                                        <div class="grid grid-cols-2 my-4 px-5">
+                                            <div class="flex items-center gap-1">
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="17" height="17" viewBox="0 0 17 17" fill="none">
+                                                    <path d="M1.2778 4.27734H15.0556V12.7218H1.2778V4.27734Z" fill="#D22F27"/>
+                                                    <path d="M1.2778 8.5H15.0556V12.7222H1.2778V8.5Z" fill="#1E50A0"/>
+                                                    <path d="M1.2778 12.7218L5.94447 9.8329H15.0556V7.16623H5.94447L1.2778 4.27734V12.7218Z" fill="#5C9E31" stroke="white" stroke-width="0.444444" stroke-linecap="round" stroke-linejoin="round"/>
+                                                    <path d="M4.61113 8.49957L1.2778 10.7218V6.27734L4.61113 8.49957Z" fill="black" stroke="#F1B31C" stroke-width="0.444444" stroke-linecap="round" stroke-linejoin="round"/>
+                                                    <path d="M1.2778 4.27734H15.0556V12.7218H1.2778V4.27734Z" stroke="black" stroke-width="0.444444" stroke-linecap="round" stroke-linejoin="round"/>
+                                                </svg>
+                                                {{$item['team1']}}
+                                            </div>
+                                            <div class="flex items-center gap-1 justify-end">
+                                                {{$item['team1_score']}}
+                                            </div>
+                                        </div>
+                                        <div class="grid grid-cols-3 my-4 px-5 text-xs">
+                                            <div class="flex items-center gap-1">
+                                                <div class="bg-jcolor1 px-3 py-1 rounded-md">
+                                                    1X &nbsp;&nbsp 3.56
+                                                </div>
+                                            </div>
+                                            <div class="flex items-center gap-1 justify-end">
+                                                <div class="bg-jcolor1 px-3 py-1 rounded-md">
+                                                    2X &nbsp;&nbsp 3.56
+                                                </div>
+                                            </div>
+                                            <div class="flex items-center gap-1 justify-end">
+                                                <div class="bg-jcolor1 px-3 py-1 rounded-md">
+                                                    3X &nbsp;&nbsp 3.56
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div>
+                                            <div class="py-2 border border-gray-600  bg-gradient-to-r from-[#00acb567] via-[#1B1B1B] to-[#00acb567]  rounded-md text-center">
+                                                Place my bet
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
-                            <div class="my-4 px-5">
-                                <hr class="border border-gray-700">
-                            </div>
-                            <div class="grid grid-cols-2 my-4 px-5">
-                                <div class="flex items-center gap-1">
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="17" height="17" viewBox="0 0 17 17" fill="none">
-                                        <g clip-path="url(#clip0_45_164)">
-                                        <path d="M16.1667 12.5004C16.1667 12.9719 15.9794 13.4241 15.646 13.7575C15.3126 14.0909 14.8604 14.2782 14.3889 14.2782H1.94446C1.47297 14.2782 1.02078 14.0909 0.687386 13.7575C0.353988 13.4241 0.166687 12.9719 0.166687 12.5004V4.50043C0.166687 4.02894 0.353988 3.57675 0.687386 3.24336C1.02078 2.90996 1.47297 2.72266 1.94446 2.72266H14.3889C14.8604 2.72266 15.3126 2.90996 15.646 3.24336C15.9794 3.57675 16.1667 4.02894 16.1667 4.50043V12.5004Z" fill="#006A4D"/>
-                                        <path d="M7.2778 11.3892C8.99602 11.3892 10.3889 9.99632 10.3889 8.2781C10.3889 6.55988 8.99602 5.16699 7.2778 5.16699C5.55958 5.16699 4.16669 6.55988 4.16669 8.2781C4.16669 9.99632 5.55958 11.3892 7.2778 11.3892Z" fill="#F42A41"/>
-                                        </g>
-                                        <defs>
-                                        <clipPath id="clip0_45_164">
-                                        <rect width="16" height="16" fill="white" transform="translate(0.166687 0.5)"/>
-                                        </clipPath>
-                                        </defs>
-                                    </svg>
-                                    Bangladesh
-                                </div>
-                                <div class="flex items-center gap-1 justify-end">
-                                    163 / 4 (20.0)
-                                </div>
-                            </div>
-                            <div class="grid grid-cols-2 my-4 px-5">
-                                <div class="flex items-center gap-1">
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="17" height="17" viewBox="0 0 17 17" fill="none">
-                                        <path d="M1.2778 4.27734H15.0556V12.7218H1.2778V4.27734Z" fill="#D22F27"/>
-                                        <path d="M1.2778 8.5H15.0556V12.7222H1.2778V8.5Z" fill="#1E50A0"/>
-                                        <path d="M1.2778 12.7218L5.94447 9.8329H15.0556V7.16623H5.94447L1.2778 4.27734V12.7218Z" fill="#5C9E31" stroke="white" stroke-width="0.444444" stroke-linecap="round" stroke-linejoin="round"/>
-                                        <path d="M4.61113 8.49957L1.2778 10.7218V6.27734L4.61113 8.49957Z" fill="black" stroke="#F1B31C" stroke-width="0.444444" stroke-linecap="round" stroke-linejoin="round"/>
-                                        <path d="M1.2778 4.27734H15.0556V12.7218H1.2778V4.27734Z" stroke="black" stroke-width="0.444444" stroke-linecap="round" stroke-linejoin="round"/>
-                                    </svg>
-                                    South Africa
-                                </div>
-                                <div class="flex items-center gap-1 justify-end">
-                                    81 / 1 (11.0)
-                                </div>
-                            </div>
-                            <div class="grid grid-cols-3 my-4 px-5">
-                                <div class="flex items-center gap-1">
-                                    <div class="bg-jcolor1 px-3 py-1 rounded-md">
-                                        1X &nbsp;&nbsp 3.56
-                                    </div>
-                                </div>
-                                <div class="flex items-center gap-1 justify-end">
-                                    <div class="bg-jcolor1 px-3 py-1 rounded-md">
-                                        2X &nbsp;&nbsp 3.56
-                                    </div>
-                                </div>
-                                <div class="flex items-center gap-1 justify-end">
-                                    <div class="bg-jcolor1 px-3 py-1 rounded-md">
-                                        3X &nbsp;&nbsp 3.56
-                                    </div>
-                                </div>
-                            </div>
-                            <div>
-                                <div class="py-2 border border-gray-600  bg-gradient-to-r from-[#00acb567] via-[#1B1B1B] to-[#00acb567]  rounded-md text-center">
-                                    Place my bet
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    @endforeach
+                            </li>
+                        @endforeach
+                    </ul>
                 </div>
             </div>
-        
-            <script>
-                document.addEventListener('DOMContentLoaded', () => {
-                    const swiper = new Swiper('.swiper-container', {
-                        slidesPerView: 4, // Display 4 slides at a time
-                        spaceBetween: 20, // Space between slides in pixels
-                        grabCursor: true, // Enables grab cursor for drag
-                        navigation: {
-                            nextEl: '.swiper-button-next',
-                            prevEl: '.swiper-button-prev',
-                        },
-                        pagination: {
-                            el: '.swiper-pagination',
-                            clickable: true,
-                        },
-                        breakpoints: {
-                            640: {
-                                slidesPerView: 1,
-                            },
-                            768: {
-                                slidesPerView: 2,
-                            },
-                            1024: {
-                                slidesPerView: 4,
-                            },
-                        },
-                    });
-                });
-            </script>
         </div>
-        
-
-        {{-- @foreach($popular_sports_cricket as $sport)
-            <div class="max-w-sm p-6 bg- border-t rounded-xl shadow text-white bg-[radial-gradient(circle_at_top,_#00383b,_#252728,_#252728)]">
-                <div class="grid grid-cols-2 px-5">
-                    <div class="flex items-center gap-1">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" fill="none">
-                            <path d="M2.44666 10.8405L2.80666 11.1938L2.39333 11.6005C2.56061 11.8613 2.74784 12.1087 2.95333 12.3405L12.34 2.94718C12.1074 2.74759 11.8624 2.56279 11.6067 2.39385L11.1933 2.80052L10.84 2.44718L11.16 2.12718C9.89744 1.44823 8.44967 1.19433 7.03142 1.40315C5.61318 1.61196 4.30002 2.27237 3.28674 3.2864C2.27345 4.30044 1.61401 5.61408 1.40625 7.03248C1.19848 8.45088 1.45345 9.89846 2.13333 11.1605L2.44666 10.8405ZM9.90666 3.38052L10.26 3.73385L9.33333 4.66718L8.98 4.31385L9.90666 3.38052ZM8.04666 5.24718L8.39333 5.60052L7.46666 6.53385L7.11333 6.18052L8.04666 5.24718ZM6.18 7.11385L6.53333 7.46718L5.6 8.39385L5.24666 8.04052L6.18 7.11385ZM4.31333 8.97385L4.66666 9.33385L3.73333 10.2672L3.38 9.91385L4.31333 8.97385ZM4.39333 13.6072L4.80666 13.2005L5.16 13.5538L4.84 13.8738C6.10255 14.5528 7.55033 14.8067 8.96857 14.5979C10.3868 14.3891 11.7 13.7287 12.7133 12.7146C13.7265 11.7006 14.386 10.3869 14.5937 8.96855C14.8015 7.55016 14.5465 6.10257 13.8667 4.84052L13.5533 5.16052L13.1933 4.80718L13.6067 4.40052C13.4394 4.13976 13.2522 3.89235 13.0467 3.66052L3.66 13.0538C3.89264 13.2534 4.13756 13.4382 4.39333 13.6072ZM12.2667 5.74052L12.62 6.09385L11.6867 7.02718L11.3333 6.66718L12.2667 5.74052ZM10.4 7.60718L10.7533 7.96052L9.82 8.88718L9.46666 8.53385L10.4 7.60718ZM8.53333 9.46718L8.88666 9.82052L7.96 10.7538L7.6 10.4005L8.53333 9.46718ZM6.66666 11.3338L7.02 11.6872L6.08666 12.6205L5.73333 12.2672L6.66666 11.3338Z" fill="#ffffff"/>
-                        </svg>
-                        Cricket ODI
-                    </div>
-                    <div class="flex items-center gap-1 justify-end">
-                        <div class="bg-jlay2 px-3 py-1 rounded-md">
-                            &#8226;
-                            LIVE
-                        </div>
-                    </div>
-                </div>
-                <div class="my-4 px-5">
-                    <hr class="border border-gray-700">
-                </div>
-                <div class="grid grid-cols-2 my-4 px-5">
-                    <div class="flex items-center gap-1">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="17" height="17" viewBox="0 0 17 17" fill="none">
-                            <g clip-path="url(#clip0_45_164)">
-                            <path d="M16.1667 12.5004C16.1667 12.9719 15.9794 13.4241 15.646 13.7575C15.3126 14.0909 14.8604 14.2782 14.3889 14.2782H1.94446C1.47297 14.2782 1.02078 14.0909 0.687386 13.7575C0.353988 13.4241 0.166687 12.9719 0.166687 12.5004V4.50043C0.166687 4.02894 0.353988 3.57675 0.687386 3.24336C1.02078 2.90996 1.47297 2.72266 1.94446 2.72266H14.3889C14.8604 2.72266 15.3126 2.90996 15.646 3.24336C15.9794 3.57675 16.1667 4.02894 16.1667 4.50043V12.5004Z" fill="#006A4D"/>
-                            <path d="M7.2778 11.3892C8.99602 11.3892 10.3889 9.99632 10.3889 8.2781C10.3889 6.55988 8.99602 5.16699 7.2778 5.16699C5.55958 5.16699 4.16669 6.55988 4.16669 8.2781C4.16669 9.99632 5.55958 11.3892 7.2778 11.3892Z" fill="#F42A41"/>
-                            </g>
-                            <defs>
-                            <clipPath id="clip0_45_164">
-                            <rect width="16" height="16" fill="white" transform="translate(0.166687 0.5)"/>
-                            </clipPath>
-                            </defs>
-                        </svg>
-                        Bangladesh
-                    </div>
-                    <div class="flex items-center gap-1 justify-end">
-                        163 / 4 (20.0)
-                    </div>
-                </div>
-                <div class="grid grid-cols-2 my-4 px-5">
-                    <div class="flex items-center gap-1">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="17" height="17" viewBox="0 0 17 17" fill="none">
-                            <path d="M1.2778 4.27734H15.0556V12.7218H1.2778V4.27734Z" fill="#D22F27"/>
-                            <path d="M1.2778 8.5H15.0556V12.7222H1.2778V8.5Z" fill="#1E50A0"/>
-                            <path d="M1.2778 12.7218L5.94447 9.8329H15.0556V7.16623H5.94447L1.2778 4.27734V12.7218Z" fill="#5C9E31" stroke="white" stroke-width="0.444444" stroke-linecap="round" stroke-linejoin="round"/>
-                            <path d="M4.61113 8.49957L1.2778 10.7218V6.27734L4.61113 8.49957Z" fill="black" stroke="#F1B31C" stroke-width="0.444444" stroke-linecap="round" stroke-linejoin="round"/>
-                            <path d="M1.2778 4.27734H15.0556V12.7218H1.2778V4.27734Z" stroke="black" stroke-width="0.444444" stroke-linecap="round" stroke-linejoin="round"/>
-                        </svg>
-                        South Africa
-                    </div>
-                    <div class="flex items-center gap-1 justify-end">
-                        81 / 1 (11.0)
-                    </div>
-                </div>
-                <div class="grid grid-cols-3 my-4 px-5">
-                    <div class="flex items-center gap-1">
-                        <div class="bg-jcolor1 px-3 py-1 rounded-md">
-                            1X &nbsp;&nbsp 3.56
-                        </div>
-                    </div>
-                    <div class="flex items-center gap-1 justify-end">
-                        <div class="bg-jcolor1 px-3 py-1 rounded-md">
-                            2X &nbsp;&nbsp 3.56
-                        </div>
-                    </div>
-                    <div class="flex items-center gap-1 justify-end">
-                        <div class="bg-jcolor1 px-3 py-1 rounded-md">
-                            3X &nbsp;&nbsp 3.56
-                        </div>
-                    </div>
-                </div>
-                <div>
-                    <div class="py-2 border border-gray-600  bg-gradient-to-r from-[#00acb567] via-[#1B1B1B] to-[#00acb567]  rounded-md text-center">
-                        Place my bet
-                    </div>
-                </div>
-            </div>
-        @endforeach --}}
         
     </div>
     

@@ -1,4 +1,4 @@
-<aside id="logo-sidebar" class="fixed top-0 left-0 z-40 w-64 h-screen scrollbar  pt-20 transition-transform -translate-x-full bg-jcolor4 border-r border-jblue2 sm:translate-x-0 text-jcolor9" aria-label="Sidebar">
+<aside id="logo-sidebar" class="fixed top-0 left-0 z-40 w-64 h-screen scrollbar  pt-24 transition-transform -translate-x-full bg-jcolor4 border-r border-jblue2 sm:translate-x-0 text-jcolor9" aria-label="Sidebar">
    <div class="h-full pb-4 overflow-y-auto bg-jcolor4 scrollbar-none ">
 
 
