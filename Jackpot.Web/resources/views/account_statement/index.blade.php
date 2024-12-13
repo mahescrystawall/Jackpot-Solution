@@ -10,11 +10,11 @@
         <div class="row">
             <div class="col-md-3">
                 <label for="start_date">Start Date</label>
-                <input type="date" name="start_date" id="start_date" 
-    value="{{ request('start_date', \Carbon\Carbon::now()->submonth(1)->format('Y-m-d')) }}" 
-    class="form-control"
-    min="{{ \Carbon\Carbon::now()->subYear(15)->format('Y-m-d') }}">       
-</div>
+                <input type="date" name="start_date" id="start_date"
+                    value="{{ request('start_date', \Carbon\Carbon::now()->submonth(1)->format('Y-m-d')) }}"
+                    class="form-control"
+                    min="{{ \Carbon\Carbon::now()->subYear(15)->format('Y-m-d') }}">
+            </div>
             <div class="col-md-3">
                 <label for="end_date">End Date</label>
                 <input type="date" name="end_date" id="end_date"
@@ -25,10 +25,13 @@
             <div class="col-md-3">
                 <label for="category">Category</label>
                 <select name="category" id="category" class="form-control">
-                    <option value="">All</option>
-                    <option value="Football" {{ request('category') == 'Football' ? 'selected' : '' }}>Football</option>
-                    <option value="Cricket" {{ request('category') == 'Cricket' ? 'selected' : '' }}>Cricket</option>
-                    <option value="Tennis" {{ request('category') == 'Tennis' ? 'selected' : '' }}>Tennis</option>
+                    <option value="">All</option> <!-- Default option for All categories -->
+                    @foreach ($allSports['data']['menu'] as $sport)
+                    <option value="{{ $sport['id'] }}"
+                        {{ request('category') == $sport['id'] ? 'selected' : '' }}>
+                        {{ $sport['name'] }}
+                    </option>
+                    @endforeach
                 </select>
             </div>
             <div class="col-md-3">

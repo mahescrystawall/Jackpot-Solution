@@ -2,19 +2,24 @@
 
 namespace App\Http\Controllers\User;
 
+use Carbon\Carbon;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use Carbon\Carbon;
+use App\Services\BetHistoryService;
 use App\Services\AccountStatementService;
+
+
 
 class AccountStatementController extends Controller
 {
     protected $accountStatementService;
+    protected $betHistoryService;
 
     // Inject AccountStatementService into the controller
-    public function __construct(AccountStatementService $accountStatementService)
+    public function __construct(AccountStatementService $accountStatementService,BetHistoryService $betHistoryService)
     {
         $this->accountStatementService = $accountStatementService;
+        $this->betHistoryService = $betHistoryService;
     }
 
     // Show form with account statements
@@ -41,18 +46,16 @@ class AccountStatementController extends Controller
                 'error' => $allData['error'], // Show error message
             ]);
         }
-    
-        // Filter the data for the last 16 days (only when showing filtered data)
-        $filteredData = [];
-        $currentDate = Carbon::now();
        $filteredData =$allData['data'];
 
-    
+       $allSports = $this->betHistoryService->getAllSports();
+
         // Return the view with all data and the filtered data for the last 16 days
         return view('account_statement.index', [
             'startDate' => $filters['start_date'],
             'endDate' => $filters['end_date'],
             'filteredData' => $filteredData, // Use the filtered data for the last 16 days
+            'allSports' =>$allSports,
         ]);
     }
     

@@ -1,23 +1,28 @@
 <?php
 
 namespace App\Services;
-use Carbon\Carbon;
 use Illuminate\Support\Facades\Http;
 
 
 
 class AccountStatementService
 {
+    protected $baseUrl;
+
+    public function __construct()
+    {
+        $this->baseUrl = env('API_URL');
+    }
    
       
     public function getAccountStatement($filters)
     {
         // Get the base URL from the configuration or environment
-        $baseUrl = config('app.api_url', env('API_URL'));
+        $this->baseUrl = env('API_URL');
         
         try {
             // Send the request to the API with a timeout of 60 seconds
-            $response = Http::timeout(60)->get($baseUrl.'/api/report/account-statement', $filters);
+            $response = Http::timeout(60)->get($this->baseUrl .'/api/report/account-statement', $filters);
             // Send filters if needed
             
             // Check if the response was successful
@@ -36,11 +41,11 @@ class AccountStatementService
     public function getBetList($id)
     {
         // Get the base URL from the configuration or environment
-        $baseUrl = config('app.api_url', env('API_URL'));
+        $this->baseUrl = env('API_URL');
         
         try {
             // Send the request to the API with a timeout of 60 seconds
-            $response = Http::timeout(60)->get($baseUrl.'/api/bet_list', $id);
+            $response = Http::timeout(60)->get(  $this->baseUrl.'/api/bet_list', $id);
             // Send filters if needed
             
             // Check if the response was successful
