@@ -8,6 +8,7 @@ use App\Http\Controllers\Api\MenuApiController;
 use App\Http\Controllers\Api\EventApiController;
 use App\Http\Controllers\Api\ProfitLossApiController;
 use App\Http\Controllers\Api\LoginApiController;
+use App\Http\Controllers\Api\AccountController;
 
 // Example of a route with authentication
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
@@ -16,6 +17,13 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 
 // Route for fetching unsettled bets
 Route::get('/unsettled_bets', [BetApiController::class, 'getUnsettledBets'])->name('unsettled_bets');
+
+// Route for fetching account_statement
+Route::get('/report/account-statement', [AccountController::class, 'getStatementData']);
+
+// Route for fetching bet_list
+Route::get('/bet_list', [AccountController::class, 'getBetData']);
+
 
 // Route for fetching stakes value
 Route::get('/stakes', [PriceValueApiController::class, 'getStakes']);

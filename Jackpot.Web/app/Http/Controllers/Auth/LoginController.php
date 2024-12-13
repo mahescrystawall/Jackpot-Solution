@@ -29,7 +29,7 @@ class LoginController extends Controller
         $response1 = $this->loginservice->getloginData();
 
         // Validate login credentials (use a more secure validation method in production)
-        if ($request->username === 'm' && $request->password === 'm') {
+        if ($request->username === 'admin' && $request->password === 'admin') {
 
             session([
                         'user_data' => $response1['data']['user'],
