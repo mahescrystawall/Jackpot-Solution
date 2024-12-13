@@ -1,44 +1,92 @@
 <?php
 
 namespace App\Services;
-use Carbon\Carbon;
-use Illuminate\Support\Facades\Http;
+
+use App\Interfaces\IAccountStatementService;
+use App\Traits\FileHelper;
+use Illuminate\Support\Facades\File;
 
 
-
-class AccountStatementService
+class AccountStatementService implements IAccountStatementService
 {
+    use FileHelper;
    
-    public function getAccountStatement(array $filters = [])
+    public function getAccountStatement(string $fileName, array $filters): array
 {
-    // Get the base URL from the configuration or environment
-    $baseUrl = config('app.api_url', env('API_URL'));
-    
-    // Fetch the account statement data from the API
-    $loginData = Http::timeout(60)->get($baseUrl.'/api/report/account-statement');
-    
-    // Check if the request was successful
-    if ($loginData->successful()) {
-        $data = $loginData->json(); // Return response as an array
-        
-        // Extract filters from the provided array
-        $startDate = isset($filters['start_date']) ? Carbon::parse($filters['start_date'])->toDateString() : null;
-        $endDate = isset($filters['end_date']) ? Carbon::parse($filters['end_date'])->toDateString() : null;
-        $category = isset($filters['category']) ? $filters['category'] : null;
+    // Define the path where the JSON file is stored
+    $filePath = storage_path("json/{$fileName}");
 
-        // Filter the data based on the filters provided
-        $filteredData = collect($data)->filter(function ($item) use ($startDate, $endDate, $category) {
-            $dateMatch = (!$startDate || $item['date'] >= $startDate) && (!$endDate || $item['date'] <= $endDate);
-            $categoryMatch = !$category || $item['sports'] === $category;
-            return $dateMatch && $categoryMatch;
-        })->values()->toArray();
-
-        return $filteredData;  // Return the filtered data
+    // Check if the file exists
+    if (!File::exists($filePath)) {
+        return ['error' => 'File not found'];
     }
 
-    // If the API request fails, return an error message
-    return ['error' => 'Failed to fetch data'];
-}       
+    // Read the file contents
+    $fileContents = File::get($filePath);
+
+    // Decode the JSON into an array
+    $data = json_decode($fileContents, true);
+
+    // Initialize the transactions array from data
+    $transactions = $data['data']['transactions']['data'];
+
+    // Apply date and category filters if they are set
+    if (isset($filters['start_date']) && isset($filters['end_date'])) {
+        // Ensure the start and end dates include time (defaulting to '00:00:00' if time is not provided)
+        $startDate = date('Y-m-d 00:00:00', strtotime($filters['start_date']));
+        $endDate = date('Y-m-d 23:59:59', strtotime($filters['end_date']));
+
+        // Filter the transactions based on 'created_at' date range and 'sports' category
+        $filteredTransactions = array_filter($transactions, function ($item) use ($startDate, $endDate, $filters) {
+            // Check if 'created_at' exists and is a valid date
+            if (isset($item['created_at']) && strtotime($item['created_at']) !== false) {
+                $createdAtTimestamp = strtotime($item['created_at']);
+
+                // Check if 'sports' is provided and if the transaction's sports category matches
+                $sportsFilterPassed = true;
+                if (!empty($filters['category']) && isset($item['sports']) && $item['sports'] !== $filters['category']) {
+                    $sportsFilterPassed = false;  // Exclude if sports doesn't match
+                }
+
+                // Compare the timestamps of 'created_at' with the start and end date range
+                return $createdAtTimestamp >= strtotime($startDate) && $createdAtTimestamp <= strtotime($endDate) && $sportsFilterPassed;
+            }
+            return false; // Exclude the item if 'created_at' is not valid or not present
+        });
+    } else {
+        // If no date filters are set, just apply the sports category filter
+        $filteredTransactions = array_filter($transactions, function ($item) use ($filters) {
+            // Check if 'sports' is provided and if the transaction's sports category matches
+            if (!empty($filters['category']) && isset($item['sports']) && $item['sports'] === $filters['category']) {
+                return true;  // Include the item if sports matches
+            }
+            return empty($filters['category']) || !isset($item['sports']);
+        });
     }
 
+    // Re-index the filtered array to reset keys (like JSON)
+    $filteredTransactions = array_values($filteredTransactions);
 
+    // If no records were found after filtering
+    if (empty($filteredTransactions)) {
+        return [
+            'status' => false,
+            'message' => 'No records found after filtering',
+            'data' => []
+        ]; // Return as an array instead of JsonResponse
+    }
+
+    // Return the filtered transactions as an array
+    return [
+        'status' => true,
+        'message' => 'Filtered records found',
+        'data' => $filteredTransactions
+    ];
+}
+
+
+    public function getBetList(string $fileName): array
+    {
+        return $this->getDataFromFile($fileName);
+    }
+}

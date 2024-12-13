@@ -15,6 +15,8 @@ use App\Interfaces\IEventService;
 use App\Services\EventService;
 use App\Interfaces\ILoginService;
 use App\Services\LoginService;
+use App\Interfaces\IAccountStatementService;
+use App\Services\AccountStatementService;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -30,6 +32,7 @@ class AppServiceProvider extends ServiceProvider
         $this->app->bind(IMenuService::class, MenuService::class);
         $this->app->bind(IEventService::class, EventService::class);
         $this->app->bind(ILoginService::class, LoginService::class);
+        $this->app->bind(IAccountStatementService::class, AccountStatementService::class);
     }
 
     /**

@@ -9,36 +9,54 @@ use Illuminate\Support\Facades\Http;
 class AccountStatementService
 {
    
-    public function getAccountStatement(array $filters = [])
-{
-    // Get the base URL from the configuration or environment
-    $baseUrl = config('app.api_url', env('API_URL'));
-    
-    // Fetch the account statement data from the API
-    $loginData = Http::timeout(60)->get($baseUrl.'/api/report/account-statement');
-    
-    // Check if the request was successful
-    if ($loginData->successful()) {
-        $data = $loginData->json(); // Return response as an array
+      
+    public function getAccountStatement($filters)
+    {
+        // Get the base URL from the configuration or environment
+        $baseUrl = config('app.api_url', env('API_URL'));
         
-        // Extract filters from the provided array
-        $startDate = isset($filters['start_date']) ? Carbon::parse($filters['start_date'])->toDateString() : null;
-        $endDate = isset($filters['end_date']) ? Carbon::parse($filters['end_date'])->toDateString() : null;
-        $category = isset($filters['category']) ? $filters['category'] : null;
-
-        // Filter the data based on the filters provided
-        $filteredData = collect($data)->filter(function ($item) use ($startDate, $endDate, $category) {
-            $dateMatch = (!$startDate || $item['date'] >= $startDate) && (!$endDate || $item['date'] <= $endDate);
-            $categoryMatch = !$category || $item['sports'] === $category;
-            return $dateMatch && $categoryMatch;
-        })->values()->toArray();
-
-        return $filteredData;  // Return the filtered data
+        try {
+            // Send the request to the API with a timeout of 60 seconds
+            $response = Http::timeout(60)->get($baseUrl.'/api/report/account-statement', $filters);
+            // Send filters if needed
+            
+            // Check if the response was successful
+            if ($response->successful()) {
+                return ['data' => $response->json()];  // Return the data in a structured format
+            }
+    
+            // If the response failed, return the error and status code
+            return ['error' => 'Failed to fetch data', 'status_code' => $response->status()];
+        } catch (\Exception $e) {
+            // Catch any exceptions, such as network issues, and return the error message
+            return ['error' => 'An error occurred: ' . $e->getMessage()];
+        }
     }
-
-    // If the API request fails, return an error message
-    return ['error' => 'Failed to fetch data'];
-}       
+       
+    public function getBetList($id)
+    {
+        // Get the base URL from the configuration or environment
+        $baseUrl = config('app.api_url', env('API_URL'));
+        
+        try {
+            // Send the request to the API with a timeout of 60 seconds
+            $response = Http::timeout(60)->get($baseUrl.'/api/bet_list', $id);
+            // Send filters if needed
+            
+            // Check if the response was successful
+            if ($response->successful()) {
+                return ['data' => $response->json()];  // Return the data in a structured format
+            }
+    
+            // If the response failed, return the error and status code
+            return ['error' => 'Failed to fetch data', 'status_code' => $response->status()];
+        } catch (\Exception $e) {
+            // Catch any exceptions, such as network issues, and return the error message
+            return ['error' => 'An error occurred: ' . $e->getMessage()];
+        }
     }
+    
+
+}
 
 

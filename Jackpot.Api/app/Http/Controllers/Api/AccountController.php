@@ -4,25 +4,41 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use App\Services\AccountStatementService;
+use App\Interfaces\IAccountStatementService;
 
 class AccountController extends Controller
 {
     protected $accountStatementService;
 
     // Inject StakeService into the controller
-    public function __construct(AccountStatementService $accountStatementService)
+    public function __construct(IAccountStatementService $accountStatementService)
     {
         $this->accountStatementService = $accountStatementService;
     }
-    public function getLoginData()
-    {
-        // Use the LoginService to get the auth user
-        $data = $this->accountStatementService->getAccountStatement($filters);
-
-        if (isset($data['error_message'])) {
-            return response()->json($data, 400);
-        }
-        return response()->json($data, 200);
+    public function getStatementData(Request $request)
+    {     
+        $filters = [
+            'start_date' => $request->input('start_date'),
+            'end_date' => $request->input('end_date'),
+            'category' => $request->input('category', null), // default to null if no category is provided
+        ];
+        $fileName= 'account_statement.json';
+            $data = $this->accountStatementService->getAccountStatement($fileName,$filters);
+                if (isset($data['error_message'])) {
+                return response()->json($data, 400);
+            }
+            return response()->json($data, 200);
     }
+
+    public function getBetData()
+    {       
+            $data = $this->accountStatementService->getBetList('bet_list.json');
+            if (isset($data['error_message'])) {
+                return response()->json($data, 400);
+            }
+            return response()->json($data, 200);
+    }
+
+    
+ 
 }

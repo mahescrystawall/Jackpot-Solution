@@ -7,54 +7,65 @@ use Illuminate\Http\Request;
 use Carbon\Carbon;
 use App\Services\AccountStatementService;
 
-
-
 class AccountStatementController extends Controller
 {
     protected $accountStatementService;
 
-    // Inject StakeService into the controller
+    // Inject AccountStatementService into the controller
     public function __construct(AccountStatementService $accountStatementService)
     {
         $this->accountStatementService = $accountStatementService;
     }
+
+    // Show form with account statements
+   
+   
     public function showForm(Request $request)
     {
-        // Get filters from request
-        $filters = $request->only(['start_date', 'end_date', 'category']);
-        
-        // Use the service to fetch the filtered data
-        $filteredData = $this->accountStatementService->getAccountStatement($filters);
+        // Default filters for the date range (initially showing all data)
+        $filters = [
+            'start_date' => $request->input('start_date', Carbon::now()->subMonth()->format('Y-m-d')),  // Default to one month ago if no start date
+            'end_date' => $request->input('end_date', Carbon::now()->format('Y-m-d')),  // Default to today if no end date
+            'category' => $request->input('category', ''), // Default to no category if not provided
+        ];
+    
+        // Fetch all account statement data (initially without filtering for the last 16 days)
+        $allData = $this->accountStatementService->getAccountStatement($filters);
+    
+        // If there is an error in fetching data, pass error message to the view
+        if (isset($allData['error'])) {
+            return view('account_statement.index', [
+                'startDate' => $filters['start_date'],
+                'endDate' => $filters['end_date'],
+                'filteredData' => [],  // Empty filtered data
+                'error' => $allData['error'], // Show error message
+            ]);
+        }
+    
+        // Filter the data for the last 16 days (only when showing filtered data)
+        $filteredData = [];
+        $currentDate = Carbon::now();
+       $filteredData =$allData['data'];
 
-        // Return the view with the data
+    
+        // Return the view with all data and the filtered data for the last 16 days
         return view('account_statement.index', [
-            'startDate' => $request->input('start_date', Carbon::now()->subMonth()->toDateString()),
-            'endDate' => $request->input('end_date', Carbon::now()->toDateString()),
-            'filteredData' => $filteredData ?: [],
+            'startDate' => $filters['start_date'],
+            'endDate' => $filters['end_date'],
+            'filteredData' => $filteredData, // Use the filtered data for the last 16 days
         ]);
     }
     
+
     public function fetchCasinoBetHistory(Request $request)
     {
-        // Validate input
-        $betStatus = $request->input('betStatus'); // 'matched' or 'deleted'
-    
-        // Static data for demo purposes
-        $data = [
-            ['sr_no' => 1, 'round_id' => '320922658051522400', 'side' => 'back', 'game_id' => '151067', 'game_code' => 'MAC88-CAVB100', 'amount' => 100, 'place_date' => '2024-11-20'],
-            // Additional rows...
-        ];
-    
-        // Optionally filter data based on bet status
-        if ($betStatus == 'matched') {
-            $data = collect($data)->filter(function ($item) {
-                return $item['side'] === 'back'; // Example filter condition for matched
-            })->toArray();
-        }
-    
-        // Return the data as JSON
-        return response()->json($data);
-    }
-}
+        // Get the bet data using your service
+        $id = ['type_id' => '803d0e34-8b1e-434b-a714-b5641d92da08'];
+        $casinoBetId = $request->input('casino_bet_id'); 
+        $betHistory = $this->accountStatementService->getBetList($casinoBetId); // Assuming this returns the bet history
 
-?>
+        // Return the data as a JSON response
+        return response()->json($betHistory);
+    }
+    
+}

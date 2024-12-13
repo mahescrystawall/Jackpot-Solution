@@ -15,6 +15,7 @@ Route::post('/postlogin', [LoginController::class, 'getLoginData'])->name('postl
 Route::middleware(['client'])->group(function () {
     Route::resource('/home', DashboardController::class);
     Route::get('/report/account-statement', [AccountStatementController::class, 'showForm'])->name('account-statement');
+    Route::post('/bet_list', [AccountStatementController::class, 'fetchCasinoBetHistory'])->name('fetchCasinoBetHistory');
     Route::get('/bet-history', [BetHistoryController::class,'index'])->name('bet-history');
     Route::get('/change-price-value', [StakeController::class,'showForm'])->name('change-price-value');
     Route::post('/stakes/update', [StakeController::class, 'updateStakeValue'])->name('stakes.update');
