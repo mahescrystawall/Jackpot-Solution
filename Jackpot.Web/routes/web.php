@@ -5,8 +5,7 @@ use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\User\BetHistoryController;
 use App\Http\Controllers\User\StakeController;
-use App\Http\Controllers\Auth\AccountStatementController;
-
+use App\Http\Controllers\User\AccountStatementController;
 
 
 Route::get('/', [LoginController::class, 'showLoginForm']);

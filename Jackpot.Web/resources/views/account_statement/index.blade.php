@@ -45,8 +45,8 @@
             <tr>
                 <th class="text-center">S.No</th>
                 <th class="text-center">Date</th>
-                <th class="text-center">Credit</th>1111
-                <th class="text-center">Debit</th>2222
+                <th class="text-center">Credit</th>
+                <th class="text-center">Debit</th>
                 <th class="text-center">Balance</th>
                 <th class="text-center">Sports</th>
                 <th class="text-center">Remarks</th>
@@ -58,8 +58,8 @@
             <tr>
                 <td class="text-center">{{ (int)$index + 1 }}</td>
                 <td class="text-center">{{ \Carbon\Carbon::parse($statement['created_at'])->format('Y-m-d') }}</td>
-                <td class="text-center">{{ $statement['total'] > 0 ? $statement['total'] : '0.00' }}</td>1111
-                <td class="text-center">{{ $statement['total'] < 0 ? $statement['total'] : '0.00' }}</td>22222
+                <td class="text-center">{{ $statement['total'] > 0 ? $statement['total'] : '0.00' }}</td>
+                <td class="text-center">{{ $statement['total'] < 0 ? $statement['total'] : '0.00' }}</td>
                 <td class="text-center">{{ $statement['balance'] }}</td>
                 <td class="text-center">{{ $statement['sports'] }}</td>
                 <td class="text-center">
