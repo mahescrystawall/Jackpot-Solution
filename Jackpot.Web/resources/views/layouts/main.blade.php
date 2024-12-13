@@ -58,7 +58,7 @@
 
                                         <li><a href="{{route('bet-history')}}">Bet History</a></li>
 
-                                        <li><a href="">Unsetteled Bet</a></li>
+                                        <li><a href="{{route('unsettled_bets')}}">Unsetteled Bet</a></li>
                                         <li><a href="{{route('change-price-value')}}">Set Button Values</a></li>
                                         <li><a href="/change-password">Change Password</a></li>
                                         <li>
