@@ -6,3 +6,12 @@ html, body {
     max-width: 100% !important;
     overflow-x: hidden !important;
 }
+
+@layer components {
+    .table-td td {
+        @apply px-4 py-2 !important;
+    }
+    .table-th th {
+        @apply px-4 py-2 !important;
+    }    
+}

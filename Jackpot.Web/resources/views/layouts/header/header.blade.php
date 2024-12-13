@@ -17,7 +17,6 @@
 
 
       <div class="flex items-center py-3">
-
         <div class="grid md:grid-cols-[100px_100px_100px_150px] md:gap-3 " >
           <div class="hidden md:flex w-[100px] justify-center items-center h-full text-xs">
             <button
@@ -54,13 +53,13 @@
               <div class="z-50 hidden my-4 text-base list-none bg-jcolor4 divide-y divide-gray-100 rounded shadow" id="dropdown-user">
             
                 <ul class="py-3 px-4" role="none">
-                  <li><a href="#" class="block px-4 py-2 text-sm text-jwhite1" role="menuitem">Account Statement</a></li>
+                  <li><a href="{{ route('account-statement') }}" class="block px-4 py-2 text-sm text-jwhite1" role="menuitem">Account Statement</a></li>
                   <li><a href="#" class="block px-4 py-2 text-sm text-jwhite1" role="menuitem">Profit & Loss</a></li>
                   <li><a href="#" class="block px-4 py-2 text-sm text-jwhite1" role="menuitem">Bet History</a></li>
                   <li><a href="#" class="block px-4 py-2 text-sm text-jwhite1" role="menuitem">Unsettled Bets</a></li>
                   <li><a href="#" class="block px-4 py-2 text-sm text-jwhite1" role="menuitem">Set Button Values</a></li>
                   <li><a href="#" class="block px-4 py-2 text-sm text-jwhite1" role="menuitem">Change Password</a></li>
-                  <li><a href="#" class="block px-4 py-2 text-sm text-jwhite1" role="menuitem">Sign out</a></li>
+                  <li><a href="{{ route('logout') }}" class="block px-4 py-2 text-sm text-jwhite1" role="menuitem">Sign out</a></li>
                 </ul>
               </div>
             </div>
