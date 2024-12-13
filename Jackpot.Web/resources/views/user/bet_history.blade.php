@@ -65,7 +65,7 @@
                                     </tr>
                                 </thead>
                                 @if($events && !empty($events['data']))
-                                
+
                                     <tbody  role="rowgroup">
                                         @foreach($events['data'] as $event)
                                             <tr>
@@ -77,8 +77,8 @@
                                                 <td>{{ $event['result'] }}</td>
                                                 <td>{{ $event['matched_at'] }}</td>
                                                 <td>{{ $event['matched_at'] }}</td>
-                                                
-                                                
+
+
                                             </tr>
                                         @endforeach
                                     </tbody>
@@ -102,7 +102,7 @@
              var is_matched = $('#is_matched').val();
              var event_type_id = $('#event_type_id').val();
 
-        });  
+        });
     });
     </script>
 @endsection

@@ -24,12 +24,12 @@ class LoginController extends Controller
     }
     public function getLoginData(Request $request)
     {
-       
+
         // Fetch login data by calling the service method
         $response1 = $this->loginservice->getloginData();
-    
+
         // Validate login credentials (use a more secure validation method in production)
-        if ($request->username === 'Amrutha' && $request->password === 'Amr@2024') {
+        if ($request->username === 'admin' && $request->password === 'admin') {
 
             session([
                         'user_data' => $response1['data']['user'],
@@ -45,6 +45,10 @@ class LoginController extends Controller
         else{
             return back()->withErrors(['error' => $response['message'] ?? 'Invalid Credentials or API Error.',]);
         }
+    }
+    public function changePassword()
+    {
+        return view('user.password.change_password');
     }
     public function logout()
     {

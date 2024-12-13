@@ -1,113 +1,93 @@
-@extends('layouts.main')
+@extends('layouts.app')
 
 @section('content')
-<div class="card">
-    <div class="card-header">
-        <h4 class="mb-0">Change Button Values</h4>
-    </div>
-    <!-- <div id="toaster-container"></div> -->
+    <div class="mt-200">
+        <div class="p-2 pt-6 sm:ml-64 mt-14 h-screen">
 
-    <div class="card-body container-fluid button-value">
-        <div class="row mb-1">
-            <div class="col-3">
-                <div class="button-title">
-                    <span>
-                        <b>Price Label</b>
-                    </span>
-                </div>
-            </div>
-            <div class="col-3">
-                <div class="button-title">
-                    <span>
-                        <b>Price Value</b>
-                    </span>
-                </div>
-            </div>
-        </div>
-        <div id="loading-spinner" style="display:none; position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%); z-index: 9999;">
-            <div class="spinner-border" role="status">
-                <span class="sr-only">Loading...</span>
-            </div>
-        </div>
+             @include('layouts.marquee')
 
-        <form id="stakeupdateform" method="post" enctype="multipart/form-data" action="{{ route('stakes.update') }}">
-            @csrf <!-- Ensure CSRF protection -->
-            <!-- Loop through each stake and generate input fields -->
-            @php
-            $stakes = session('stakes'); // Retrieve the stakes from the session
-            @endphp
-            @foreach ($stakes as $key => $value)
-            <!-- Check if the key starts with "stake_name_" -->
-            @if (strpos($key, 'stake_name_') === 0)
-            @php
-            // Extract the index from the key
-            $index = substr($key, -1);
-            @endphp
-            <div class="row mb-1">
-                <div class="col-3">
-                    <div class="form-group mb-0">
-                        <input type="text" name="stake_name_{{ $index }}" maxlength="7" class="form-control" value="{{ old('stake_name_' . $index, $stakes['stake_name_' . $index]) }}" placeholder="stackVal{{ $index }}">
+
+            <section class="w-full text-white">
+                <div class="flex flex-row w-full py-2 mb-2 bg-gradient-to-r from-[#00ADB5] via-[#00ADB5] to-[#1B1B1B]">
+                    <div class="flex items-center gap-2 text-white text-sm w-full px-2">
+                        <h2>Change Button Values</h2>
                     </div>
                 </div>
-                <div class="col-3">
-                    <div class="form-group mb-0">
-                        <input type="number" name="stake_amount_{{ $index }}" min="1" max="99999999" maxlength="9" class="form-control" value="{{ old('stake_amount_' . $index, $stakes['stake_amount_' . $index]) }}" placeholder="stackVal{{ $index }}">
-                    </div>
-                </div>
-            </div>
-            @endif
-            @endforeach
+                <div class="card-body container-fluid button-value">
+                    <div class="grid grid-cols-2 w-full md:w-1/3 gap-2">
+                        <div class="">
+                            <span>Price Label</span>
 
-            <div class="row mt-2">
-                <div class="col-12">
-                    <button type="submit" class="btn btn-primary">Update</button>
+                        </div>
+                        <div class="">
+                            <span>Price Value</span>
+
+                        </div>
+                    </div>
+
+
+
+                    <form id="stakeupdateform" method="post" enctype="multipart/form-data"
+                        action="{{ route('stakes.update') }}">
+                        @csrf <!-- CSRF Protection -->
+                        @php
+                            $stakes = session('stakes');
+                        @endphp
+                        @foreach ($stakes as $key => $value)
+                            @if (strpos($key, 'stake_name_') === 0)
+                                @php
+                                    $index = substr($key, -1);
+                                @endphp
+
+                                    <div class="grid grid-cols-2 w-full md:w-1/3 gap-2">
+                                        <div class="">
+
+                                            <input type="text" name="stake_name_{{ $index }}" maxlength="7"
+                                            class="block w-full p-3 text-white border border-bg-jblue2 bg-transparent rounded-lg text-sm focus:border-jblue2 focus:ring-jblue2"
+                                            value="{{ old('stake_name_' . $index, $stakes['stake_name_' . $index]) }}"
+                                            placeholder="stackVal{{ $index }}">
+
+                                        </div>
+                                        <div class="">
+
+                                            <input type="number" name="stake_amount_{{ $index }}" min="1"
+                                            max="99999999" maxlength="9"
+                                            class="block w-full p-3 text-white border border-bg-jblue2 bg-transparent rounded-lg text-sm focus:border-jblue2 focus:ring-jblue2"
+                                            value="{{ old('stake_amount_' . $index, $stakes['stake_amount_' . $index]) }}"
+                                            placeholder="stackVal{{ $index }}">
+
+                                        </div>
+                                    </div>
+
+                                {{-- <div class="flex mb-4 space-x-4">
+
+                                    <div class="flex-1 md:w-[320px]">
+                                        <input type="text" name="stake_name_{{ $index }}" maxlength="7"
+                                            class="block  p-3 text-white border border-bg-jblue2 bg-transparent rounded-lg text-sm focus:border-jblue2 focus:ring-jblue2"
+                                            value="{{ old('stake_name_' . $index, $stakes['stake_name_' . $index]) }}"
+                                            placeholder="stackVal{{ $index }}">
+                                    </div>
+                                    <div class="flex-1">
+                                        <input type="number" name="stake_amount_{{ $index }}" min="1"
+                                            max="99999999" maxlength="9"
+                                            class="block w-1/2 p-3 text-white border border-bg-jblue2 bg-transparent rounded-lg text-sm focus:border-jblue2 focus:ring-jblue2"
+                                            value="{{ old('stake_amount_' . $index, $stakes['stake_amount_' . $index]) }}"
+                                            placeholder="stackVal{{ $index }}">
+                                    </div>
+                                </div> --}}
+                            @endif
+                        @endforeach
+                        <div class="mt-4">
+                            <button type="submit"
+                                class="bg-[#00ADB5] text-[#EEEEEE] shadow-[3px_3px_0px_0_rgba(3,119,124,1)] flex items-center gap-2 p-3 rounded-md hover:text-jwhite2 focus:ring-4 focus:outline-none focus:ring-jblue2 text-sm w-[200px] px-5 py-2.5 text-center">
+                                Update
+                            </button>
+                        </div>
+                    </form>
                 </div>
-            </div>
-        </form>
+            </section>
+        </div>
     </div>
-</div>
 @endsection
 @section('scripts')
-<!-- jQuery and AJAX script -->
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-<script>
-    $(document).ready(function() {
-        // Handle the form submission
-        $('#stakeupdateform').on('submit', function(e) {
-            e.preventDefault(); // Prevent default form submission
-
-            // Show the loading spinner
-            $('#loading-spinner').show();
-
-            // Serialize the form data
-            var formData = $(this).serialize();
-
-            // Send AJAX request to update the stakes
-            $.ajax({
-                url: $(this).attr('action'), // Use the action attribute of the form
-                method: "POST",
-                data: formData,
-                success: function(response) {
-
-                    // Hide the loading spinner once the request is complete
-                    $('#loading-spinner').hide();
-                    var successMessage = response.message;
-                    if (response.success) {
-                       
-                        // Append the message to a div or use it as needed
-                          $('#toaster-container').html('<div class="toast success " role="alert" style="display: block;">' + successMessage + '</div>');
-                      
-                    } else {
-                        $('#toaster-container').html('<div class="toast error " role="alert" style="display: block;">' + successMessage + '</div>');
-
-                       // alert(response.message); // Show error message
-                    }
-                },
-                error: function(xhr, status, error) {
-                    alert('Something went wrong. Please try again.');
-                }
-            });
-        });
-    });
-</script>
 @endsection
