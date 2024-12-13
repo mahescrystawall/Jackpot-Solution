@@ -5,7 +5,7 @@ namespace App\Http\Controllers\Api;
 use App\Http\Controllers\Controller;
 use App\Interfaces\IPriceValueService;
 
-class PriceValueController extends Controller
+class PriceValueApiController extends Controller
 {
     protected $_priceValueService;
 
