@@ -8,7 +8,7 @@ use App\Http\Controllers\User\BetHistoryController;
 use App\Http\Controllers\User\AccountStatementController;
 use App\Http\Controllers\User\StakeController;
 use App\Http\Controllers\User\ProfitLossController;
-
+use App\Http\Controllers\User\UnsettledBetController;
 
 Route::get('/', [LoginController::class, 'showLoginForm']);
 Route::get('/login', [LoginController::class, 'showLoginForm'])->name('login');
@@ -20,6 +20,7 @@ Route::middleware(['client'])->group(function () {
     Route::get('/account-statement', [AccountStatementController::class,'index'])->name('account-statement');
     Route::get('/profit-loss', [ProfitLossController::class,'index'])->name('profit-loss');
     Route::get('/bet-history', [BetHistoryController::class,'index'])->name('bet-history');
+    Route::get('/unsettled_bets', [UnsettledBetController::class,'index'])->name('unsettled_bets');
     Route::get('/change-password', [LoginController::class,'changePassword'])->name('change-password');
     Route::get('/change-price-value', [StakeController::class,'showForm'])->name('change-price-value');
     Route::post('/stakes/update', [StakeController::class, 'updateStakeValue'])->name('stakes.update');
