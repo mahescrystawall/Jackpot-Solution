@@ -19,11 +19,11 @@ class UnsettledBetController extends Controller
     {
 
 
-            $isMatched = $request->get('is_matched', 1);
+        $isMatched = 1;//$request->get('is_matched', 1);
 
         $unSettledBetsData = $this->unsettledService->getBetHistoryData( $isMatched);
-        $events = $unSettledBetsData;
-        $pagination = $unSettledBetsData;
+        $events = $unSettledBetsData["data"]["orders"]["data"];
+        $pagination = $unSettledBetsData["data"]["orders"]["data"];
         return view('user/unsettled_bet', compact('events', 'pagination'));
     }
 }
