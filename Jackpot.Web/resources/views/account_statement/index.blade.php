@@ -56,10 +56,10 @@
             </tr>
         </thead>
         <tbody>
-            @if(isset($filteredData) && is_array($filteredData))
-            @foreach($filteredData['data'] as $index => $statement)
+            @if(isset($paginationData) && is_array($paginationData))
+            @foreach($paginationData['data'] as $index => $statement)
             <tr>
-                <td class="text-center">{{ (int)$index + 1 }}</td>
+                <td class="text-center">{{ $statement['id'] }}</td>
                 <td class="text-center">{{ \Carbon\Carbon::parse($statement['created_at'])->format('Y-m-d') }}</td>
                 <td class="text-center">{{ $statement['total'] > 0 ? $statement['total'] : '0.00' }}</td>
                 <td class="text-center">{{ $statement['total'] < 0 ? $statement['total'] : '0.00' }}</td>
@@ -81,6 +81,68 @@
             @endif
         </tbody>
     </table>
+    <div>
+
+    
+</div>
+
+<div class="pagination d-flex flex-column align-items-center">
+    @if (!empty($paginationData) && $paginationData['total_pages'] > 0)
+        <!-- Buttons for navigation -->
+        <div class="button-group d-flex">
+            <!-- Previous Button -->
+            @if ($paginationData['prev_page'])
+                <a href="{{ route('account-statement', [
+                        'page' => $paginationData['prev_page'], 
+                        'start_date' => request('start_date'), 
+                        'end_date' => request('end_date'), 
+                        'category' => request('category')
+                    ]) }}" 
+                    class="btn btn-primary btn-sm btn-prev me-2">
+                    <i class="fas fa-arrow-left"></i> Previous
+                </a>
+            @else
+                <span class="btn btn-secondary btn-sm btn-prev me-2" disabled>
+                    <i class="fas fa-arrow-left"></i> Previous
+                </span>
+            @endif
+
+            <!-- Next Button -->
+            @if ($paginationData['next_page'])
+                <a href="{{ route('account-statement', [
+                        'page' => $paginationData['next_page'], 
+                        'start_date' => request('start_date'), 
+                        'end_date' => request('end_date'), 
+                        'category' => request('category')
+                    ]) }}" 
+                    class="btn btn-primary btn-sm btn-next">
+                    Next <i class="fas fa-arrow-right"></i>
+                </a>
+            @else
+                <span class="btn btn-secondary btn-sm btn-next" disabled>
+                    Next <i class="fas fa-arrow-right"></i>
+                </span>
+            @endif
+        </div>
+
+        <!-- Page Information -->
+        <div class="page-info mt-2">
+            <span class="page-info-text">
+                Total Page <strong>{{ $paginationData['current_page'] }}</strong> of <strong>{{ $paginationData['total_pages'] }}</strong>
+            </span>
+        </div>
+    @else
+        <!-- No Data Available -->
+        <div class="no-data mt-3">
+            <p>No data available for the selected filters.</p>
+        </div>
+    @endif
+</div>
+
+
+
+
+
 
     <!-- Modal for Remarks Details -->
     <div class="modal fade" id="descriptionModal" tabindex="-1" role="dialog" aria-labelledby="descriptionModalLabel" aria-hidden="true">

@@ -30,6 +30,7 @@ class AccountStatementService implements IAccountStatementService
     
         // Initialize the transactions array from data
         $transactions = $data['data']['transactions']['data'];
+        $pagination = $data['data']['pagination'];
     
         // Apply date and category filters if they are set
         if (isset($filters['start_date']) && isset($filters['end_date'])) {
@@ -81,7 +82,8 @@ class AccountStatementService implements IAccountStatementService
         return [
             'status' => true,
             'message' => 'Filtered records found',
-            'data' => $filteredTransactions
+            'data' => $filteredTransactions,
+            'pagination'=>  $pagination
         ];
     }
     
