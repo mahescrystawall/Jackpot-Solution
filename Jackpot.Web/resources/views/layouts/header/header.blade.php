@@ -55,7 +55,7 @@
                 <ul class="py-3 px-4" role="none">
                   <li><a href="{{ route('account-statement') }}" class="block px-4 py-2 text-sm text-jwhite1" role="menuitem">Account Statement</a></li>
                   <li><a href="{{ route('profit-loss') }}" class="block px-4 py-2 text-sm text-jwhite1" role="menuitem">Profit & Loss</a></li>
-                  <li><a href="#" class="block px-4 py-2 text-sm text-jwhite1" role="menuitem">Bet History</a></li>
+                  <li><a href="{{ route('bet-history') }}" class="block px-4 py-2 text-sm text-jwhite1" role="menuitem">Bet History</a></li>
                   <li><a href="#" class="block px-4 py-2 text-sm text-jwhite1" role="menuitem">Unsettled Bets</a></li>
                   <li><a href="{{route('change-price-value')}}" class="block px-4 py-2 text-sm text-jwhite1" role="menuitem">Set Button Values</a></li>
                   <li><a href="{{route('change-password')}}" class="block px-4 py-2 text-sm text-jwhite1" role="menuitem">Change Password</a></li>
