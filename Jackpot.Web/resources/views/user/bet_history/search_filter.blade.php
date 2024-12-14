@@ -15,7 +15,7 @@
     }
   </style>
    <div class="px-2 md:px-0">
-        <form class="flex flex-wrap gap-5  mt-5 leading-none  max-md:max-w-full" action="{{ route('bet-history')}}" method="POST">
+        <form class="grid grid-cols-5 gap-5  mt-5 leading-none  max-md:max-w-full" action="{{ route('bet-history')}}" method="POST">
             <div class="flex gap-10  justify-between items-start rounded-md border border-1 border-jcolor1 w-full md:w-60">
                 <label for="category" class="sr-only">Category</label>
                 <select class="dropdown-search gap-2.5 bg-transparent border-none text-white  focus:ring-jblue2 focus:rounded-md focus:border-jblue2 w-full md:w-60" name="event_type_id" id="event_type_id">
