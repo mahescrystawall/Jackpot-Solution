@@ -6,7 +6,7 @@
         </div>
         <div class="card-body container-fluid container-fluid-5">
             <!-- Filter Form -->
-            <form id="filter_form" method="POST" action="{{ route('bet-history') }}" class="">
+
                 <div class="row row5 mt-2">
                     <div class="col-md-2">
                         <div class="form-group mb-0">
@@ -53,7 +53,7 @@
                     </div>
 
                 </div>
-            </form>
+
 
             <div class="col-md-2">
                 <button id="submitBtn" class="btn btn-primary btn-block">Submit</button>
