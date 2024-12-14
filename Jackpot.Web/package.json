@@ -18,6 +18,7 @@
     },
     "dependencies": {
         "@splidejs/splide": "^4.1.4",
-        "alpinejs": "^3.14.7"
+        "alpinejs": "^3.14.7",
+        "tailwindcss-gradients": "^3.0.0"
     }
 }

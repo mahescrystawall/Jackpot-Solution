@@ -17,10 +17,14 @@
                 <div class="splide__track">
                     <ul class="splide__list">
                         @foreach($slot_games as $slot_game)
+                            @php
+                                // Remove the file extension by splitting at the dot (.)
+                                $filename = explode('.', $slot_game)[0];
+                            @endphp
                             <li class="splide__slide">
                                 <div >
                                     <div class="w-full p-">
-                                        <img src="{{ asset('assets/images/CASINO/SLOT_GAMES/' . $slot_game) }}" alt="{{$slot_game}}">
+                                        <img src="{{ asset('assets/images/CASINO/SLOT_GAMES/' . $slot_game) }}" alt="{{$filename}}">
                                     </div>
                                 </div>
                             </li>

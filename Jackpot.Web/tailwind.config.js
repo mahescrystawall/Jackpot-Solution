@@ -20,6 +20,11 @@ export default {
             fontFamily: {
                 sans: ['Figtree', ...defaultTheme.fontFamily.sans],
             },
+
+            backgroundImage: {
+                'custom-gradient': 'linear-gradient(to right, #00ADB5, #1d1c1c 30%, #19383a 60%, #00ADB5)',
+            },
+        
         },
         colors: {
             transparent: 'transparent',
@@ -47,7 +52,8 @@ export default {
     },
     plugins: [
         require('flowbite/plugin'),
-        require('tailwind-scrollbar')
+        require('tailwind-scrollbar'),
+        require('tailwindcss-gradients')
     ],
 
 };

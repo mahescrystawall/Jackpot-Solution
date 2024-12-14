@@ -11,13 +11,15 @@
 
         @yield('css_content')
     </head>
-    <body>
-        <div id="app" class="h-[100vh] w-[100vw] bg-jcolor8">
+    <body class="bg-jcolor8">
+        <div id="app" class="h-full w-[100vw] bg-jcolor8">
             @include('layouts.header.header')
             
             @include('layouts.side_menu.index')
             
-            @yield('content')
+            <div class="pr-4">
+                @yield('content')
+            </div>
             
         </div>
         @yield('js_content')
