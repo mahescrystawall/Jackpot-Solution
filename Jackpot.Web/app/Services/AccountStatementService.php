@@ -16,35 +16,45 @@ class AccountStatementService
    
       
     public function getPaginatedAccountStatement($filters)
-    {
-        // Get the data from the API or database
-        $response = Http::timeout(60)->get($this->baseUrl . '/api/report/account-statement', $filters);
-    
+{
+    try {
+        // Fetch data from the API
+        $response = Http::timeout(60)->post($this->baseUrl . '/api/report/account-statement', $filters);
+
         if ($response->successful()) {
-            $data = $response->json();    
-            // Assuming 'data' contains the actual records
-            $totalItems = isset($data['pagination']['total_items']) ? $data['pagination']['total_items'] : 0;
-            $perPage = 10;
-            $totalPages = ceil($totalItems / $perPage); // Calculate total pages
-            $currentPage = (int) request()->get('page', 1); // Get the current page, default is 1
-            $offset = ($currentPage - 1) * $perPage; // Calculate the offset for pagination
-    
-            // Paginate the data manually
-            $pagedData = array_slice($data['data'], $offset, $perPage); // Paginate the actual data
-    
-            // Returning paginated data with pagination info
-            return [
-                'data' => $pagedData,
-                'total_items' => $totalItems,
-                'total_pages' => $totalPages,
-                'current_page' => $currentPage,
-                'prev_page' => ($currentPage > 1) ? $currentPage - 1 : null,
-                'next_page' => ($currentPage < $totalPages) ? $currentPage + 1 : null,
-            ];
+            $data = $response->json();
+
+            // Validate response structure
+            if (isset($data['data'])) {
+                $filteredData = $data['data']; // Assuming this is already filtered by the API
+                $totalItems = count($filteredData); // Count filtered data
+                $perPage = 10;
+                $totalPages = ceil($totalItems / $perPage);
+                $currentPage = (int) request()->get('page', 1);
+                $offset = ($currentPage - 1) * $perPage;
+
+                // Slice data for the current page
+                $pagedData = array_slice($filteredData, $offset, $perPage);
+
+                return [
+                    'data' => $pagedData,
+                    'total_items' => $totalItems,
+                    'total_pages' => $totalPages,
+                    'current_page' => $currentPage,
+                    'prev_page' => ($currentPage > 1) ? $currentPage - 1 : null,
+                    'next_page' => ($currentPage < $totalPages) ? $currentPage + 1 : null,
+                ];
+            }
+
+            return ['error' => 'Invalid data structure received'];
         }
-    
-        return ['error' => 'Failed to fetch data'];
+
+        return ['error' => 'Failed to fetch data from API'];
+    } catch (\Exception $e) {
+        return ['error' => 'An error occurred: ' . $e->getMessage()];
     }
+}
+
        
     public function getBetList($id)
     {

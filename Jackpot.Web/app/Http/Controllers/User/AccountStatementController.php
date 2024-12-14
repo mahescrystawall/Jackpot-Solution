@@ -8,16 +8,12 @@ use Illuminate\Http\Request;
 use App\Services\BetHistoryService;
 use App\Services\AccountStatementService;
 
-
-
-
-
 class AccountStatementController extends Controller
 {
     protected $accountStatementService;
     protected $betHistoryService;
 
-    // Inject AccountStatementService into the controller
+    // Inject AccountStatementService and BetHistoryService into the controller
     public function __construct(AccountStatementService $accountStatementService, BetHistoryService $betHistoryService)
     {
         $this->accountStatementService = $accountStatementService;
@@ -25,48 +21,62 @@ class AccountStatementController extends Controller
     }
 
     // Show form with account statements
-
-
     public function showForm(Request $request)
     {
-        // Default filters for the date range (initially showing all data)
         $filters = [
-            'start_date' => $request->input('start_date', Carbon::now()->subMonth()->format('Y-m-d')),  // Default to one month ago if no start date
-            'end_date' => $request->input('end_date', Carbon::now()->format('Y-m-d')),  // Default to today if no end date
-            'category' => $request->input('category', ''), // Default to no category if not provided
+            'start_date' => Carbon::parse($request->input('start_date', Carbon::now()->subMonth()->format('Y-m-d')))->format('Y-m-d'),
+            'end_date' => Carbon::parse($request->input('end_date', Carbon::now()->format('Y-m-d')))->format('Y-m-d'),
+            'category' => $request->input('category', ''),
         ];
+
+        // Fetch the paginated account statement data
         $paginationData = $this->accountStatementService->getPaginatedAccountStatement($filters);
+            
 
-        // Fetch paginated data using the filters
+        // If there is an error fetching data, pass error message to the view or JSON response
+        if (isset($paginationData['error'])) {
+            // For API users (JSON response)
+            if ($request->wantsJson()) {
+                return response()->json([
+                    'error' => $paginationData['error'],
+                ], 400); // 400 Bad Request
+            }
 
-        // If there is an error in fetching data, pass error message to the view
-        if (isset($data['error'])) {
+            // For web users (Blade view with error message)
             return view('account_statement.index', [
-                'startDate' => $filters['start_date'],
-                'endDate' => $filters['end_date'],
-                'filteredData' => [],  // Empty filtered data
-                'error' => $data['error'], // Show error message
+                'error' => $paginationData['error']
             ]);
         }
 
         // Fetch all sports (if needed)
         $allSports = $this->betHistoryService->getAllSports();
 
-        // Return the view with all data and the filtered data for the paginated results
+        // Return JSON response for API users
+        if ($request->wantsJson()) {
+            return response()->json([
+                'startDate' => $filters['start_date'],
+                'endDate' => $filters['end_date'],
+                'paginationData' => $paginationData,
+                'allSports' => $allSports
+            ]);
+        }
+
+        // Return a Blade view for browser users
         return view('account_statement.index', [
             'startDate' => $filters['start_date'],
             'endDate' => $filters['end_date'],
-            'allSports' => $allSports,
-            'paginationData' => $paginationData
+            'paginationData' => $paginationData,
+            'allSports' => $allSports
         ]);
     }
 
-
-
+    // Fetch casino bet history
     public function fetchCasinoBetHistory(Request $request)
     {
+        // Validate the casino_bet_id to make sure it's provided
+       
+
         // Get the bet data using your service
-        $id = ['type_id' => '803d0e34-8b1e-434b-a714-b5641d92da08'];
         $casinoBetId = $request->input('casino_bet_id');
         $betHistory = $this->accountStatementService->getBetList($casinoBetId); // Assuming this returns the bet history
 

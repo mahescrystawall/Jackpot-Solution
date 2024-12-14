@@ -19,7 +19,7 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 Route::get('/unsettled_bets', [BetApiController::class, 'getUnsettledBets'])->name('unsettled_bets');
 
 // Route for fetching account_statement
-Route::get('/report/account-statement', [AccountController::class, 'getStatementData']);
+Route::post('/report/account-statement', [AccountController::class, 'getStatementData']);
 
 // Route for fetching bet_list
 Route::get('/bet_list', [AccountController::class, 'getBetData']);
