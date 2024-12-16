@@ -11,81 +11,93 @@ use App\Interfaces\IAccountStatementService;
 class AccountStatementService implements IAccountStatementService
 {
     use FileHelper;
-   
-    public function getAccountStatement(string $fileName, array $filters): array
-    {
-        // Define the path where the JSON file is stored
-        $filePath = storage_path("json/{$fileName}");
-    
-        // Check if the file exists
-        if (!File::exists($filePath)) {
-            return ['error' => 'File not found'];
-        }
-    
-        // Read the file contents
-        $fileContents = File::get($filePath);
-    
-        // Decode the JSON into an array
-        $data = json_decode($fileContents, true);
-    
-        // Initialize the transactions array from data
-        $transactions = $data['data']['transactions']['data'];
-    
-        // Apply date and category filters if they are set
-        if (isset($filters['start_date']) && isset($filters['end_date'])) {
-            // Ensure the start and end dates include time (defaulting to '00:00:00' if time is not provided)
-            $startDate = date('Y-m-d 00:00:00', strtotime($filters['start_date']));
-            $endDate = date('Y-m-d 23:59:59', strtotime($filters['end_date']));
-    
-            // Filter the transactions based on 'created_at' date range and 'event_type_id' (category filter)
-            $filteredTransactions = array_filter($transactions, function ($item) use ($startDate, $endDate, $filters) {
-                // Check if 'created_at' exists and is a valid date
-                if (isset($item['created_at']) && strtotime($item['created_at']) !== false) {
-                    $createdAtTimestamp = strtotime($item['created_at']);
-    
-                    // Check if 'event_type_id' is provided and if it matches the 'category' filter
-                    $sportsFilterPassed = true;
-                    if (!empty($filters['category']) && isset($item['event_type_id']) && $item['event_type_id'] != $filters['category']) {
-                        $sportsFilterPassed = false;  // Exclude if event_type_id doesn't match the category filter
-                    }
-    
-                    // Compare the timestamps of 'created_at' with the start and end date range
-                    return $createdAtTimestamp >= strtotime($startDate) && $createdAtTimestamp <= strtotime($endDate) && $sportsFilterPassed;
-                }
-                return false; // Exclude the item if 'created_at' is not valid or not present
+
+   public function getAccountStatement(string $fileName, array $filters): array
+{
+    // Define the path where the JSON file is stored
+    $filePath = storage_path("json/{$fileName}");
+
+    // Define the path for the menu.json file
+    $menuFilePath = storage_path('json/menu.json');
+
+    // Check if the file exists
+    if (!File::exists($filePath)) {
+        return ['error' => 'File not found'];
+    }
+
+    // Read the file contents
+    $fileContents = File::get($filePath);
+
+    // Decode the JSON into an array
+    $data = json_decode($fileContents, true);
+
+    // Load the menu.json file to get event_type_id names
+    $filteredMenu = [];
+    if (File::exists($menuFilePath)) {
+        $menuContents = File::get($menuFilePath);
+        $menuData = json_decode($menuContents, true);
+        $eventTypeId = $filters['category'] ?? null;
+
+        // Filter the menu if a specific category ID is provided
+        if ($eventTypeId && $eventTypeId !== "ALL") {
+            $filteredMenu = array_filter($menuData['data']['menu'], function ($item) use ($eventTypeId) {
+                return $item['id'] == $eventTypeId;
             });
         } else {
-            // If no date filters are set, just apply the event_type_id filter (category filter)
-            $filteredTransactions = array_filter($transactions, function ($item) use ($filters) {
-                // Check if 'event_type_id' is provided and if the transaction's 'event_type_id' matches
-                if (!empty($filters['category']) && isset($item['event_type_id']) && $item['event_type_id'] == $filters['category']) {
-                    return true;  // Include the item if event_type_id matches
-                }
-                return empty($filters['category']) || !isset($item['event_type_id']);
-            });
+            $filteredMenu = $menuData['data']['menu']; // Use full menu if no category or "ALL" is provided
         }
-    
-        // Re-index the filtered array to reset keys (like JSON)
-        $filteredTransactions = array_values($filteredTransactions);
-    
-        // If no records were found after filtering
-        if (empty($filteredTransactions)) {
-            return [
-                'status' => false,
-                'message' => 'No records found after filtering',
-                'data' => []
-            ]; // Return as an array instead of JsonResponse
-        }
-    
-        // Return the filtered transactions as an array
-        return [
-            'status' => true,
-            'message' => 'Filtered records found',
-            'data' => $filteredTransactions
-        ];
     }
-    
 
+    // Initialize the transactions array from data
+    $transactions = $data['data']['transactions']['data'];
+
+    // Extract pagination details
+    $pagination = $data['data']['transactions'];
+    $paginationDetails = [
+        'next_page_url' => $pagination['next_page_url'],
+        'path' => $pagination['path'],
+        'per_page' => $pagination['per_page'],
+        'prev_page_url' => $pagination['prev_page_url'],
+        'to' => $pagination['to'],
+        'total' => $pagination['total'],
+    ];
+
+    // Apply category filter (event_type_id)
+    if (isset($filters['category']) && $filters['category'] !== "ALL") {
+        $transactions = array_filter($transactions, function ($item) use ($filters) {
+            return isset($item['event_type_id']) &&
+                   (int)$item['event_type_id'] === (int)$filters['category'];
+        });
+    }
+
+    // Apply date filter if start_date and end_date are provided
+    if (isset($filters['start_date']) && isset($filters['end_date'])) {
+        $startDate = \Carbon\Carbon::parse($filters['start_date'])->startOfDay();
+        $endDate = \Carbon\Carbon::parse($filters['end_date'])->endOfDay();
+
+        $transactions = array_filter($transactions, function ($item) use ($startDate, $endDate) {
+            $transactionDate = \Carbon\Carbon::parse($item['created_at']);
+            return $transactionDate->between($startDate, $endDate);
+        });
+    }
+
+    // Reset keys for filtered transactions
+    $filteredTransactions = array_values($transactions);
+
+    // Prepare the response data
+    return [
+        'status' => true,
+        'message' => 'Filtered records found',
+        'data' => [
+            'transactions' => $filteredTransactions, // Reset keys for filtered transactions
+            'menu' => array_values($filteredMenu), // Reset keys for the filtered menu
+        ],
+        'pagination' => $paginationDetails, // Include pagination details
+    ];
+}
+
+    
+    
 
     public function getBetList(string $fileName): array
     {

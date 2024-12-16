@@ -53,11 +53,7 @@
                                     <ul>
                                         <li><a href="/report/account-statement">Account Statement</a></li>
                                         <li><a href="/report/profit-loss">Profit Loss Report</a></li>
-
-
-
                                         <li><a href="{{route('bet-history')}}">Bet History</a></li>
-
                                         <li><a href="{{route('unsettled_bets')}}">Unsetteled Bet</a></li>
                                         <li><a href="{{route('change-price-value')}}">Set Button Values</a></li>
                                         <li><a href="/change-password">Change Password</a></li>
