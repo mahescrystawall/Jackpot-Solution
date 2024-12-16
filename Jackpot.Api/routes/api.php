@@ -2,12 +2,13 @@
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\Api\BetController;
-use App\Http\Controllers\Api\PriceValueController;
-use App\Http\Controllers\Api\MenuController;
-use App\Http\Controllers\Api\EventController;
-use App\Http\Controllers\Api\ProfitLossController;
-use App\Http\Controllers\Api\LoginController;
+use App\Http\Controllers\Api\BetApiController;
+use App\Http\Controllers\Api\PriceValueApiController;
+use App\Http\Controllers\Api\MenuApiController;
+use App\Http\Controllers\Api\EventApiController;
+use App\Http\Controllers\Api\ProfitLossApiController;
+use App\Http\Controllers\Api\LoginApiController;
+use App\Http\Controllers\Api\AccountController;
 
 // Example of a route with authentication
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
@@ -15,19 +16,26 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 });
 
 // Route for fetching unsettled bets
-Route::get('/unsettled_bets', [BetController::class, 'getUnsettledBets'])->name('unsettled_bets');
+Route::get('/unsettled_bets', [BetApiController::class, 'getUnsettledBets'])->name('unsettled_bets');
+
+// Route for fetching account_statement
+Route::get('/report/account-statement', [AccountController::class, 'getStatementData']);
+
+// Route for fetching bet_list
+Route::get('/bet_list', [AccountController::class, 'getBetData']);
+
 
 // Route for fetching stakes value
-Route::get('/stakes', [PriceValueController::class, 'getStakes']);
+Route::get('/stakes', [PriceValueApiController::class, 'getStakes']);
 
 // Route for fetching menu items
-Route::get('/menu', [MenuController::class, 'getMenu']);
+Route::get('/menu', [MenuApiController::class, 'getMenu']);
 
-Route::get('/events', [EventController::class, 'getEvents']);
+Route::get('/events', [EventApiController::class, 'getEvents']);
 
-Route::get('/profit-loss', [ProfitLossController::class, 'getProfitLoss']);
+Route::get('/profit-loss', [ProfitLossApiController::class, 'getProfitLoss']);
 
-Route::get('/bet_history', [BetController::class, 'getBetHistory']);
+Route::post('/bet_history', [BetApiController::class, 'getBetHistory']);
 
-Route::get('/login-data', [LoginController::class, 'getLoginData']);
+Route::get('/login-data', [LoginApiController::class, 'getLoginData']);
 
