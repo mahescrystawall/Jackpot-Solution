@@ -26,38 +26,42 @@ class AccountStatementController extends Controller
         $filters = [
             'start_date' => Carbon::parse($request->input('start_date', Carbon::now()->subMonth()->format('Y-m-d')))->format('Y-m-d'),
             'end_date' => Carbon::parse($request->input('end_date', Carbon::now()->format('Y-m-d')))->format('Y-m-d'),
-            'category' => $request->input('category', ''),
+            'category' => $request->input('category', 'ALL'),
         ];
 
         // Fetch the paginated account statement data
         $paginationData = $this->accountStatementService->getPaginatedAccountStatement($filters);
-            
+        $menuData=  $paginationData['menuData'];
 
-        // If there is an error fetching data, pass error message to the view or JSON response
+        // Debugging data (remove in production)
+        // dd($paginationData);
+
+        // Handle errors during data retrieval
         if (isset($paginationData['error'])) {
-            // For API users (JSON response)
             if ($request->wantsJson()) {
                 return response()->json([
-                    'error' => $paginationData['error'],
-                ], 400); // 400 Bad Request
+                    'status' => false,
+                    'message' => $paginationData['error'],
+                ], 400);
             }
 
-            // For web users (Blade view with error message)
             return view('account_statement.index', [
-                'error' => $paginationData['error']
+                'error' => $paginationData['error'],
             ]);
         }
 
-        // Fetch all sports (if needed)
+        // Fetch additional data like sports (if needed)
         $allSports = $this->betHistoryService->getAllSports();
 
         // Return JSON response for API users
         if ($request->wantsJson()) {
             return response()->json([
+                'status' => true,
+                'message' => 'Data fetched successfully',
                 'startDate' => $filters['start_date'],
                 'endDate' => $filters['end_date'],
                 'paginationData' => $paginationData,
-                'allSports' => $allSports
+                'allSports' => $allSports,
             ]);
         }
 
@@ -66,15 +70,18 @@ class AccountStatementController extends Controller
             'startDate' => $filters['start_date'],
             'endDate' => $filters['end_date'],
             'paginationData' => $paginationData,
-            'allSports' => $allSports
+            'allSports' => $allSports,
+            'menuData' => $menuData
+
         ]);
     }
+
 
     // Fetch casino bet history
     public function fetchCasinoBetHistory(Request $request)
     {
         // Validate the casino_bet_id to make sure it's provided
-       
+
 
         // Get the bet data using your service
         $casinoBetId = $request->input('casino_bet_id');
