@@ -52,7 +52,7 @@
                                     <span>{{ $userData['name'] }}<i class="fas fa-chevron-down"></i></span>
                                     <ul>
                                         <li><a href="/report/account-statement">Account Statement</a></li>
-                                        <li><a href="">Profit Loss Report</a></li>
+                                        <li><a href="/report/profit-loss">Profit Loss Report</a></li>
 
 
 
