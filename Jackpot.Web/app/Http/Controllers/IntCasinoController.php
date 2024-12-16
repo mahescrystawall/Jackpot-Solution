@@ -9,6 +9,6 @@ class IntCasinoController extends Controller
 
     public function index()
     {
-        return view('int-casino.casino');
+        return view('int-casino.int-casino');
     }
 }
