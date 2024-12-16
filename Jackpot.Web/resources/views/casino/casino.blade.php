@@ -15,19 +15,19 @@
    use Illuminate\Support\Collection;
 
    $popular_games = [ 
-      "FUN-GAMES-DRAFT-LAYOUT-01.webp", 
-      "FUN-GAMES-DRAFT-LAYOUT-02.webp", 
-      "FUN-GAMES-DRAFT-LAYOUT-03.webp", 
-      "FUN-GAMES-DRAFT-LAYOUT-04.webp", 
-      "FUN-GAMES-DRAFT-LAYOUT-05.webp", 
-      "FUN-GAMES-DRAFT-LAYOUT-06.webp", 
-      "FUN-GAMES-DRAFT-LAYOUT-07.webp", 
-      "FUN-GAMES-DRAFT-LAYOUT-08.webp", 
-      "FUN-GAMES-DRAFT-LAYOUT-09.webp", 
-      "FUN-GAMES-DRAFT-LAYOUT-10.webp"
+      "AVIATOR X2.webp", 
+      "AVIATOR.webp", 
+      "CRASH.webp", 
+      "DIAMONDS.webp", 
+      "DICE.webp", 
+      "HILO.webp", 
+      "LIMBO.webp", 
+      "MINES.webp", 
+      "PLINKO.webp", 
+      "X-ROULETTE.webp", 
    ]; 
 
-   $slot_games = [ 
+   $mac88 = [ 
       "1-ANDAR-BAHAR.webp", 
       "10-20-20-POKER.webp", 
       "11-POKER-ONE-DAY.webp", 
@@ -121,16 +121,16 @@
 
 @section('content')
    <div class="mt-200 text-white">
-      <div class="p-2 pt-6 sm:ml-64 mt-14 h-screen">
+      <div class="p-2 pt-6 sm:ml-64 mt-14 ">
          @include('layouts.marquee')
 
          @include('layouts.slider')
 
          @include('casino.popular_sports')
 
-         @include('casino.popular_games')
+         {{-- @include('casino.popular_games') --}}
 
-         @include('casino.slot_games')
+         {{-- @include('casino.slot_games') --}}
 
          @include('casino.casino_tabs')
 

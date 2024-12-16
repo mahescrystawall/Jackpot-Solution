@@ -21,7 +21,7 @@
                         @foreach ($popular_sports_cricket as $item)
                             <li class="splide__slide">
                                 <div class="">
-                                    <div class="w-full p-6 bg- border-t rounded-xl shadow text-white bg-[radial-gradient(circle_at_top,_#00383b,_#252728,_#252728)]">
+                                    <div class="w-full p-6 bg- border-t border-jblue2 rounded-xl shadow text-white bg-[radial-gradient(circle_at_top,_#00383b,_#252728,_#252728)]">
                                         <div class="grid grid-cols-2 px-5">
                                             <div class="flex items-center gap-1">
                                                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" fill="none">
