@@ -20,7 +20,7 @@ Route::middleware(['client'])->group(function () {
     Route::resource('/int-casino', IntCasinoController::class);
 
 
-    Route::get('/account-statement', [AccountStatementController::class,'index'])->name('account-statement');
+    Route::any('/account-statement', [AccountStatementController::class,'showAccountStatement'])->name('account-statement');
     Route::get('/profit-loss', [ProfitLossController::class,'index'])->name('profit-loss');
     Route::get('/bet-history', [BetHistoryController::class,'index'])->name('bet-history');
     Route::get('/unsettled_bets', [UnsettledBetController::class,'index'])->name('unsettled_bets');
