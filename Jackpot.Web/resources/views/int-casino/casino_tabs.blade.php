@@ -21,6 +21,22 @@
         @foreach ($casinoGameList as $mainCategory => $subCategories)
             <div x-show="activeMainCategory === '{{ strtolower(str_replace(' ', '_', $mainCategory)) }}'">
                 <ul class="grid grid-cols-2 md:grid-cols-7 items-center w-full text-sm text-center" role="tablist">
+
+                   <!-- Show the "ALL" subcategory if subCategories count is greater than 0 -->
+                @if (count($subCategories) > 0)
+                <li class="flex-auto w-full" role="presentation">
+                    <button
+                        @click="activeSubCategory = 'all'"
+                        :class="activeSubCategory === 'all'
+                            ? 'bg-[#03777C] text-[#EEEEEE]'
+                            : 'border border-jcolor1 text-jcolor9'"
+                        class="flex flex-col items-center px-3 py-6 w-full rounded-tl-md hover:border-jblue2 hover:text-jwhite2 gap-1"
+                    >
+                        ALL
+                    </button>
+                </li>
+            @endif
+
                     @foreach ($subCategories as $subCategory)
                         <li class="flex-auto w-full" role="presentation">
                             <button
