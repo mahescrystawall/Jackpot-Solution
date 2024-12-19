@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
 use App\Interfaces\IProfitLossService;
+use Illuminate\Http\Request;
 
 class ProfitLossApiController extends Controller
 {
@@ -19,9 +20,15 @@ class ProfitLossApiController extends Controller
      *
      * @return \Illuminate\Http\JsonResponse
      */
-    public function getProfitLoss()
+    public function getProfitLoss(Request $request)
     {
-        $data = $this->_profitLossService->getProfitLossData();
+
+        $filters = $request->all();
+
+        $apiUrl = null;
+
+        $data = $this->_profitLossService->getProfitLossData($apiUrl, $filters);
+
 
         if (isset($data['message']) && $data['message'] === 'File not found') {
             return response()->json($data, 404);
