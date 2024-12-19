@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\IntCasinoController;
+use App\Http\Controllers\CasinoController;
 
 use App\Http\Controllers\User\BetHistoryController;
 use App\Http\Controllers\User\AccountStatementController;
@@ -16,7 +17,8 @@ Route::get('/', [LoginController::class, 'showLoginForm']);
 Route::get('/login', [LoginController::class, 'showLoginForm'])->name('login');
 Route::post('/postlogin', [LoginController::class, 'getLoginData'])->name('postlogin');
 Route::middleware(['client'])->group(function () {
-    Route::resource('/home', DashboardController::class);
+    // Route::resource('/home', DashboardController::class);
+    Route::resource('/home', CasinoController::class);
     Route::resource('/int-casino', IntCasinoController::class);
 
 
