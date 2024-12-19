@@ -4,7 +4,7 @@
         @foreach ($casinoGameList as $mainCategory => $subCategories)
             <li class="flex items-center justify-center w-full" role="presentation">
                 <button
-                    @click="activeMainCategory = '{{ strtolower(str_replace(' ', '_', $mainCategory)) }}'; activeSubCategory = ''"
+                    @click="activeMainCategory = '{{ strtolower(str_replace(' ', '_', $mainCategory)) }}'; activeSubCategory = 'all'"
                     :class="activeMainCategory === '{{ strtolower(str_replace(' ', '_', $mainCategory)) }}'
                         ? 'bg-[#03777C] text-[#EEEEEE] shadow-[2px_2px_0px_0_rgba(0,173,181,1)]'
                         : 'bg-jcolor7 text-jcolor9 shadow-[2px_2px_0px_0_rgba(54,54,54,1)]'"
@@ -42,7 +42,7 @@
                                     : 'border border-jcolor1 text-jcolor9'"
                                 class="flex flex-col items-center px-3 py-6 w-full rounded-tl-md hover:border-jblue2 hover:text-jwhite2 gap-1"
                             >
-                                {{ $subCategory['name'] }}
+                            {{ ucwords(strtolower($subCategory['name'])) }}
                             </button>
                         </li>
                     @endforeach
