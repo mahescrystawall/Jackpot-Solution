@@ -1,8 +1,9 @@
 <style>
-    table, th, td {
+    table,
+    th,
+    td {
         border: 0.5px solid #393E46 !important;
     }
-    
 </style>
 <div class="overflow-x-auto mt-5">
     <table class="w-full text-xs text-white border-collapse ">
@@ -22,21 +23,22 @@
 
         <!-- Table Body -->
         <tbody class="table-td">
+            <?php //dd($events);            exit; ?>
             @if($events && !empty($events['data']))
-                @foreach($events['data'] as $event)
-                <tr class="border border-jcolor1 px-4 py-3">
-                    <td class="overflow-hidden whitespace-nowrap">{{ $event['event_name'] }}</td>
-                    <td class="overflow-hidden whitespace-nowrap">{{ $event['selection_name'] }}</td>
-                    <td class="">{{ ($event['bet_type'])?'back':'lay' }}</td>
-                    <td class="">{{ $event['rate'] }}</td>
-                    <td class="">{{ $event['stake'] }}</td>
-                    <td class="">{{ $event['result'] }}</td>
-                    <td class="overflow-hidden whitespace-nowrap">{{ $event['matched_at'] }}</td>
-                    <td class="overflow-hidden whitespace-nowrap">{{ $event['matched_at'] }}</td>
-                </tr>
-                @endforeach
+            @foreach($events['data'] as $event)
+            <tr class="border border-jcolor1 px-4 py-3">
+                <td class="overflow-hidden whitespace-nowrap">{{ $event['event_name'] }}</td>
+                <td class="overflow-hidden whitespace-nowrap">{{ $event['selection_name'] }}</td>
+                <td class="">{{ ($event['bet_type'])?'back':'lay' }}</td>
+                <td class="">{{ $event['rate'] }}</td>
+                <td class="">{{ $event['stake'] }}</td>
+                <td class="">{{ $event['result'] }}</td>
+                <td class="overflow-hidden whitespace-nowrap">{{ $event['matched_at'] }}</td>
+                <td class="overflow-hidden whitespace-nowrap">{{ $event['matched_at'] }}</td>
+            </tr>
+            @endforeach
             @endif
-    
+
         </tbody>
     </table>
 </div>
