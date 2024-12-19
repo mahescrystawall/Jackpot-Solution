@@ -1,4 +1,4 @@
-<div class="mb-4 mt-2" x-data="{ activeMainCategory: 'mac88', activeSubCategory: '' }">
+<div class="mb-4 mt-2" x-data="{ activeMainCategory: 'mac88', activeSubCategory: 'all' }">
     <!-- Main Category Tabs -->
     <ul class="grid grid-cols-2 md:grid-cols-4 items-center w-full text-sm text-center gap-3" role="tablist">
         @foreach ($casinoGameList as $mainCategory => $subCategories)
@@ -23,33 +23,34 @@
                 <ul class="grid grid-cols-2 md:grid-cols-7 items-center w-full text-sm text-center" role="tablist">
 
                    <!-- Show the "ALL" subcategory if subCategories count is greater than 0 -->
-                @if (count($subCategories) > 0)
-                <li class="flex-auto w-full" role="presentation">
-                    <button
-                        @click="activeSubCategory = 'all'"
-                        :class="activeSubCategory === 'all'
-                            ? 'bg-[#03777C] text-[#EEEEEE]'
-                            : 'border border-jcolor1 text-jcolor9'"
-                        class="flex flex-col items-center px-3 py-6 w-full rounded-tl-md hover:border-jblue2 hover:text-jwhite2 gap-1"
-                    >
-                        ALL
-                    </button>
-                </li>
-            @endif
 
-                    @foreach ($subCategories as $subCategory)
-                        <li class="flex-auto w-full" role="presentation">
-                            <button
-                                @click="activeSubCategory = '{{ strtolower(str_replace(' ', '_', $subCategory['name'])) }}'"
-                                :class="activeSubCategory === '{{ strtolower(str_replace(' ', '_', $subCategory['name'])) }}'
-                                    ? 'bg-[#03777C] text-[#EEEEEE]'
-                                    : 'border border-jcolor1 text-jcolor9'"
-                                class="flex flex-col items-center px-3 py-6 w-full rounded-tl-md hover:border-jblue2 hover:text-jwhite2 gap-1"
-                            >
-                                {{ $subCategory['name'] }}
-                            </button>
-                        </li>
-                    @endforeach
+
+                @foreach ($subCategories as $key=>$subCategory)
+                    @if($key == '0')
+                    <li class="flex-auto w-full" role="presentation">
+                        <button
+                            @click="activeSubCategory = 'all'"
+                            :class="activeSubCategory === 'all'
+                                ? 'bg-[#03777C] text-[#EEEEEE]'
+                                : 'border border-jcolor1 text-jcolor9'"
+                            class="flex flex-col items-center px-3 py-6 w-full rounded-tl-md hover:border-jblue2 hover:text-jwhite2 gap-1"
+                        >
+                            ALL
+                        </button>
+                    </li>
+                    @endif
+                    <li class="flex-auto w-full" role="presentation">
+                        <button
+                            @click="activeSubCategory = '{{ strtolower(str_replace(' ', '_', $subCategory['name'])) }}'"
+                            :class="activeSubCategory === '{{ strtolower(str_replace(' ', '_', $subCategory['name'])) }}'
+                                ? 'bg-[#03777C] text-[#EEEEEE]'
+                                : 'border border-jcolor1 text-jcolor9'"
+                            class="flex flex-col items-center px-3 py-6 w-full rounded-tl-md hover:border-jblue2 hover:text-jwhite2 gap-1"
+                        >
+                            {{ $subCategory['name'] }}
+                        </button>
+                    </li>
+                @endforeach
                 </ul>
             </div>
         @endforeach
@@ -61,6 +62,27 @@
             <div x-show="activeMainCategory === '{{ strtolower(str_replace(' ', '_', $mainCategory)) }}'">
                 @foreach ($subCategories as $subCategory)
                     <div x-show="activeSubCategory === '{{ strtolower(str_replace(' ', '_', $subCategory['name'])) }}'">
+                        <div class="w-full">
+                            <div class="grid grid-cols-3 md:grid-cols-6 gap-2">
+                                @foreach ($subCategory['data'] as $game)
+                                    <div class="max-w-sm bg-jcolor8 group">
+                                        <a href="#">
+                                            <img class="rounded-t-lg w-full" src="{{ $game['url_thumb'] }}" alt="{{ $game['name'] }}" />
+                                        </a>
+                                        <div class="p-2 group-hover:bg-gradient-to-r group-hover:from-[#00ADB5] group-hover:via-[#19383a] group-hover:via-30% group-hover:via-[#19383a] group-hover:via-50% group-hover:to-[#00ADB5]  bg-gradient-to-r from-[#19383a] via-[#1B1B1B] to-[#19383a]">
+                                            <a href="#">
+                                                <p class="font-semibold tracking-tight text-center text-white">
+                                                    {{ $game['name'] }}
+                                                </p>
+                                            </a>
+                                        </div>
+                                    </div>
+                                @endforeach
+                            </div>
+                        </div>
+                    </div>
+
+                    <div x-show="activeSubCategory === 'all'">
                         <div class="w-full">
                             <div class="grid grid-cols-3 md:grid-cols-6 gap-2">
                                 @foreach ($subCategory['data'] as $game)
