@@ -2,21 +2,21 @@
 
 namespace App\Http\Controllers;
 
-use App\Services\IntCasinoService;
+use App\Services\CasinoService;
 
-class IntCasinoController extends Controller
+class CasinoController extends Controller
 {
-    protected $intCasinoService;
+    protected $CasinoService;
 
-    public function __construct(IntCasinoService $intCasinoService)
+    public function __construct(CasinoService $CasinoService)
     {
-        $this->intCasinoService = $intCasinoService;
+        $this->CasinoService = $CasinoService;
     }
 
     public function index()
     {
         // Fetch data using the service
-        $casinoData = $this->intCasinoService->getCasinoData();
+        $casinoData = $this->CasinoService->getCasinoData();
 
         $casinoGameList = [];
 
@@ -40,8 +40,12 @@ class IntCasinoController extends Controller
                 ];
             }
         }
-        // dd($casinoGameList);
+
+        // Fetch casino game list
+
+        $casinoGameList = array_intersect_key($casinoGameList, array_flip(['MAC88', 'Fun Games', 'Mac88 Virtuals', 'Color Prediction']));
+
         // Pass the data to the view
-        return view('int-casino.int-casino', compact('casinoData', 'casinoGameList'));
+        return view('casino.casino', compact('casinoData', 'casinoGameList'));
     }
 }
