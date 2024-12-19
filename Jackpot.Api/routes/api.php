@@ -34,7 +34,10 @@ Route::get('/menu', [MenuApiController::class, 'getMenu']);
 
 Route::get('/events', [EventApiController::class, 'getEvents']);
 
-Route::get('/profit-loss', [ProfitLossApiController::class, 'getProfitLoss']);
+//Route::get('/profit-loss', [ProfitLossApiController::class, 'getProfitLoss']);
+
+Route::post('/profit-loss', [ProfitLossApiController::class, 'getProfitLoss']);
+
 
 Route::post('/bet_history', [BetApiController::class, 'getBetHistory']);
 

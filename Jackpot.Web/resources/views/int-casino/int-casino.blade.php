@@ -132,7 +132,7 @@
 
          {{-- @include('casino.slot_games') --}}
 
-         @include('int-casino.casino_tabs', ['casinoData' => $casinoData])
+         @include('int-casino.casino_tabs', ['casinoData' => $casinoData,'casinoGameList'=>$casinoGameList])
 
       </div>
    </div>
