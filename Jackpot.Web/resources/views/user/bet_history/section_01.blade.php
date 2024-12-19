@@ -49,13 +49,13 @@
 
         // Listen for the submit button click
         submitButton.addEventListener('click', function (e) {
-            e.preventDefault(); // Prevent the default form submission
+            e.preventDefault();
 
             const eventTypeId = eventTypeSelect.value;
             const betStatus = betStatusSelect.value;
             const startDate = startDateInput.value;
             const endDate = endDateInput.value;
-            const type = "ALL";  // Assuming you want to pass a fixed value for 'type'
+            const type = "ALL";
 
             // Prepare the payload for the POST request
             const payload = {
@@ -70,11 +70,11 @@
             fetch('http://127.0.0.1:8081/api/bet_history', {
                 method: 'POST', // HTTP method
                 headers: {
-                    'Content-Type': 'application/json' // Set content type as JSON
+                    'Content-Type': 'application/json'
                 },
-                body: JSON.stringify(payload) // Convert the payload to JSON
+                body: JSON.stringify(payload)
             })
-            .then(response => response.json()) // Parse the JSON response
+            .then(response => response.json())
             .then(data => {
                 // Check if the API returned data and populate the table
                 if (data && data.length > 0) {

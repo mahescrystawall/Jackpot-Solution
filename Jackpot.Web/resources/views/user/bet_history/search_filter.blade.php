@@ -45,11 +45,11 @@
                 <input id="datepicker-toDate" name="end_date" datepicker placeholder="{{$endDatecal}}" type="text" class="bg-transparent border border-solid border-jcolor1 text-gray-900 text-sm rounded-lg focus:ring-jblue2 focus:rounded-md focus:border-jblue2 block  w-full md:w-60 ps-10 p-2.5 " >
             </div>
 
-
+            <button type="submit" class="flex p-2.5 justify-center items-center font-semibold bg-jblue1 text-white rounded-md shadow-[2px_3px_0px_rgba(3,119,124,1)] w-full md:w-60">
+                <span class="gap-2.5">Submit</span>
+            </button>
 
 
         </form>
-        <button type="submit" class="flex p-2.5 justify-center items-center font-semibold bg-jblue1 text-white rounded-md shadow-[2px_3px_0px_rgba(3,119,124,1)] w-full md:w-60">
-            <span class="gap-2.5">Submit</span>
-        </button>
+
    </div>
