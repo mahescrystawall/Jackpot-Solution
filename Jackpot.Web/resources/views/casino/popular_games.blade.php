@@ -17,17 +17,17 @@
                 <div class="splide__track">
                     <ul class="splide__list">
                         @foreach($popular_games as $popular_game)
-                            <li class="splide__slide">
+                            <div class="splide__slide">
                                 <div >
                                     <div class="w-full p-">
                                         <img src="{{ asset('assets/images/CASINO/POPULAR_GAMES/' . $popular_game) }}" alt="{{$popular_game}}">
                                     </div>
                                 </div>
-                            </li>
+                            </div>
                         @endforeach
                     </ul>
                 </div>
             </div>
         </div>
-    </div>    
+    </div>
  </section>

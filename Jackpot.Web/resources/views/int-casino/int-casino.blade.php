@@ -137,3 +137,35 @@
       </div>
    </div>
 @endsection
+
+@section('js_content')
+<script>
+    function initializeSlider(selector, options = {}) {
+        new Splide(selector, {
+            pagination: false, // Disable pagination dots
+            ...options          // merge passed options with defaults
+        }).mount();
+    }
+    document.addEventListener('DOMContentLoaded', function () {
+        initializeSlider('#int-casino-games', {
+            type       : 'loop', // Infinite loop
+            arrows    : true, // Disable arrows
+            perPage    : 6, // Number of slides per page
+            perMove    : 1,  // Number of slides to move on arrow click
+            gap        : '1rem', // Space between slides
+            loop       : false,
+            autoplay  : false,            // Enable autoplay
+            interval  : 2000,            // Set the time interval (in milliseconds) for the slide transition
+            breakpoints : {
+                1024 : { perPage: 2 }, // For larger screens
+                600  : { perPage: 1 }, // For mobile screens
+            },
+
+        });
+
+
+
+    });
+
+</script>
+@endsection
