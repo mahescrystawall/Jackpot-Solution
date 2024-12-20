@@ -12,7 +12,7 @@ class ProfitLossController extends Controller
      *
      * @return \Illuminate\Http\JsonResponse
      */
-    public function getProfitLoss()
+    public function getProfitLoss($apiUrl,$filters)
     {
         // Path to the profit and loss JSON file
         $path = storage_path('json/profit_loss.json');
