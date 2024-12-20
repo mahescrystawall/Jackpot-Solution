@@ -149,9 +149,11 @@
 
     document.addEventListener('DOMContentLoaded', function () {
         initializeSlider('#menu-slider', {
-            type      : 'slide',      // Infinite loop
-            arrows    : false, // Disable arrows
-            autoWidth : true,        // Automatically determine width based on content
+            type      : 'slide',   // Slide type
+            arrows    : false,     // Disable arrows
+            autoWidth : false,      // Automatically determine width based on content
+            perPage    : 10, // Number of slides per page
+            perMove    : 1,  // Number of slides to move on arrow click
         });
 
         initializeSlider('#casino-popular-live-sports', {

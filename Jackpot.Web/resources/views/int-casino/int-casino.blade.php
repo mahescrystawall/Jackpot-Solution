@@ -168,12 +168,11 @@
         initializeSlider('#menu-slider', {
             type      : 'slide',   // Slide type
             arrows    : false,     // Disable arrows
-            autoWidth : true,      // Automatically determine width based on content
+            autoWidth : false,      // Automatically determine width based on content
+            perPage    : 10, // Number of slides per page
+            perMove    : 1,  // Number of slides to move on arrow click
         });
-
-
-
-    });
+      });
 
 </script>
 @endsection
