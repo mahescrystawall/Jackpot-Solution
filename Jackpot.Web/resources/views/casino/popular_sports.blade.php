@@ -12,7 +12,7 @@
 
     <div class="text-sm">
 
-        
+
         <div class="text-sm">
             <div id="casino-popular-live-sports" class="splide w-full px-1">
                 <!-- Splide Track -->
@@ -103,7 +103,7 @@
                 </div>
             </div>
         </div>
-        
+
     </div>
-    
+
  </section>
