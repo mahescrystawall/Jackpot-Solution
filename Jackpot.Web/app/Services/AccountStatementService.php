@@ -21,7 +21,6 @@ class AccountStatementService
         try {
             // Send a POST request to the backend API with filters
             $response = Http::timeout(60)->post($this->baseUrl . '/api/report/account-statement', $filters);
-            Log::info('API Response', ['response' => $response->json()]);
 
     
             // Check if the response is successful
@@ -47,6 +46,7 @@ class AccountStatementService
     
                     return [
                         'data' => $pagedData,
+                        'perPage'=> $perPage,
                         'menuData'=>$menuData,
                         'total_items' => $totalItems,
                         'total_pages' => $totalPages,
@@ -73,27 +73,59 @@ class AccountStatementService
        
     public function getBetList($id)
     {
-        // Get the base URL from the configuration or environment
+        // Get the base URL from the environment or configuration
         $this->baseUrl = env('API_URL');
-        
+    
         try {
-            // Send the request to the API with a timeout of 60 seconds
-            $response = Http::timeout(60)->get(  $this->baseUrl.'/api/bet_list', $id);
-            // Send filters if needed
-            
+            // Build the API endpoint with query parameters
+            $url = $this->baseUrl . '/api/bet_list';
+            $response = Http::timeout(60)->post($url, ['casino_bet_id' => $id]);
+    
             // Check if the response was successful
             if ($response->successful()) {
-                return ['data' => $response->json()];  // Return the data in a structured format
+                $data = $response->json();
+                return [
+                    'data' => $data,
+                ];
             }
     
-            // If the response failed, return the error and status code
-            return ['error' => 'Failed to fetch data', 'status_code' => $response->status()];
+            // Return error message if the response failed
+            return [
+                'error' => 'Failed to fetch data',
+                'status_code' => $response->status(),
+            ];
         } catch (\Exception $e) {
-            // Catch any exceptions, such as network issues, and return the error message
+            // Handle exceptions such as timeouts or network issues
             return ['error' => 'An error occurred: ' . $e->getMessage()];
         }
     }
     
+    public function getOrderDetails(array $filters): array
+    {
+        $baseUrl = env('API_URL', '');
+        if (empty($baseUrl)) {
+            return ['error' => 'Base URL is not configured.'];
+        }
+    
+        $url = rtrim($baseUrl, '/') . '/api/order_history';
+    
+        try {
+            $response = Http::timeout(60)->post($url, [
+                'event_type_id' => $filters[0]['event_type_id'] ?? null,
+                'market_id' => $filters[0]['market_id'] ?? null,
+            ]);
+            if ($response->successful()) {
+                return ['data' => $response->json()];
+            }
+    
+            return [
+                'error' => $response->json('message', 'Failed to fetch data.'),
+                'status_code' => $response->status(),
+            ];
+        } catch (\Exception $e) {
+            return ['error' => 'An error occurred: ' . $e->getMessage()];
+        }
+    }
 
 }
 
