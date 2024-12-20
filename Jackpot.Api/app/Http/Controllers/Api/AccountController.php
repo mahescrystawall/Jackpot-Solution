@@ -5,7 +5,6 @@ namespace App\Http\Controllers\Api;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Interfaces\IAccountStatementService;
-use Illuminate\Support\Facades\Log;
 
 
 class AccountController extends Controller
