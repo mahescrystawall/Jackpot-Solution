@@ -63,7 +63,7 @@
                 },
                 success: function(response) {
 
-                    console.log(response.data);
+                   // console.log(response.data);
                     // Update the table with the new data
                     $('#data-table-body').html(response.data); // Populate the table
                     // Update the pagination

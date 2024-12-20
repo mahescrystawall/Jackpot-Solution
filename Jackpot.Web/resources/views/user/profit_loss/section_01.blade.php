@@ -1,3 +1,4 @@
+@section('css_content')
 <style>
     table,
     th,
@@ -5,6 +6,7 @@
         border: 0.5px solid #393E46 !important;
     }
 </style>
+@endsection
 <div class="overflow-x-auto mt-5">
     <table class="w-full text-xs text-white border-collapse ">
         <!-- Table Header -->
