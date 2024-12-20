@@ -26,13 +26,13 @@ class BetHistoryController extends Controller
 
         $allSports = $this->betHistoryService->getAllSports();
 
+        $categories = $allSports['data']['menu'];
         // Ensure $betHistoryData contains paginated data
         $betHistoryData = $this->betHistoryService->getbetHistoryData($eventTypeId, $startDate, $endDate, $isMatched);
 
         // Paginate the results (assuming it's an array or collection of data)
         $events =$betHistoryData;
-
-        return view('user/bet_history/bet_history', compact('events', 'startDatecal', 'endDatecal'));
+        return view('user/bet_history/bet_history', compact('events', 'startDate', 'endDate','categories'));
     }
 
 }
