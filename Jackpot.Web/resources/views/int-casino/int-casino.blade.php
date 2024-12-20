@@ -8,6 +8,7 @@
          padding: 0 !important; /* Removes all padding */
       }
 
+
    </style>
 @endsection
 
@@ -152,7 +153,7 @@
             arrows    : true, // Disable arrows
             perPage    : 6, // Number of slides per page
             perMove    : 1,  // Number of slides to move on arrow click
-            gap        : '1rem', // Space between slides
+            // gap        : '1rem', // Space between slides
             loop       : false,
             autoplay  : false,            // Enable autoplay
             interval  : 2000,            // Set the time interval (in milliseconds) for the slide transition
@@ -161,6 +162,13 @@
                 600  : { perPage: 1 }, // For mobile screens
             },
 
+        });
+        // Delay the initialization of the menu slider
+
+        initializeSlider('#menu-slider', {
+            type      : 'slide',   // Slide type
+            arrows    : false,     // Disable arrows
+            autoWidth : true,      // Automatically determine width based on content
         });
 
 

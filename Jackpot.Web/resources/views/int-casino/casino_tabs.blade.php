@@ -1,18 +1,18 @@
 <div class="mb-4 mt-2" x-data="{ activeMainCategory: 'mac88', activeSubCategory: 'all' }">
     <!-- Main Category Tabs -->
-    <div id="int-casino-games" class="splide">
+
+    <div id="int-casino-games" class="splide mb-4">
         <div class="splide__track">
-            <ul class="splide__list "
-                role="tablist">
+            <ul class="splide__list">
                 @foreach ($casinoGameList as $mainCategory => $subCategories)
-                    <li id="" class="splide__slide" role="presentation">
+                    <li class="splide__slide">
                         <button
                             @click="activeMainCategory = '{{ strtolower(str_replace(' ', '_', $mainCategory)) }}'; activeSubCategory = 'all'"
                             :class="activeMainCategory === '{{ strtolower(str_replace(' ', '_', $mainCategory)) }}'
-                                ?
-                                'bg-[#03777C] text-[#EEEEEE] shadow-[2px_2px_0px_0_rgba(0,173,181,1)]' :
-                                'bg-jcolor7 text-jcolor9 shadow-[2px_2px_0px_0_rgba(54,54,54,1)]'"
-                            class="rounded-md text-center hover:shadow-[2px_2px_0px_0_rgba(74,74,74,1)] hover:text-jwhite2">
+                                ? 'bg-[#03777C] text-[#EEEEEE] shadow-[2px_2px_0px_0_rgba(0,173,181,1)]'
+                                : 'bg-jcolor7 text-jcolor9 shadow-[2px_2px_0px_0_rgba(54,54,54,1)] border border-jcolor1'"
+                            class="flex flex-col items-center px-3 py-6 w-full rounded-tl-md hover:border-jblue2 hover:text-jwhite2 gap-1"
+                        >
                             {{ $mainCategory }}
                         </button>
                     </li>
