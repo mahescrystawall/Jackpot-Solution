@@ -15,17 +15,27 @@ class Procedure
      */
     static public function ExecuteProcedure($procedureName, $values = [])
     {
-        // Convert the associative array to an indexed array if needed
-        $values = collect($values)->values()->toArray();
+        // Check if the values array is associative
+        if (!is_array($values) || empty($values)) {
+            return "Invalid or empty values provided.";
+        }
 
-        // Build a simple EXEC statement with placeholders
-        $placeholders = implode(', ', array_fill(0, count($values), '?'));
-        $execStatement = "EXEC {$procedureName} {$placeholders}";
+        // Build parameter placeholders with named parameters
+        $placeholders = [];
+        foreach ($values as $key => $value) {
+            $placeholders[] = "@{$key} = ?";
+        }
+        $placeholdersString = implode(', ', $placeholders);
 
+        // Build the EXEC statement
+        $execStatement = "EXEC {$procedureName} {$placeholdersString}";
+
+        // Extract the values to pass to the query
+        $params = array_values($values);
 
         // Execute the procedure with the values
         try {
-            $results = DB::select($execStatement, $values);
+            $results = DB::select($execStatement, $params);
             return collect($results);
         } catch (\Exception $e) {
             return "Error executing procedure: " . $e->getMessage();
