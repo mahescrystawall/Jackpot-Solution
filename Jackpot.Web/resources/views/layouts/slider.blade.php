@@ -31,6 +31,7 @@
          visibility: hidden;
          transition: opacity 0.5s ease, visibility 0.5s ease;
          padding: 0 !important;
+         text-align: center !important;
     }
 </style>
 
@@ -40,7 +41,7 @@
         <div class="menu_list splide__track">
             <ul class="splide__list">
                 @foreach($slider_games as $game)
-                    <div class="splide__slide flex text-nowrap capitalize items-center m-0 px-5 py-2 text-white text-xs border border-jblue2 rounded-none" style="border-radius: 0 !important;">
+                    <div class="splide__slide text-nowrap capitalize items-center m-0 px-auto py-2 text-white text-xs border border-jblue2 rounded-none" style="border-radius: 0 !important;">
                         {{$game[1]}}
                     </div>
                 @endforeach
