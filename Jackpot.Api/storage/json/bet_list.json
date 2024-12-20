@@ -1,52 +1,52 @@
 {
-    "data": {
+  "data": {
       "bet_history": {
-        "current_page": 1,
-        "data": [
-          {
-            "round": "803d0e34-8b1e-434b-a714-b5641d92da08",
-            "round_id": 334837378991522400,
-            "transaction_uuid": "cae99c3a-38d8-4107-8eb0-6f0e51b7dcc4",
-            "game_id": "151067",
-            "game_code": "MAC88-CAVB101",
-            "amount": "100.00",
-            "created_at": "2024-12-06T11:15:37.000000Z",
-            "created_at_format": "2024-12-06T11:15:37.000000Z"
-          }
-        ],
-        "first_page_url": "https://api.d99hub.com/api/client/casino_i_bet_history/803d0e34-8b1e-434b-a714-b5641d92da08?page=1",
-        "from": 1,
-        "last_page": 1,
-        "last_page_url": "https://api.d99hub.com/api/client/casino_i_bet_history/803d0e34-8b1e-434b-a714-b5641d92da08?page=1",
-        "links": [
-          {
-            "url": null,
-            "label": "&laquo; Previous",
-            "active": false
-          },
-          {
-            "url": "https://api.d99hub.com/api/client/casino_i_bet_history/803d0e34-8b1e-434b-a714-b5641d92da08?page=1",
-            "label": "1",
-            "active": true
-          },
-          {
-            "url": null,
-            "label": "Next &raquo;",
-            "active": false
-          }
-        ],
-        "next_page_url": null,
-        "path": "https://api.d99hub.com/api/client/casino_i_bet_history/803d0e34-8b1e-434b-a714-b5641d92da08",
-        "per_page": 100,
-        "prev_page_url": null,
-        "to": 1,
-        "total": 1
+          "current_page": 1,
+          "data": [
+              {
+                  "round": "803d0e34-8b1e-434b-a714-b5641d92da08",
+                  "round_id": 334837378991522415,
+                  "transaction_uuid": "cae99c3a-38d8-4107-8eb0-6f0e51b7dcc4",
+                  "game_id": "151067",
+                  "game_code": "MAC88-CAVB101",
+                  "amount": "100.00",
+                  "created_at": "2024-12-06T11:15:37.000000Z",
+                  "created_at_format": "2024-12-06T11:15:37.000000Z"
+              }
+          ],
+          "first_page_url": "https:\/\/api.d99hub.com\/api\/client\/casino_i_bet_history\/803d0e34-8b1e-434b-a714-b5641d92da08?page=1",
+          "from": 1,
+          "last_page": 1,
+          "last_page_url": "https:\/\/api.d99hub.com\/api\/client\/casino_i_bet_history\/803d0e34-8b1e-434b-a714-b5641d92da08?page=1",
+          "links": [
+              {
+                  "url": null,
+                  "label": "&laquo; Previous",
+                  "active": false
+              },
+              {
+                  "url": "https:\/\/api.d99hub.com\/api\/client\/casino_i_bet_history\/803d0e34-8b1e-434b-a714-b5641d92da08?page=1",
+                  "label": "1",
+                  "active": true
+              },
+              {
+                  "url": null,
+                  "label": "Next &raquo;",
+                  "active": false
+              }
+          ],
+          "next_page_url": null,
+          "path": "https:\/\/api.d99hub.com\/api\/client\/casino_i_bet_history\/803d0e34-8b1e-434b-a714-b5641d92da08",
+          "per_page": 100,
+          "prev_page_url": null,
+          "to": 1,
+          "total": 1
       },
       "index": 0
-    },
-    "status": true,
-    "error": {
+  },
+  "status": true,
+  "error": {
       "message": "",
       "code": 0
-    }
   }
+}

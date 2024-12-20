@@ -22,8 +22,10 @@ Route::get('/unsettled_bets', [BetApiController::class, 'getUnsettledBets'])->na
 Route::post('/report/account-statement', [AccountController::class, 'getStatementData']);
 
 // Route for fetching bet_list
-Route::get('/bet_list', [AccountController::class, 'getBetData']);
+Route::post('/bet_list', [AccountController::class, 'getBetData']);
 
+// Route for fetching bet_list
+Route::post('/order_history', [AccountController::class, 'getBetHistoryData']);
 
 // Route for fetching stakes value
 Route::get('/stakes', [PriceValueApiController::class, 'getStakes']);
