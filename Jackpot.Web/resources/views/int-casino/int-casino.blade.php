@@ -4,7 +4,7 @@
    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.css">
    <script src="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.js" defer></script>
    <style>
-      #casino-popular-games, #casino-popular-live-sports, #casino-slot-games {
+      #casino-popular-games, #casino-popular-live-sports, #casino-slot-games, #int-casino-games {
          padding: 0 !important; /* Removes all padding */
       }
 
@@ -149,10 +149,8 @@
     }
     document.addEventListener('DOMContentLoaded', function () {
         initializeSlider('#int-casino-games', {
-            type       : 'loop', // Infinite loop
+            type       : 'slide', // Infinite loop
             arrows    : true, // Disable arrows
-            perPage    : 6, // Number of slides per page
-            perMove    : 1,  // Number of slides to move on arrow click
             // gap        : '1rem', // Space between slides
             loop       : false,
             autoplay  : false,            // Enable autoplay

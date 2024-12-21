@@ -21,18 +21,18 @@
         </thead>
         <tbody class="table-td">
             @if(!empty($events))
-                @foreach($events as $event)
-                    <tr class="border border-jcolor1 px-4 py-3">
-                        <td class="overflow-hidden whitespace-nowrap">{{ $event['event_name'] }}</td>
-                        <td class="overflow-hidden whitespace-nowrap">{{ $event['selection_name'] }}</td>
-                        <td>{{ ($event['bet_type']) ? 'back' : 'lay' }}</td>
-                        <td>{{ $event['rate'] }}</td>
-                        <td>{{ $event['stake'] }}</td>
-                        <td>{{ $event['result'] }}</td>
-                        <td class="overflow-hidden whitespace-nowrap">{{ $event['matched_at'] }}</td>
-                        <td class="overflow-hidden whitespace-nowrap">{{ $event['matched_at'] }}</td>
-                    </tr>
-                @endforeach
+            @foreach($events as $event)
+            <tr class="border border-jcolor1 px-4 py-3">
+                <td class="overflow-hidden whitespace-nowrap">{{ $event['event_name'] }}</td>
+                <td class="overflow-hidden whitespace-nowrap">{{ $event['selection_name'] }}</td>
+                <td>{{ ($event['bet_type']) ? 'back' : 'lay' }}</td>
+                <td>{{ $event['rate'] }}</td>
+                <td>{{ $event['stake'] }}</td>
+                <td>{{ $event['result'] }}</td>
+                <td class="overflow-hidden whitespace-nowrap">{{ $event['matched_at'] }}</td>
+                <td class="overflow-hidden whitespace-nowrap">{{ $event['matched_at'] }}</td>
+            </tr>
+            @endforeach
             @endif
         </tbody>
     </table>
@@ -40,21 +40,38 @@
 </div>
 
 <script>
-    document.addEventListener("DOMContentLoaded", function () {
+    // Function to convert date to 'Y-m-d' format (yyyy-mm-dd)
+    function formatDate(dateString) {
+        const date = new Date(dateString); // Create a Date object from the input string
+        const year = date.getFullYear();
+        const month = String(date.getMonth() + 1).padStart(2, '0'); // Months are 0-based
+        const day = String(date.getDate()).padStart(2, '0');
+
+        return `${year}-${month}-${day}`;
+    }
+    document.addEventListener("DOMContentLoaded", function() {
         const submitButton = document.querySelector('button[type="submit"]');
         const eventTypeSelect = document.getElementById('event_type_id');
         const betStatusSelect = document.getElementById('is_matched');
         const startDateInput = document.querySelector('input[name="start_date"]');
         const endDateInput = document.querySelector('input[name="end_date"]');
 
+        // Get and format the start date
+        const formattedStartDate = formatDate(startDateInput.value);
+        console.log("Formatted Start Date:", formattedStartDate);
+
+        // Get and format the end date
+        const formattedEndDate = formatDate(endDateInput.value);
+        console.log("Formatted End Date:", formattedEndDate);
+
         // Listen for the submit button click
-        submitButton.addEventListener('click', function (e) {
+        submitButton.addEventListener('click', function(e) {
             e.preventDefault();
 
             const eventTypeId = eventTypeSelect.value;
             const betStatus = betStatusSelect.value;
-            const startDate = startDateInput.value;
-            const endDate = endDateInput.value;
+            const startDate = formattedStartDate; //startDateInput.value;
+            const endDate = formattedEndDate; //endDateInput.value;
             const type = "ALL";
 
             // Prepare the payload for the POST request
@@ -68,19 +85,19 @@
 
             // Send POST request using fetch
             fetch('http://127.0.0.1:8081/api/bet_history', {
-                method: 'POST', // HTTP method
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify(payload)
-            })
-            .then(response => response.json())
-            .then(data => {
-                // Check if the API returned data and populate the table
-                if (data && data.length > 0) {
-                    let tableRows = '';
-                    data.forEach(event => {
-                        tableRows += `<tr class="border border-jcolor1 px-4 py-3">
+                    method: 'POST', // HTTP method
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(payload)
+                })
+                .then(response => response.json())
+                .then(data => {
+                    // Check if the API returned data and populate the table
+                    if (data && data.length > 0) {
+                        let tableRows = '';
+                        data.forEach(event => {
+                            tableRows += `<tr class="border border-jcolor1 px-4 py-3">
                                         <td class="overflow-hidden whitespace-nowrap">${event.event_name}</td>
                                         <td class="overflow-hidden whitespace-nowrap">${event.selection_name}</td>
                                         <td>${event.bet_type ? 'back' : 'lay'}</td>
@@ -90,19 +107,18 @@
                                         <td class="overflow-hidden whitespace-nowrap">${event.matched_at}</td>
                                         <td class="overflow-hidden whitespace-nowrap">${event.matched_at}</td>
                                     </tr>`;
-                    });
+                        });
 
-                    // Insert the rows into the table
-                    document.querySelector('table tbody').innerHTML = tableRows;
-                } else {
-                    // If no data, display a message in the table
-                    document.querySelector('table tbody').innerHTML = '<tr><td colspan="8">No Data To Display</td></tr>';
-                }
-            })
-            .catch(error => {
-                console.error('Error fetching data:', error);
-            });
+                        // Insert the rows into the table
+                        document.querySelector('table tbody').innerHTML = tableRows;
+                    } else {
+                        // If no data, display a message in the table
+                        document.querySelector('table tbody').innerHTML = '<tr><td colspan="8">No Data To Display</td></tr>';
+                    }
+                })
+                .catch(error => {
+                    console.error('Error fetching data:', error);
+                });
         });
     });
 </script>
-
