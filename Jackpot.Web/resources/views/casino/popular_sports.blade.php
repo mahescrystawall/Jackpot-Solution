@@ -1,3 +1,6 @@
+
+
+
 <section class="w-full ">
     <div class="flex flex-row w-full py-2 mb-2 bg-gradient-to-r from-[#00ADB5] via-[#00ADB5] to-[#1B1B1B]">
         <div class="flex items-center gap-2 text-white text-sm w-full px-2">
@@ -12,7 +15,7 @@
 
     <div class="text-sm">
 
-
+        
         <div class="text-sm">
             <div id="casino-popular-live-sports" class="splide w-full px-1">
                 <!-- Splide Track -->
@@ -21,7 +24,7 @@
                         @foreach ($popular_sports_cricket as $item)
                             <li class="splide__slide">
                                 <div class="">
-                                    <div class="w-full p-6 bg- border-t border-jblue2 rounded-xl shadow text-white bg-[radial-gradient(circle_at_top,_#00383b,_#252728,_#252728)]">
+                                    <div class="w-full p-6 bg- border-t border-jblue2 rounded- shadow text-white bg-[radial-gradient(circle_at_top,_#01292b,_#01292b,_#01292b,_#01292b,_#1c1c1c,_#1c1c1c)]">
                                         <div class="grid grid-cols-2 px-5">
                                             <div class="flex items-center gap-1">
                                                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" fill="none">
@@ -91,9 +94,10 @@
                                             </div>
                                         </div>
                                         <div>
-                                            <div class="py-2 border border-gray-600  bg-gradient-to-r from-[#00acb567] via-[#1B1B1B] to-[#00acb567]  rounded-md text-center">
-                                                Place my bet
-                                            </div>
+                                            @php
+                                                $urlLink = "#";
+                                            @endphp
+                                            <x-live-sports-button :urllink="$urlLink"></x-live-sports-button>
                                         </div>
                                     </div>
                                 </div>
