@@ -46,3 +46,5 @@ Route::get('/login-data', [LoginApiController::class, 'getLoginData']);
 // Route for fetching int casino games list
 Route::get('/int-casino', [IntCasinoApiController::class, 'getCasinoGames']);
 
+//Unsettled bets- client
+Route::post('/getUnsettledBet', [BetApiController::class, 'unsettledBet']);

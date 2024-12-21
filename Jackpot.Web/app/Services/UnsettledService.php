@@ -32,21 +32,45 @@ class UnsettledService
         return ['error' => 'Failed to fetch data'];
     }
 
-    public function getbetHistoryData($isMatched = null)
+    // public function getbetHistoryData($isMatched = null)
+    // {
+
+    //     $url = $this->baseUrl . '/api/unsettled_bets';
+
+    //     if ($isMatched !== null) {
+    //         $queryParams['is_matched'] = $isMatched;
+    //     }
+
+    //     $response = Http::timeout(60)->get($url, $queryParams);
+
+    //     if ($response->successful()) {
+    //         return $response->json();
+    //     }
+    //     return ['error' => 'Failed to fetch data'];
+    // }
+
+    public function getBetHistoryData($status)
     {
 
-        $url = $this->baseUrl . '/api/unsettled_bets';
+        // The endpoint URL
+        $url = $this->baseUrl . '/api/getUnsettledBet';
 
-        if ($isMatched !== null) {
-            $queryParams['is_matched'] = $isMatched;
-        }
+        // Send the POST request with the parameters
+        $response = Http::post($url, [
+            'user_id'        => 19, // should be from incoming data
+            'PageNumber'     => 1,  // should be from incoming data
+            'PageSize'       => 10, // should be from incoming data
+            'OrderBy'        => 'created_at',
+            'OrderDirection' => 'ASC',
+            'FilterStatus'   => $status ?? 'matched', 
+        ]);
 
-        $response = Http::timeout(60)->get($url, $queryParams);
-
+        // Check if the response is successful
         if ($response->successful()) {
-            return $response->json();
+            return $response->json(); // Return the response as an array
         }
-        return ['error' => 'Failed to fetch data'];
-    }
 
+        // Handle error cases
+        return ['error' => 'Failed to fetch data', 'status' => $response->status()];
+    }
 }

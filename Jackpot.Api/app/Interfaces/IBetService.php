@@ -14,6 +14,9 @@ interface IBetService
      */
     public function getBetData(string $fileName): array;
 
+    //NEW
+    public function unsettledBet($data);
+
     /**
      * Fetch bet history data from the specified file with optional filters and date range.
      *
