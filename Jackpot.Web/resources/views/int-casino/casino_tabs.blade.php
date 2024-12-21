@@ -3,23 +3,91 @@
 
     <div id="int-casino-games" class="splide mb-4">
         <div class="splide__track">
-            <ul class="splide__list">
-                @foreach ($casinoGameList as $mainCategory => $subCategories)
-                    <li class="splide__slide">
-                        <button
-                            @click="activeMainCategory = '{{ strtolower(str_replace(' ', '_', $mainCategory)) }}'; activeSubCategory = 'all'"
-                            :class="activeMainCategory === '{{ strtolower(str_replace(' ', '_', $mainCategory)) }}'
-                                ? 'bg-[#03777C] text-[#EEEEEE] shadow-[2px_2px_0px_0_rgba(0,173,181,1)]'
-                                : 'bg-jcolor7 text-jcolor9 shadow-[2px_2px_0px_0_rgba(54,54,54,1)] border border-jcolor1'"
-                            class="flex flex-col items-center px-3 py-6 w-full rounded-tl-md hover:border-jblue2 hover:text-jwhite2 gap-1"
-                        >
-                            {{ $mainCategory }}
-                        </button>
-                    </li>
-                @endforeach
-            </ul>
+            <div class="splide__list gap-4">
+                @php
+                    // Split the $casinoGameList into two halves (main categories only)
+                    $halfCount = ceil(count($casinoGameList) / 2);
+                    $firstHalf = array_slice($casinoGameList, 0, $halfCount, true); // First half
+                    $secondHalf = array_slice($casinoGameList, $halfCount, null, true); // Second half
+                @endphp
+    
+                <!-- First Row: Loop through the first half of main categories -->
+                <div class="splide__slide grid grid-rows-2 grid-flow-col gap-2">
+                    @foreach ($firstHalf as $mainCategory => $subCategories)
+                        <div class="splide__slide">
+                            <button
+                                @click="activeMainCategory = '{{ strtolower(str_replace(' ', '_', $mainCategory)) }}'; activeSubCategory = 'all'"
+                                :class="activeMainCategory === '{{ strtolower(str_replace(' ', '_', $mainCategory)) }}'
+                                    ? 'bg-[#03777C] text-[#EEEEEE] '
+                                    : 'bg-jcolor7 text-jcolor9  border border-jcolor1'"
+                                class="flex flex-col items-center px-3 py-6 w-full hover:border-jblue2 hover:text-jwhite2 gap-1 min-w-[150px] text-nowrap"
+                            >
+                                {{ $mainCategory }}
+                            </button>
+                        </div>
+                    @endforeach
+                </div>
+    
+                <!-- Second Row: Loop through the second half of main categories -->
+                <div class="splide__slide grid grid-rows-2 grid-flow-col gap-2">
+                    @foreach ($secondHalf as $mainCategory => $subCategories)
+                        <div class="splide__slide">
+                            <button
+                                @click="activeMainCategory = '{{ strtolower(str_replace(' ', '_', $mainCategory)) }}'; activeSubCategory = 'all'"
+                                :class="activeMainCategory === '{{ strtolower(str_replace(' ', '_', $mainCategory)) }}'
+                                    ? 'bg-[#03777C] text-[#EEEEEE] '
+                                    : 'bg-jcolor7 text-jcolor9 border border-jcolor1'"
+                                class="flex flex-col items-center px-3 py-6 w-full hover:border-jblue2 hover:text-jwhite2 gap-1 min-w-[150px] text-nowrap"
+                            >
+                                {{ $mainCategory }}
+                            </button>
+                        </div>
+                    @endforeach
+                </div>
+            </div>
         </div>
     </div>
+    
+
+    {{-- <div id="int-casino-games" class="splide mb-4">
+        <div class="splide__track">
+            <div class="splide__list">
+               {{ceil($casinoGameList->count() / 2)}}
+                @foreach ($casinoGameList as $mainCategory => $subCategories)
+                <div class="grid grid-rows-2 grid-flow-col gap-2">
+                    {{$loop->index}}
+                    @if($loop->index < ceil($casinoGameList->count() / 2))
+                        <div class="splide__slide">
+                            <button
+                                @click="activeMainCategory = '{{ strtolower(str_replace(' ', '_', $mainCategory)) }}'; activeSubCategory = 'all'"
+                                :class="activeMainCategory === '{{ strtolower(str_replace(' ', '_', $mainCategory)) }}'
+                                    ? 'bg-[#03777C] text-[#EEEEEE] shadow-[2px_2px_0px_0_rgba(0,173,181,1)]'
+                                    : 'bg-jcolor7 text-jcolor9 shadow-[2px_2px_0px_0_rgba(54,54,54,1)] border border-jcolor1'"
+                                class="flex flex-col items-center px-3 py-6 w-full rounded-tl-md hover:border-jblue2 hover:text-jwhite2 gap-1"
+                            >
+                                {{ $mainCategory }}
+                            </button>
+                        </div>
+                    @else
+                        <div class="splide__slide">
+                            <button
+                                @click="activeMainCategory = '{{ strtolower(str_replace(' ', '_', $mainCategory)) }}'; activeSubCategory = 'all'"
+                                :class="activeMainCategory === '{{ strtolower(str_replace(' ', '_', $mainCategory)) }}'
+                                    ? 'bg-[#03777C] text-[#EEEEEE] shadow-[2px_2px_0px_0_rgba(0,173,181,1)]'
+                                    : 'bg-jcolor7 text-jcolor9 shadow-[2px_2px_0px_0_rgba(54,54,54,1)] border border-jcolor1'"
+                                class="flex flex-col items-center px-3 py-6 w-full rounded-tl-md hover:border-jblue2 hover:text-jwhite2 gap-1"
+                            >
+                                {{ $mainCategory }}
+                            </button>
+                        </div>
+                    @endif
+                </div>
+                    
+                @endforeach
+            </div>
+        </div>
+    </div> --}}
+    
     <!-- Subcategory Tabs and Game Images -->
     <div class="mt-4 text-white">
         @foreach ($casinoGameList as $mainCategory => $subCategories)
@@ -32,7 +100,7 @@
                                 ?
                                 'bg-[#03777C] text-[#EEEEEE]' :
                                 'border border-jcolor1 text-jcolor9'"
-                            class="flex flex-col items-center px-3 py-6 w-full rounded-tl-md hover:border-jblue2 hover:text-jwhite2 gap-1">
+                            class="flex flex-col items-center px-3 py-6 w-full  hover:border-jblue2 hover:text-jwhite2 gap-1">
                             ALL
                         </button>
                     </li>
@@ -44,7 +112,7 @@
                                     ?
                                     'bg-[#03777C] text-[#EEEEEE]' :
                                     'border border-jcolor1 text-jcolor9'"
-                                class="flex flex-col items-center px-3 py-6 w-full rounded-tl-md hover:border-jblue2 hover:text-jwhite2 gap-1">
+                                class="flex flex-col items-center px-3 py-6 w-full  hover:border-jblue2 hover:text-jwhite2 gap-1">
                                 {{ ucwords(strtolower($subCategory['name'])) }}
                             </button>
                         </li>
