@@ -10,6 +10,7 @@ use App\Http\Controllers\Api\ProfitLossApiController;
 use App\Http\Controllers\Api\LoginApiController;
 use App\Http\Controllers\Api\AccountController;
 use App\Http\Controllers\Api\IntCasinoApiController;
+use App\Http\Controllers\Api\SportsController;
 
 // Example of a route with authentication
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
@@ -45,4 +46,9 @@ Route::get('/login-data', [LoginApiController::class, 'getLoginData']);
 
 // Route for fetching int casino games list
 Route::get('/int-casino', [IntCasinoApiController::class, 'getCasinoGames']);
+
+ Route::get('/sports-inplay', [SportsController::class, 'getInplayGames']);
+// Route::get('/sports-inplay', function () {
+//     return response()->json(['test' => 'API is working']);
+// });
 

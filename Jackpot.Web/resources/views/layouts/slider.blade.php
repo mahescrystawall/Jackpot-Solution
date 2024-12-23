@@ -56,6 +56,22 @@
         // Show the slider with smooth transition
         document.getElementById('menu-slider').style.opacity = '1';
         document.getElementById('menu-slider').style.visibility = 'visible';
-        new Splide('#menu-slider').mount();
+    });
+
+    function initializeSlider(selector, options = {}) {
+        new Splide(selector, {
+            pagination: false, // Disable pagination dots
+            ...options          // merge passed options with defaults
+        }).mount();
+    }
+
+    document.addEventListener('DOMContentLoaded', function () {
+        initializeSlider('#menu-slider', {
+            type      : 'slide',   // Slide type
+            arrows    : false,     // Disable arrows
+            autoWidth : false,      // Automatically determine width based on content
+            perPage    : 10, // Number of slides per page
+            perMove    : 1,  // Number of slides to move on arrow click
+        });
     });
 </script>

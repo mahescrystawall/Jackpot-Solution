@@ -19,6 +19,8 @@ use App\Interfaces\IAccountStatementService;
 use App\Services\AccountStatementService;
 use App\Interfaces\IIntCasinoService;
 use App\Services\IntCasinoService;
+use App\Services\SportsInplayService;
+use App\Interfaces\ISportsInplayService;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -36,6 +38,7 @@ class AppServiceProvider extends ServiceProvider
         $this->app->bind(ILoginService::class, LoginService::class);
         $this->app->bind(IAccountStatementService::class, AccountStatementService::class);
         $this->app->bind(IIntCasinoService::class, IntCasinoService::class);
+        $this->app->bind(ISportsInplayService::class, SportsInplayService::class);
     }
 
     /**
