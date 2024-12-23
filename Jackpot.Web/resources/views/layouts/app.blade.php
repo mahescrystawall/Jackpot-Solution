@@ -23,5 +23,6 @@
             
         </div>
         @yield('js_content')
+        <script src="{{ asset('js/modal.js') }}"></script>
     </body> 
 </html>
