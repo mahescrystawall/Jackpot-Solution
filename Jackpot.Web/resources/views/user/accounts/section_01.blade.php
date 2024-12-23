@@ -33,12 +33,20 @@
                 @endphp
                 <td class="text-center">{{ $menuItem['name'] ?? 'N/A' }}</td>
                 <td class="text-ellipsis overflow-hidden whitespace-nowrap">
-                    <a href class="btn btn-link text-decoration-none remarks-link"
-                        data-casino-bet-id="{{ $statement['casino_bet_id'] ?? '' }}">
+                    <a data-modal-target="custom-modal"
+                        data-description="Here is some sample content that will appear in the modal."
+                        onclick="openPopup(this)"
+                        class="block text-jblue1 hover:underline cursor-pointer" 
+                       >
                         {{ $statement['description'] }}
                     </a>
 
+                    <!-- Include Modal Component -->
+                    <x-modal id="custom-modal" />
+
+
                 </td>
+
             </tr>
             @empty
             <tr>
@@ -49,7 +57,6 @@
         </tbody>
     </table>
 </div>
-
 
 <div class="pagination flex justify-center mt-3">
     @if ($paginationData['total_pages'] > 1)
