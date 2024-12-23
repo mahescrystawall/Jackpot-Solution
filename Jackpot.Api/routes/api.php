@@ -49,3 +49,5 @@ Route::get('/int-casino', [IntCasinoApiController::class, 'getCasinoGames']);
 
 Route::put('/user/status', [UserController::class, 'toggleUserFeature']);
 
+Route::post('/user/buttons', [UserController::class, 'UpdateButtonValue']);
+

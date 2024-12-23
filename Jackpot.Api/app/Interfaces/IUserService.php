@@ -12,4 +12,5 @@ interface IUserService
      * @return mixed The result of the procedure execution.
      */
     public function changeUserStatus(int $user_id, string $procedure_name);
+    public function updateButtonValue(int $user_id,string $title,string $amount,$updated_at);
 }
