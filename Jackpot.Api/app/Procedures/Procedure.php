@@ -11,7 +11,7 @@ class Procedure
      * Execute a procedure by checking in database. Includes checking procedure name, number of parameters.
      * @param string $procedureName
      * @param array $values
-     * @return string|Collection
+     * @return string|array
      */
     static public function ExecuteProcedure($procedureName, $values = [])
     {
@@ -36,9 +36,15 @@ class Procedure
         // Execute the procedure with the values
         try {
             $results = DB::select($execStatement, $params);
-            return collect($results);
+            return [
+                "success" => true,
+                "result" => collect($results)
+            ];
         } catch (\Exception $e) {
-            return "Error executing procedure: " . $e->getMessage();
+            return [
+                "success" => false,
+                "message" => "Error executing procedure: " . $e->getMessage()
+            ];
         }
     }
 
