@@ -5,6 +5,7 @@ use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\IntCasinoController;
 use App\Http\Controllers\CasinoController;
+use App\Http\Controllers\SportsController;
 
 use App\Http\Controllers\User\BetHistoryController;
 use App\Http\Controllers\User\AccountStatementController;
@@ -20,6 +21,7 @@ Route::middleware(['client'])->group(function () {
     // Route::resource('/home', DashboardController::class);
     Route::resource('/home', CasinoController::class);
     Route::resource('/int-casino', IntCasinoController::class);
+    
 
 
     Route::get('/account-statement', [AccountStatementController::class,'index'])->name('account-statement');
@@ -30,4 +32,8 @@ Route::middleware(['client'])->group(function () {
     Route::get('/change-price-value', [StakeController::class,'showForm'])->name('change-price-value');
     Route::post('/stakes/update', [StakeController::class, 'updateStakeValue'])->name('stakes.update');
     Route::get('/logout', [LoginController::class, 'logout'])->name('logout');
+
+
+    //INPLAY
+    Route::get('/in-play', [SportsController::class, 'index_inplay'])->name('inplay.index');
 });
