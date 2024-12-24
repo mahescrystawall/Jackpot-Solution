@@ -5,6 +5,7 @@ namespace App\Services;
 use App\Interfaces\IBetService;
 use App\Traits\FileHelper;
 use Carbon\Carbon;
+use App\Procedures\Procedure;
 
 class BetService implements IBetService
 {
@@ -24,7 +25,7 @@ class BetService implements IBetService
      * @param Carbon $endDate
      * @return array
      */
-    public function getBetHistoryData(string $fileName, array $queryParams = [],  $startDate = null,  $endDate = null): array
+    public function getBetHistoryData1(string $fileName, array $queryParams = [],  $startDate = null,  $endDate = null): array
     {
         $filePath = storage_path('json/' . $fileName);
 
@@ -63,5 +64,18 @@ class BetService implements IBetService
         $filteredData = array_values($filteredOrders);
 
         return $filteredData; // Return the filtered data
+    }
+
+
+
+    public function getBetHistoryData($data)
+    {
+        try {
+            $data = Procedure::ExecuteProcedure('Get_Bet_History', $data);
+
+            return collect($data);
+        } catch (\Throwable $th) {
+            return $th->getMessage();
+        }
     }
 }

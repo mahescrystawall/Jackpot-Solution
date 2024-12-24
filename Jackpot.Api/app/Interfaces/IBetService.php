@@ -23,5 +23,6 @@ interface IBetService
      * @param \Carbon\Carbon|null $endDate The end date for filtering (optional).
      * @return array
      */
-    public function getBetHistoryData(string $fileName, array $queryParams = [], Carbon $startDate = null, Carbon $endDate = null): array;
+    public function getBetHistoryData1(string $fileName, array $queryParams = [], Carbon $startDate = null, Carbon $endDate = null): array;
+    public function getBetHistoryData(array $data);
 }

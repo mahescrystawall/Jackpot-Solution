@@ -25,7 +25,7 @@ class StakeController extends Controller
     public function updateStakeValue(Request $request)
     {
 
-        dd($request);
+       // dd($request);
         $stakeData = $request->only(['stake_name', 'stake_amount']);
         $response = $this->stakeService->updateStakeData($stakeData);
 
