@@ -6,9 +6,9 @@
                 <button
                     @click="activeMainCategory = '{{ strtolower(str_replace(' ', '_', $mainCategory)) }}'; activeSubCategory = 'all'"
                     :class="activeMainCategory === '{{ strtolower(str_replace(' ', '_', $mainCategory)) }}'
-                        ? 'bg-[#03777C] text-[#EEEEEE] shadow-[2px_2px_0px_0_rgba(0,173,181,1)]'
-                        : 'bg-jcolor7 text-jcolor9 shadow-[2px_2px_0px_0_rgba(54,54,54,1)]'"
-                    class="flex items-center justify-center gap-2 p-3 w-full rounded-md text-center hover:shadow-[2px_2px_0px_0_rgba(74,74,74,1)] hover:text-jwhite2"
+                        ? 'bg-jblue1 text-[#EEEEEE] shadow-[4px_4px_0px_0_rgba(3,119,124,1)]'
+                        : 'bg-jcolor7 text-jcolor9 shadow-[4px_4px_0px_0_rgba(54,54,54,1)]'"
+                    class="flex items-center text-[16px] font-semibold uppercase tracking-wide justify-center gap-2 p-6 w-full rounded-none text-center hover:text-jwhite2"
                 >
                     {{ $mainCategory }}
                 </button>
@@ -28,7 +28,7 @@
                             :class="activeSubCategory === 'all'
                                 ? 'bg-[#03777C] text-[#EEEEEE]'
                                 : 'border border-jcolor1 text-jcolor9'"
-                            class="flex flex-col items-center px-3 py-6 w-full rounded-tl-md hover:border-jblue2 hover:text-jwhite2 gap-1"
+                            class="flex flex-col items-center px-3 py-6 w-full hover:border-jblue2 hover:text-jwhite2 gap-1"
                         >
                             ALL
                         </button>
@@ -40,7 +40,7 @@
                                 :class="activeSubCategory === '{{ strtolower(str_replace(' ', '_', $subCategory['name'])) }}'
                                     ? 'bg-[#03777C] text-[#EEEEEE]'
                                     : 'border border-jcolor1 text-jcolor9'"
-                                class="flex flex-col items-center px-3 py-6 w-full rounded-tl-md hover:border-jblue2 hover:text-jwhite2 gap-1"
+                                class="flex flex-col items-center px-3 py-6 w-full  hover:border-jblue2 hover:text-jwhite2 gap-1"
                             >
                             {{ ucwords(strtolower($subCategory['name'])) }}
                             </button>

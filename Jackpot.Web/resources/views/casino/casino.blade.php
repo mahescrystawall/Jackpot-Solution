@@ -8,6 +8,88 @@
          padding: 0 !important; /* Removes all padding */
       }
 
+    .cta {
+        display: flex;
+        padding: 8px 18px;
+        text-decoration: none;
+        font-size: 16px;
+        color: white;
+        background: #00adb5;
+        transition: 1s;
+        box-shadow: 6px 6px 0 black;
+        transform: skewX(-15deg);
+        border: none;
+        cursor: pointer;
+    }
+
+    .cta:focus {
+        outline: none;
+    }
+
+    .cta:hover {
+    transition: 0.5s;
+    box-shadow: 10px 10px 0 #03777c;
+    }
+
+    .cta .second {
+    transition: 0.5s;
+    margin-right: 0px;
+    }
+
+    .cta:hover .second {
+    transition: 0.5s;
+    margin-right: 45px;
+    }
+
+    .span {
+    transform: skewX(15deg);
+    }
+
+    .second {
+    width: 20px;
+    margin-left: 30px;
+    position: relative;
+    top: 12%;
+    }
+
+    .one {
+    transition: 0.4s;
+    transform: translateX(-60%);
+    }
+
+    .two {
+    transition: 0.5s;
+    transform: translateX(-30%);
+    }
+
+    .cta:hover .three {
+    animation: color_anim 1s infinite 0.2s;
+    }
+
+    .cta:hover .one {
+    transform: translateX(0%);
+    animation: color_anim 1s infinite 0.6s;
+    }
+
+    .cta:hover .two {
+    transform: translateX(0%);
+    animation: color_anim 1s infinite 0.4s;
+    }
+
+    @keyframes color_anim {
+    0% {
+        fill: white;
+    }
+
+    50% {
+        fill: #fbc638;
+    }
+
+    100% {
+        fill: white;
+    }
+    }
+
    </style>
 @endsection
 
@@ -126,7 +208,7 @@
 
          @include('layouts.slider')
 
-         @include('casino.popular_sports')
+         {{-- @include('casino.popular_sports') --}}
 
          {{-- @include('casino.popular_games') --}}
 
@@ -141,86 +223,85 @@
 @section('js_content')
     <script>
         function initializeSlider(selector, options = {}) {
-        new Splide(selector, {
-            pagination: false, // Disable pagination dots
-            ...options          // merge passed options with defaults
-        }).mount();
-    }
+            new Splide(selector, {
+                pagination: false, // Disable pagination dots
+                ...options          // merge passed options with defaults
+            }).mount();
+        }
 
-    document.addEventListener('DOMContentLoaded', function () {
-        initializeSlider('#menu-slider', {
-            type      : 'slide',   // Slide type
-            arrows    : false,     // Disable arrows
-            autoWidth : false,      // Automatically determine width based on content
-            perPage    : 10, // Number of slides per page
-            perMove    : 1,  // Number of slides to move on arrow click
-        });
+        document.addEventListener('DOMContentLoaded', function () {
+            initializeSlider('#menu-slider', {
+                type      : 'slide',   // Slide type
+                arrows    : false,     // Disable arrows
+                autoWidth : false,      // Automatically determine width based on content
+                perPage    : 10, // Number of slides per page
+                perMove    : 1,  // Number of slides to move on arrow click
+            });
 
-        initializeSlider('#casino-popular-live-sports', {
-            type       : 'loop', // Infinite loop
-            arrows    : true, // Disable arrows
-            perPage    : 3, // Number of slides per page
-            perMove    : 1,  // Number of slides to move on arrow click
-            gap        : '1rem', // Space between slides
-            loop       : false,
-            autoplay  : true,            // Enable autoplay
-            interval  : 2000,            // Set the time interval (in milliseconds) for the slide transition
-            breakpoints : {
-                1024 : { perPage: 2 }, // For larger screens
-                600  : { perPage: 1 }, // For mobile screens
-            },
-        });
-
-        initializeSlider('#casino-popular-games', {
-            type       : 'slide', // Infinite loop
-            arrows    : true, // Disable arrows
-            perPage    : 6, // Number of slides per page
-            perMove    : 1,  // Number of slides to move on arrow click
-            gap        : '0.5rem', // Space between slides
-            loop       : false,
-            autoplay  : false,            // Enable autoplay
-            interval  : 2000,            // Set the time interval (in milliseconds) for the slide transition
-            breakpoints : {
-                1024 : {
-                    type: 'slide',
-                    perPage: 2
-                }, // For larger screens
-                600  : {
-                    type: 'loop',
-                    perPage: 2, // Show two slides per page
-                    focus: 'center', // Center active slide
-                    padding: '10%',  // Add space on the left and right to show partial slides
-                    gap: '0.5rem', // Adjust spacing between slides
+            initializeSlider('#casino-popular-live-sports', {
+                type       : 'slide', // Infinite loop
+                arrows    : true, // Disable arrows
+                perPage    : 4, // Number of slides per page
+                perMove    : 1,  // Number of slides to move on arrow click
+                gap        : '1rem', // Space between slides
+                loop       : false,
+                autoplay  : true,            // Enable autoplay
+                interval  : 2000,            // Set the time interval (in milliseconds) for the slide transition
+                breakpoints : {
+                    1024 : { perPage: 2 }, // For larger screens
+                    600  : { perPage: 1 }, // For mobile screens
                 },
-            },
+            });
 
-        });
-
-        initializeSlider('#casino-slot-games', {
-            type       : 'slide', // Infinite loop
-            perPage    : 6, // Number of slides per page
-            perMove    : 1,  // Number of slides to move on arrow click
-            gap        : '0.5rem', // Space between slides
-            loop       : false,
-            autoplay  : false,            // Enable autoplay
-            interval  : 2000,            // Set the time interval (in milliseconds) for the slide transition
-            breakpoints : {
-                1024 : {
-                    type: 'slide',
-                    perPage: 2
-                }, // For larger screens
-                600  : {
-                    type: 'loop',
-                    perPage: 2, // Show two slides per page
-                    focus: 'center', // Center active slide
-                    padding: '10%',  // Add space on the left and right to show partial slides
-                    gap: '0.5rem', // Adjust spacing between slides
+            initializeSlider('#casino-popular-games', {
+                type       : 'slide', // Infinite loop
+                arrows    : true, // Disable arrows
+                perPage    : 6, // Number of slides per page
+                perMove    : 1,  // Number of slides to move on arrow click
+                gap        : '0.5rem', // Space between slides
+                loop       : false,
+                autoplay  : false,            // Enable autoplay
+                interval  : 2000,            // Set the time interval (in milliseconds) for the slide transition
+                breakpoints : {
+                    1024 : {
+                        type: 'slide',
+                        perPage: 2
+                    }, // For larger screens
+                    600  : {
+                        type: 'loop',
+                        perPage: 2, // Show two slides per page
+                        focus: 'center', // Center active slide
+                        padding: '10%',  // Add space on the left and right to show partial slides
+                        gap: '0.5rem', // Adjust spacing between slides
+                    },
                 },
-            },
+
+            });
+
+            initializeSlider('#casino-slot-games', {
+                type       : 'slide', // Infinite loop
+                perPage    : 6, // Number of slides per page
+                perMove    : 1,  // Number of slides to move on arrow click
+                gap        : '0.5rem', // Space between slides
+                loop       : false,
+                autoplay  : false,            // Enable autoplay
+                interval  : 2000,            // Set the time interval (in milliseconds) for the slide transition
+                breakpoints : {
+                    1024 : {
+                        type: 'slide',
+                        perPage: 2
+                    }, // For larger screens
+                    600  : {
+                        type: 'loop',
+                        perPage: 2, // Show two slides per page
+                        focus: 'center', // Center active slide
+                        padding: '10%',  // Add space on the left and right to show partial slides
+                        gap: '0.5rem', // Adjust spacing between slides
+                    },
+                },
+
+            });
 
         });
-
-    });
-
     </script>
 @endsection
