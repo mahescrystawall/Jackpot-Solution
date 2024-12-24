@@ -102,11 +102,11 @@ class BetHistoryController extends Controller
 
         $events =  $betHistoryData;
         $pagination = [];
-        //dd($betHistoryData);
+       // dd($betHistoryData['result']);
         return view('user.bet_history.bet_history',  [
             'startDate' => $startDate,
             'endDate' => $endDate,
-            'events' => $events,
+            'events' => $events['result'],
             'pagination' => $pagination,
             'categories' => $categories
         ]);
