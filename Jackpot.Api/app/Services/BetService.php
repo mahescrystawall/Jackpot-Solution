@@ -70,12 +70,18 @@ class BetService implements IBetService
 
     public function getBetHistoryData($data)
     {
-        try {
-            $data = Procedure::ExecuteProcedure('Get_Bet_History', $data);
+        // return $data;
 
-            return collect($data);
-        } catch (\Throwable $th) {
-            return $th->getMessage();
-        }
+
+        $response = Procedure::ExecuteProcedure('Get_Bet_History', $data);
+        if (!$response['success'])  throw new \Exception($response['message']);
+        return $response['result'];
+        // try {
+        //     $data = Procedure::ExecuteProcedure('Get_Bet_History', $data);
+
+        //     return collect($data);
+        // } catch (\Throwable $th) {
+        //     return $th->getMessage();
+        // }
     }
 }

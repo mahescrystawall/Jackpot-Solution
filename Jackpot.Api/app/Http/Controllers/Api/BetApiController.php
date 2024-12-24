@@ -6,9 +6,13 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\BetHistoryRequest;
 use App\Interfaces\IBetService;
 use Illuminate\Http\Request;
+use App\Traits\ApiResponseTrait;
 
 class BetApiController extends Controller
 {
+
+    use ApiResponseTrait;
+
     protected $_betService;
 
     public function __construct(IBetService $betService)
@@ -69,13 +73,20 @@ class BetApiController extends Controller
 
         ];
 
-        // return $request->all();
-        $data = $this->_betService->getBetHistoryData($params);
-        // return $data;
-        if (isset($data['error_message'])) {
-            return response()->json($data, 400);
-        }
 
-        return response()->json($data, 200);
+        // $data = $this->_betService->getBetHistoryData($request->all());
+
+
+        try {
+            $result = $this->_betService->getBetHistoryData($request->all());
+
+            return $this->sendResponse(
+                $result,
+                "msg",
+                200
+            );
+        } catch (\Throwable $th) {
+            return $this->sendError($th);
+        }
     }
 }

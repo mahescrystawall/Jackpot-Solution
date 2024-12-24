@@ -7,30 +7,24 @@ trait ApiResponseTrait
     /**
      * Send a success or error response based on the result.
      */
-    public function sendResponse($result, string $successMessage, string $errorMessage)
+    public function sendResponse($result, string $successMessage, $code = 200)
     {
-        if ($result) {
-            return response()->json([
-                'success' => true,
-                'message' => $successMessage,
-            ], 200);
-        }
-
         return response()->json([
-            'success' => false,
-            'message' => $errorMessage,
-        ], 500);
+            'success' => true,
+            'result' => $result,
+            'message' => $successMessage,
+        ], $code);
     }
 
     /**
      * Send an error response for exceptions.
      */
-    public function sendError(\Throwable $th)
+    public function sendError($th, $code = 500)
     {
         return response()->json([
             'success' => false,
             'message' => 'An unexpected error occurred.',
             'error' => $th->getMessage(),
-        ], 500);
+        ], $code);
     }
 }
