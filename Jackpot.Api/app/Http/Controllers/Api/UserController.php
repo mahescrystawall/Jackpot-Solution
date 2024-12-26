@@ -30,7 +30,7 @@ class UserController extends Controller
             return $this->sendResponse(
                 $result,
                 "User status toggled successfully.",
-                "Failed to toggle user status."
+                200
             );
         } catch (\Throwable $th) {
             return $this->sendError($th);

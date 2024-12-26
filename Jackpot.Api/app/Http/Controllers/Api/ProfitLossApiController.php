@@ -31,7 +31,7 @@ class ProfitLossApiController extends Controller
             return $this->sendResponse(
                 $result,
                 "Profit Loss report fetched successfully.",
-                "Failed to fetch profit loss report."
+                200
             );
         } catch (\Throwable $th) {
             return $this->sendError($th);
