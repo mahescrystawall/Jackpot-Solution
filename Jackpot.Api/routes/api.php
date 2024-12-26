@@ -12,6 +12,9 @@ use App\Http\Controllers\Api\LoginApiController;
 use App\Http\Controllers\Api\AccountController;
 use App\Http\Controllers\Api\Auth\AuthController as APIAuthController;
 use App\Http\Controllers\Api\IntCasinoApiController;
+use App\Http\Controllers\Api\UserController;
+use App\Http\Controllers\Api\SportsController;
+
 
 
 // Example of a route with authentication
@@ -53,3 +56,14 @@ Route::get('/int-casino', [IntCasinoApiController::class, 'getCasinoGames']);
 
 //Unsettled bets- client
 Route::post('/getUnsettledBet', [BetApiController::class, 'unsettledBet']);
+
+Route::put('/user/status', [UserController::class, 'toggleUserFeature']);
+
+Route::post('/user/buttons', [UserController::class, 'UpdateButtonValue']);
+
+ Route::get('/sports-inplay', [SportsController::class, 'getInplayGames']);
+// Route::get('/sports-inplay', function () {
+//     return response()->json(['test' => 'API is working']);
+// });
+
+

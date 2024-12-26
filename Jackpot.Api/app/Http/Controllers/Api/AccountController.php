@@ -16,18 +16,21 @@ class AccountController extends Controller
         $this->accountStatementService = $accountStatementService;
     }
     public function getStatementData(Request $request)
-    {     
+    {
         $filters = [
             'start_date' => $request->input('start_date'),
             'end_date' => $request->input('end_date'),
-            'category' => $request->input('category', null), // default to null if no category is provided
+            'category' => $request->input('category', 'ALL'), // Default to "ALL" if no category is provided
         ];
-        $fileName= 'account_statement.json';
-            $data = $this->accountStatementService->getAccountStatement($fileName,$filters);
-                if (isset($data['error_message'])) {
-                return response()->json($data, 400);
-            }
-            return response()->json($data, 200);
+    
+        $fileName = 'account_statement.json';
+        $data = $this->accountStatementService->getAccountStatement($fileName, $filters);
+    
+        if (isset($data['error_message'])) {
+            return response()->json($data, 400);
+        }
+    
+        return response()->json($data, 200);
     }
 
     public function getBetData()
