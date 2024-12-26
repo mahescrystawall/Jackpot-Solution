@@ -23,7 +23,7 @@ class ProfitLossController extends Controller
 
         // Set up filters with defaults
         $filters = [
-            'start_date' => $request->input('start_date', Carbon::now()->subDays(30)->format('Y-m-d')),
+            'start_date' => $request->input('start_date', Carbon::now()->subDays(15)->format('Y-m-d')),
             'end_date' => $request->input('end_date', Carbon::now()->format('Y-m-d')),
             'user_id' => session('user_id'),
             'page' => $request->input('page', Constants::DEFAULT_PAGE),

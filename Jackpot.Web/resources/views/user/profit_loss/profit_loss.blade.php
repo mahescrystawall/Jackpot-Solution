@@ -31,12 +31,33 @@
             const DEFAULT_ORDER_DIRECTION = "{{ \App\Constants\Constants::DEFAULT_ORDER_DIRECTION }}";
             const DEFAULT_ORDER_BY = "{{ \App\Constants\Constants::DEFAULT_ORDER_BY }}";
             const API_URL = "{{ env('API_URL') }}";
+
             // Handle form submission (filter by start and end date)
             $('#filter_form').on('submit', function(event) {
                 event.preventDefault();
+
                 const startDate = $('#start_date').val();
                 const endDate = $('#end_date').val();
 
+                // Perform validation
+                if (!startDate || !endDate) {
+                    alert('Please select both start and end date.');
+                    return;
+                }
+
+
+                const endDateObj = new Date(endDate);
+
+
+                // Calculate the difference between the start and end date
+                const startDateObj = new Date(startDate);
+                const dateDiff = Math.floor((endDateObj - startDateObj) / (1000 * 60 * 60 * 24)); // in days
+                if (dateDiff > 15) {
+                    alert('Max Date Range of 15 days is allowed!');
+                    return;
+                }
+
+                // If validation passes, call the getData function
                 getData('', startDate, endDate);
             });
 
@@ -68,17 +89,16 @@
 
                         if (data.length > 0) {
                             const rows = data.map((item, index) => `
-                                <tr>
-                                    <td>${index + 1}</td>
-                                    <td>${item.created_on}</td>
-                                    <td>${item.event_type_name}</td>
-                                    <td>${item.event_name}</td>
-                                    <td>${item.amount}</td>
-                                </tr>
-                            `).join('');
+                        <tr>
+                            <td>${index + 1}</td>
+                            <td>${item.created_on}</td>
+                            <td>${item.event_type_name}</td>
+                            <td>${item.event_name}</td>
+                            <td>${item.amount}</td>
+                        </tr>
+                    `).join('');
                             $('#data-table-body').html(rows);
                         } else {
-                            // Display "No data available" if the data is null or empty
                             $('#data-table-body').html(
                                 '<tr><td colspan="5" class="text-center">No data available</td></tr>'
                             );
@@ -89,9 +109,9 @@
                     },
                     error: function(xhr, status, error) {
                         console.error("Error loading data: " + error);
-                        // Handle error by displaying a message in the table
                         $('#data-table-body').html(
-                            '<tr><td colspan="5" class="text-center">Error loading data</td></tr>');
+                            '<tr><td colspan="5" class="text-center">Error loading data</td></tr>'
+                        );
                     }
                 });
             }
