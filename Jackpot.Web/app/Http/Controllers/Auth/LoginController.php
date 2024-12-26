@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Http;
 use App\Services\LoginService;
+
 class LoginController extends Controller
 {
     //
@@ -17,35 +18,34 @@ class LoginController extends Controller
     public function showLoginForm()
     {
         // If the user is already logged in, redirect to the home page
-        if (session()->has('access_token')) {
+        if (session()->has('auth_token')) {
             return redirect('/home');
         }
         return view('auth.login');
     }
-    public function getLoginData(Request $request)
-    {
+    // public function getLoginData(Request $request)
+    // {
 
-        // Fetch login data by calling the service method
-        $response1 = $this->loginservice->getloginData();
+    //     // Fetch login data by calling the service method
+    //     $response1 = $this->loginservice->getloginData();
 
-        // Validate login credentials (use a more secure validation method in production)
-        if ($request->username === 'admin' && $request->password === 'admin') {
+    //     // Validate login credentials (use a more secure validation method in production)
+    //     if ($request->username === 'admin' && $request->password === 'admin') {
 
-            session([
-                        'user_data' => $response1['data']['user'],
-                        'access_token' => $response1['data']['access_token'],
-                        'games_list' =>$response1['data']['event_type_settings'],
-                        'stakes'=>$response1['data']['stakes'],
-                        'message'=>$response1['data']['message']
-                    ]);
+    //         session([
+    //             'user_data' => $response1['data']['user'],
+    //             'access_token' => $response1['data']['access_token'],
+    //             'games_list' => $response1['data']['event_type_settings'],
+    //             'stakes' => $response1['data']['stakes'],
+    //             'message' => $response1['data']['message']
+    //         ]);
 
-            return redirect('/home');
+    //         return redirect('/home');
+    //     } else {
+    //         return back()->withErrors(['error' => $response['message'] ?? 'Invalid Credentials or API Error.',]);
+    //     }
+    // }
 
-        }
-        else{
-            return back()->withErrors(['error' => $response['message'] ?? 'Invalid Credentials or API Error.',]);
-        }
-    }
     public function changePassword()
     {
         return view('user.password.change_password');
@@ -53,11 +53,9 @@ class LoginController extends Controller
     public function logout()
     {
 
-       // $response = Http::withToken(session('access_token') ?? '')->get('https://api.d99hub.com/api/logout');
-       // Destroy all session data
-       session()->flush();
-       return redirect('/login');
-
+        // $response = Http::withToken(session('access_token') ?? '')->get('https://api.d99hub.com/api/logout');
+        // Destroy all session data
+        session()->flush();
+        return redirect('/login');
     }
 }
-?>

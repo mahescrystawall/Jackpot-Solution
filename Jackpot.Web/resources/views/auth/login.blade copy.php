@@ -29,7 +29,7 @@
                                 <form autocomplete="off" class="ng-dirty ng-touched ng-valid" method="POST" action="{{ route('postlogin') }}">
                                     @csrf
                                     <div class="form-group m-b-20">
-                                        <input name="username" formcontrolname="username" type="text"
+                                        <input name="email" formcontrolname="username" type="text"
                                             aria-required="true" aria-invalid="false"
                                             class="form-control ng-dirty ng-valid ng-touched" placeholder="User Name"
                                             fdprocessedid="mgkcio">
