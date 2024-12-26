@@ -4,6 +4,7 @@ namespace App\Services;
 
 use App\Interfaces\IBetService;
 use App\Traits\FileHelper;
+use App\Procedures\Procedure;
 use Carbon\Carbon;
 
 class BetService implements IBetService
@@ -63,5 +64,17 @@ class BetService implements IBetService
         $filteredData = array_values($filteredOrders);
 
         return $filteredData; // Return the filtered data
+    }
+
+    //NEW
+    public function unsettledBet($data)
+    {
+        try {
+            $data = Procedure::ExecuteProcedure('Get_Unsettled_Bets', $data);
+
+            return collect($data);
+        } catch (\Throwable $th) {
+            return $th->getMessage();
+        }
     }
 }

@@ -4,7 +4,7 @@ namespace App\Services;
 use App\Interfaces\ILoginService;
 use App\Traits\FileHelper;
 
-class LoginService implements ILoginService
+class LoginService1 implements ILoginService
 {
     use FileHelper;
 

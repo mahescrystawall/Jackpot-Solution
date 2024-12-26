@@ -15,6 +15,8 @@ use App\Interfaces\IEventService;
 use App\Services\EventService;
 use App\Interfaces\ILoginService;
 use App\Services\LoginService;
+use App\Interfaces\IAuthService;
+use App\Services\Auth\AuthService;
 use App\Interfaces\IAccountStatementService;
 use App\Services\AccountStatementService;
 use App\Interfaces\IIntCasinoService;
@@ -43,6 +45,7 @@ class AppServiceProvider extends ServiceProvider
         $this->app->bind(ILoginService::class, LoginService::class);
         $this->app->bind(IAccountStatementService::class, AccountStatementService::class);
         $this->app->bind(IIntCasinoService::class, IntCasinoService::class);
+        $this->app->bind(IAuthService::class, AuthService::class);
         $this->app->bind(IUserService::class, UserService::class);
         $this->app->bind(ISportsInplayService::class, SportsInplayService::class);
 
