@@ -1,7 +1,4 @@
-@if($profitData && !empty($profitData))
-
-
-
+@if($profitData['data'] && !empty($profitData['data']))
 @foreach($profitData['data'] as $event)
 
     <tr class="border border-jcolor1 px-4 py-2">
