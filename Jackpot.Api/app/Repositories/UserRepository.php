@@ -14,4 +14,9 @@ class UserRepository
     {
         return Procedure::ExecuteProcedure(ProcedureNames::UPDATE_BUTTON, $data);
     }
+    public function getProfitLossReport(array $data)
+    {
+        return Procedure::ExecuteProcedure(ProcedureNames::GET_PROFIT_LOSS, $data);
+    }
+
 }

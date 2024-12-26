@@ -12,6 +12,7 @@ trait ApiResponseTrait
         if ($result) {
             return response()->json([
                 'success' => true,
+                'result'=> $result,
                 'message' => $successMessage,
             ], 200);
         }

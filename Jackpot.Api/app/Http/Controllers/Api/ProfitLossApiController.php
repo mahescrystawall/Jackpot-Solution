@@ -5,9 +5,10 @@ namespace App\Http\Controllers\Api;
 use App\Http\Controllers\Controller;
 use App\Interfaces\IProfitLossService;
 use Illuminate\Http\Request;
-
+use App\Traits\ApiResponseTrait;
 class ProfitLossApiController extends Controller
 {
+    use ApiResponseTrait;
     protected $_profitLossService;
 
     public function __construct(IProfitLossService $profitLossService)
@@ -23,17 +24,17 @@ class ProfitLossApiController extends Controller
     public function getProfitLoss(Request $request)
     {
 
-        $filters = $request->all();
+        try {
 
-        $apiUrl = null;
+            $result = $this->_profitLossService->getProfitLossData($request->all());
 
-        $data = $this->_profitLossService->getProfitLossData($apiUrl, $filters);
-
-
-        if (isset($data['message']) && $data['message'] === 'File not found') {
-            return response()->json($data, 404);
+            return $this->sendResponse(
+                $result,
+                "Profit Loss report fetched successfully.",
+                "Failed to fetch profit loss report."
+            );
+        } catch (\Throwable $th) {
+            return $this->sendError($th);
         }
-
-        return response()->json($data, 200);
     }
 }
