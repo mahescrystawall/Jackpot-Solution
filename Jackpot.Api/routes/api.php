@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Api\ButtonController;
 use App\Http\Controllers\Api\Auth\AuthController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -57,9 +58,11 @@ Route::get('/int-casino', [IntCasinoApiController::class, 'getCasinoGames']);
 //Unsettled bets- client
 Route::post('/getUnsettledBet', [BetApiController::class, 'unsettledBet']);
 
-Route::put('/user/status', [UserController::class, 'toggleUserFeature']);
+Route::put('/user/status', [UserController::class, 'UpdateUserStaus']);
 
 Route::post('/user/buttons', [UserController::class, 'UpdateButtonValue']);
+Route::get('/user-buttons', [ButtonController::class, 'getUserButtons']);
+
 
  Route::get('/sports-inplay', [SportsController::class, 'getInplayGames']);
 // Route::get('/sports-inplay', function () {
