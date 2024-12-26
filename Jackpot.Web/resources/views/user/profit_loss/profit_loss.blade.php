@@ -22,11 +22,15 @@
     </div>
 @endsection
 
-
 @section('js_content')
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script>
         $(document).ready(function() {
+            const userId = "{{ session('user_id') }}";
+            const DEFAULT_PAGE_SIZE = {{ \App\Constants\Constants::DEFAULT_PAGE_SIZE }};
+            const DEFAULT_ORDER_DIRECTION = "{{ \App\Constants\Constants::DEFAULT_ORDER_DIRECTION }}";
+            const DEFAULT_ORDER_BY = "{{ \App\Constants\Constants::DEFAULT_ORDER_BY }}";
+            const API_URL = "{{ env('API_URL') }}";
             // Handle form submission (filter by start and end date)
             $('#filter_form').on('submit', function(event) {
                 event.preventDefault();
@@ -47,14 +51,14 @@
 
             function getData(page, startDate, endDate) {
                 $.ajax({
-                    url: "http://127.0.0.1:8081/api/profit-loss",
+                    url: `${API_URL}/api/profit-loss`,
                     method: "POST",
                     data: {
                         page: page || 1,
-                        user_id: 7,
-                        page_size: 2,
-                        order_direction: "ASC",
-                        order_by: "created_on",
+                        user_id: userId,
+                        page_size: DEFAULT_PAGE_SIZE,
+                        order_direction: DEFAULT_ORDER_DIRECTION,
+                        order_by: DEFAULT_ORDER_BY,
                         start_date: startDate,
                         end_date: endDate
                     },
@@ -64,20 +68,20 @@
 
                         if (data.length > 0) {
                             const rows = data.map((item, index) => `
-                    <tr>
-                        <td>${index + 1}</td>
-                        <td>${item.created_on}</td>
-                        <td>${item.event_type_name}</td>
-                        <td>${item.event_name}</td>
-                        <td>${item.amount}</td>
-                    </tr>
-                `).join('');
+                                <tr>
+                                    <td>${index + 1}</td>
+                                    <td>${item.created_on}</td>
+                                    <td>${item.event_type_name}</td>
+                                    <td>${item.event_name}</td>
+                                    <td>${item.amount}</td>
+                                </tr>
+                            `).join('');
                             $('#data-table-body').html(rows);
                         } else {
                             // Display "No data available" if the data is null or empty
                             $('#data-table-body').html(
                                 '<tr><td colspan="5" class="text-center">No data available</td></tr>'
-                                );
+                            );
                         }
 
                         // Update the pagination links
@@ -91,8 +95,6 @@
                     }
                 });
             }
-
-
         });
     </script>
 @endsection

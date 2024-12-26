@@ -5,17 +5,12 @@ namespace App\Http\Controllers\User;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Services\ProfitLossService;
+use App\Constants\Constants;
 use Carbon\Carbon;
 
 class ProfitLossController extends Controller
 {
     protected $profitLossService;
-
-    // Default parameters for filters
-    private const DEFAULT_PAGE = 1;
-    private const DEFAULT_PAGE_SIZE = 2;
-    private const DEFAULT_ORDER_DIRECTION = 'ASC';
-    private const DEFAULT_ORDER_BY = 'created_on';
 
     public function __construct(ProfitLossService $profitLossService)
     {
@@ -31,10 +26,10 @@ class ProfitLossController extends Controller
             'start_date' => $request->input('start_date', Carbon::now()->subDays(30)->format('Y-m-d')),
             'end_date' => $request->input('end_date', Carbon::now()->format('Y-m-d')),
             'user_id' => session('user_id'),
-            'page' => $request->input('page', self::DEFAULT_PAGE),
-            'page_size' => $request->input('page_size', self::DEFAULT_PAGE_SIZE),
-            'order_direction' => $request->input('order_direction', self::DEFAULT_ORDER_DIRECTION),
-            'order_by' => $request->input('order_by', self::DEFAULT_ORDER_BY),
+            'page' => $request->input('page', Constants::DEFAULT_PAGE),
+            'page_size' => $request->input('page_size', Constants::DEFAULT_PAGE_SIZE),
+            'order_direction' => $request->input('order_direction', Constants::DEFAULT_ORDER_DIRECTION),
+            'order_by' => $request->input('order_by', Constants::DEFAULT_ORDER_BY),
         ];
 
         // Fetch profit/loss data from service
