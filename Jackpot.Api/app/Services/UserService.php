@@ -3,26 +3,36 @@
 namespace App\Services;
 
 use App\Interfaces\IUserService;
-use App\Procedures\Procedure;
-use App\Constants\ProcedureNames;
+use App\Repositories\UserRepository;
+
 
 class UserService implements IUserService
 {
+    protected $userRepository;
+
+    public function __construct(UserRepository $userRepository)
+    {
+        $this->userRepository = $userRepository;
+    }
+
     public function changeUserStatus($request)
     {
-        $response = Procedure::ExecuteProcedure(ProcedureNames::TOGGLE_USER_STATUS, $request);
-        if(!$response['success'])  throw new \Exception($response['message']);
+        $response = $this->userRepository->toggleUserStatus($request);
+        if (!$response['success']) throw new \Exception($response['message']);
         return $response['result'];
     }
 
-    public function updateButtonValue($userId, $title,$amount,$updated_at)
+    public function updateButtonValue($userId, $title, $amount, $updated_at)
     {
-        $response = Procedure::ExecuteProcedure(
-            ProcedureNames::UPDATE_BUTTON,
-            ["user_id" => $userId, "title" => $title, "amount" => $amount, 'updated_at' => $updated_at, 1]
-        );
-        if(!$response['success'])  throw new \Exception($response['message']);
+        $data = [
+            "user_id" => $userId,
+            "title" => $title,
+            "amount" => $amount,
+            "updated_at" => $updated_at,
+            1
+        ];
+        $response = $this->userRepository->updateButtonValue($data);
+        if (!$response['success']) throw new \Exception($response['message']);
         return $response['result'];
     }
-
 }

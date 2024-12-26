@@ -1,0 +1,17 @@
+<?php
+namespace App\Repositories;
+use App\Procedures\Procedure;
+use App\Constants\ProcedureNames;
+
+class UserRepository
+{
+    public function toggleUserStatus(array $data)
+    {
+        return Procedure::ExecuteProcedure(ProcedureNames::TOGGLE_USER_STATUS, $data);
+    }
+
+    public function updateButtonValue(array $data)
+    {
+        return Procedure::ExecuteProcedure(ProcedureNames::UPDATE_BUTTON, $data);
+    }
+}
