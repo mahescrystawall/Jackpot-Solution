@@ -54,15 +54,15 @@ class UnsettledService
 
         // The endpoint URL
         $url = $this->baseUrl . '/api/getUnsettledBet';
-
+        // dd(session('user_id'));
         // Send the POST request with the parameters
         $response = Http::post($url, [
-            'user_id'        => 19, // should be from incoming data
+
+            'user_id'        => session('user_id'),
             'PageNumber'     => 1,  // should be from incoming data
             'PageSize'       => 10, // should be from incoming data
-            'OrderBy'        => 'created_at',
+            'OrderBy'        => 'created_on',
             'OrderDirection' => 'ASC',
-            'FilterStatus'   => $status ?? 'matched', 
         ]);
 
         // Check if the response is successful

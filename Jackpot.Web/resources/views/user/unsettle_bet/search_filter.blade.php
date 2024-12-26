@@ -17,7 +17,7 @@
         font-size: 12px !important;
     }
 </style>
-<div class="px-2 md:px-0">
+<!-- <div class="px-2 md:px-0">
     <form class="flex flex-wrap gap-5 mt-5 leading-none max-md:max-w-full">
         @csrf
         <div class="flex gap-4 items-center">
@@ -41,4 +41,4 @@
             </div>
         </div>
     </form>
-</div>
+</div> -->

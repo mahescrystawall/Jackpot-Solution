@@ -30,12 +30,12 @@
                 <td>{{$loop->iteration}}</td>
                 <td>{{ $event['event_name'] }}</td>
                 <td>{{ $event['nation'] }}</td>
-                <td>{{ $event['EventType'] }}</td>
-                <td>{{ $event['market_name'] }}</td>
+                <td>{{ $event['event_type_name'] }}</td>
+                <td>{{ $event['type'] }}</td>
                 <td>{{ ($event['is_back']) ? 'back' : 'lay' }}</td>
                 <td>{{ $event['odd'] }}</td>
-                <td>{{ $event['amount'] }}</td>
-                <td>{{ $event['place_date'] }}</td>
+                <td>{{ $event['stake'] }}</td>
+                <td>{{ $event['created_on'] }}</td>
                 <td>{{ $event['match_date'] }}</td>
             </tr>
             @endforeach
@@ -44,20 +44,20 @@
     </table>
 </div>
 
-<script>
-    // function filterTable(filterValue) {
-    //     const rows = document.querySelectorAll('tbody tr');
-    //     rows.forEach(row => {
-    //         const isMatched = row.getAttribute('data-is-matched');
-    //         if (filterValue == 2) {
-    //             row.style.display = 'none';
-    //         } else if (isMatched == filterValue) {
-    //             row.style.display = '';
-    //         } else {
-    //             row.style.display = 'none';
-    //         }
-    //     });
-    // }
+<!-- <script>
+    function filterTable(filterValue) {
+        const rows = document.querySelectorAll('tbody tr');
+        rows.forEach(row => {
+            const isMatched = row.getAttribute('data-is-matched');
+            if (filterValue == 2) {
+                row.style.display = 'none';
+            } else if (isMatched == filterValue) {
+                row.style.display = '';
+            } else {
+                row.style.display = 'none';
+            }
+        });
+    }
 
 
     function filterTable(status) {
@@ -102,8 +102,4 @@
                 console.error('Error fetching data:', error); // Handle errors
             });
     }
-</script>
-
-</script>
-
-</script>
+</script> -->

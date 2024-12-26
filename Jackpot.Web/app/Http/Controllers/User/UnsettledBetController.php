@@ -34,8 +34,7 @@ class UnsettledBetController extends Controller
     {
         //     dd(session('user_data'));`
         $events = $this->unsettledService->getBetHistoryData($request->data);
-
-
+        // dd($events);
         return view('user/unsettle_bet/unsettled_bet', compact('events'));
     }
 
