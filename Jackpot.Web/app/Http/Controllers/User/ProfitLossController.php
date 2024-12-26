@@ -25,9 +25,9 @@ class ProfitLossController extends Controller
         $endDate = $request->input('end_date', Carbon::now()->format('Y-m-d')); // Today
 
         $filters = [
-            'start_date' => $startDate,  // Default to one month ago if no start date
-            'end_date' => $endDate,  // Default to today if no end date
-            'user_id'=> 7,
+            'start_date' => $startDate,
+            'end_date' => $endDate,
+            'user_id'=> session('user_id'),
             "page"=>1,
             "page_size"=>2,
             "order_direction"=>"ASC",
