@@ -18,7 +18,7 @@
     }
 </style>
 <div class="px-2 md:px-0">
-    <form class="flex flex-wrap gap-5  mt-5 leading-none  max-md:max-w-full" action="{{ route('account-statement')}}" method="post">
+    <form class="flex flex-wrap gap-5  mt-5 leading-none  max-md:max-w-full" id="filter_form">
         @csrf
 
         <div class="relative w-[100vw] md:max-w-sm md:w-full">
@@ -30,11 +30,11 @@
             <input
                 id="datepicker-start_date"
                 name="start_date"
-                datepicker
+
                 placeholder="From Date"
-                type="text"
+              type="date"
                 class="bg-transparent border border-solid border-jcolor1 text-white-900 text-sm rounded-lg focus:ring-jblue2 focus:rounded-md focus:border-jblue2 block w-full ps-10 p-2.5"
-                value="{{ request('start_date') }}">
+                value="{{ old('start_date', $startDate) }}"/>
         </div>
 
         <div class="relative w-[100vw] md:max-w-sm md:w-full">
@@ -44,12 +44,12 @@
                 </svg>
             </div>
             <input
-            value="{{ request('end_date') }}"
+          value="{{ old('end_date', $endDate) }}"
                 id="datepicker-end_date"
                 name="end_date"
-                datepicker
+
                 placeholder="To Date"
-                type="text"
+                type="date"
                 class="bg-transparent border border-solid border-jcolor1 text-white-900 text-sm rounded-lg focus:ring-jblue2 focus:rounded-md focus:border-jblue2 block w-full ps-10 p-2.5">
         </div>
         <div class="flex gap-10  justify-between items-start rounded-md border border-1 border-jcolor1 w-[100vw] md:w-full md:max-w-sm">

@@ -15,11 +15,10 @@ class ProfitLossService
 
     public function getProfitLossData(string $apiUrl = null, array $filters = null)
     {
-        $url = $this->baseUrl . '/api/profit-loss';
 
         try {
             // Send the request to the API with a timeout of 60 seconds
-            $response = Http::timeout(60)->post($url, $filters);
+            $response = Http::timeout(60)->post($apiUrl, $filters);
             // Check if the response was successful
             if ($response->successful()) {
                 $data = $response->json();
