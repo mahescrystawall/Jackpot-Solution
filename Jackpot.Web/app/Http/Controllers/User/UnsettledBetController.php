@@ -32,10 +32,9 @@ class UnsettledBetController extends Controller
 
     public function index(Request $request)
     {
-        //     dd(session('user_data'));`
         $unsettledBets = $this->unsettledService->getBetHistoryData($request->data);
 
-        $events = $unsettledBets["result"];
+        $events = $unsettledBets["data"]["result"];
 
         return view('user/unsettle_bet/unsettled_bet', compact('events'));
     }

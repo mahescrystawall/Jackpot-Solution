@@ -4,6 +4,7 @@ namespace App\Services;
 
 use App\Interfaces\IProfitLossService;
 use App\Repositories\UserRepository;
+
 class ProfitLossService implements IProfitLossService
 {
     protected $userRepository;
@@ -13,18 +14,17 @@ class ProfitLossService implements IProfitLossService
      *
      */
 
-     public function __construct(UserRepository $userRepository)
-     {
-         $this->userRepository = $userRepository;
-     }
-     public function getProfitLossData($request)
-     {
+    public function __construct(UserRepository $userRepository)
+    {
+        $this->userRepository = $userRepository;
+    }
+    public function getProfitLossData($request)
+    {
         $response = $this->userRepository->getProfitLossReport($request);
 
         if (!$response['success']) throw new \Exception($response['message']);
         return $response['result'];
-
-     }
+    }
     // public function getProfitLossData(array $filters): array
     // {
     //     // Path to the profit and loss JSON file

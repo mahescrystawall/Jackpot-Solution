@@ -3,6 +3,7 @@
 namespace App\Services;
 
 use App\Interfaces\IBetService;
+use App\Repositories\BetRepository;
 use App\Traits\FileHelper;
 use App\Procedures\Procedure;
 use Carbon\Carbon;
@@ -67,14 +68,9 @@ class BetService implements IBetService
     }
 
     //NEW
-    public function unsettledBet($data)
+    public function getUnsettledBet($data)
     {
-        try {
-            $data = Procedure::ExecuteProcedure('Get_Unsettled_Bets', $data);
-
-            return collect($data);
-        } catch (\Throwable $th) {
-            return $th->getMessage();
-        }
+        $unsettledData = BetRepository::getUnsettledBet($data);
+        return collect($unsettledData);
     }
 }
