@@ -64,7 +64,7 @@ class UnsettledService
             'OrderBy'        => 'created_on',
             'OrderDirection' => 'ASC',
         ]);
-
+      
         // Check if the response is successful
         if ($response->successful()) {
             return $response->json(); // Return the response as an array
