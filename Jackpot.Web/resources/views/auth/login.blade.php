@@ -6,6 +6,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
+
     <!--  CSS -->
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 
@@ -109,6 +110,9 @@
             </section>
         </div>
     </main>
+
+    <script src="{{ asset('assets/js/crypto-js.js') }}"></script>
+    <script src="{{ asset('assets/js/encrypt.js') }}"></script>
 
 </body>
 

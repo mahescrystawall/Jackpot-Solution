@@ -2,6 +2,7 @@
 
 namespace App\Services;
 
+use Illuminate\Support\Facades\Crypt;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\File;
@@ -17,7 +18,10 @@ class LoginService
     }
     public function getLoginData(array $data)
     {
+
         $url = $this->baseUrl . '/api/login';
+        // dd($data['password']);
+        // $password = decrypt($data['password'], 'Test@123');
 
         try {
             $response = Http::post($url, $data);
@@ -26,10 +30,9 @@ class LoginService
             if ($response->successful()) {
                 $loginData = $response->json();
 
-                // dd($loginData);
                 // Extract and format required data
-                $balance = $loginData['chips'][0]['balance'] ?? null;
-                $exposure = $loginData['chips'][0]['exposure'] ?? null;
+                $balance = $loginData['chips']['result'][0]['balance'] ?? null;
+                $exposure = $loginData['chips']['result'][0]['exposure'] ?? null;
                 $userName = $loginData['user']['name'] ?? '';
                 $userId = $loginData['user']['id'] ?? null;
                 $roleId = $loginData['user']['role_id'] ?? null;
