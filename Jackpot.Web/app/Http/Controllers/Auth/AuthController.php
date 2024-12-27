@@ -24,8 +24,6 @@ class AuthController extends Controller
         // Fetch login data from the service
         $response = $this->loginservice->getLoginData($request->all());
 
-        // dd($response);
-
 
         // Check if token and user exist in the response
         if (isset($response['token'], $response['user'])) {

@@ -36,7 +36,7 @@ class UnsettledBetController extends Controller
         $unsettledBets = $this->unsettledService->getBetHistoryData($request->data);
 
         $events = $unsettledBets["result"];
-        // dd($events);
+
         return view('user/unsettle_bet/unsettled_bet', compact('events'));
     }
 
