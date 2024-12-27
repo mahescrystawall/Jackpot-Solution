@@ -23,7 +23,7 @@ Route::middleware(['client'])->group(function () {
     // Route::resource('/home', DashboardController::class);
     Route::resource('/home', CasinoController::class);
     Route::resource('/int-casino', IntCasinoController::class);
-    
+
 
 
     Route::get('/account-statement', [AccountStatementController::class, 'showAccountStatement'])->name('account-statement');

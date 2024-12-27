@@ -18,5 +18,10 @@ class UserRepository
     {
         return Procedure::ExecuteProcedure(ProcedureNames::GET_PROFIT_LOSS, $data);
     }
+    public function getAccountStatement(array $data)
+    {
+        return Procedure::ExecuteProcedure(ProcedureNames::GET_ACCOUNT_STATEMENT, $data);
+    }
+
 
 }
