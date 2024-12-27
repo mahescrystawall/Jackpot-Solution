@@ -23,9 +23,6 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-// Route for fetching unsettled bets
-Route::get('/unsettled_bets', [BetApiController::class, 'getUnsettledBets'])->name('unsettled_bets');
-
 // Route for fetching account_statement
 Route::post('/report/account-statement', [AccountController::class, 'getStatementData']);
 
@@ -55,8 +52,8 @@ Route::post('/login', [APIAuthController::class, 'login']);
 // Route for fetching int casino games list
 Route::get('/int-casino', [IntCasinoApiController::class, 'getCasinoGames']);
 
-//Unsettled bets- client
-Route::post('/getUnsettledBet', [BetApiController::class, 'unsettledBet']);
+//Unsettled bets- client NEW
+Route::post('/getUnsettledBet', [BetApiController::class, 'getUnsettledBet']);
 
 Route::put('/user/status', [UserController::class, 'UpdateUserStaus']);
 
@@ -64,9 +61,7 @@ Route::post('/user/buttons', [UserController::class, 'UpdateButtonValue']);
 Route::get('/user-buttons', [ButtonController::class, 'getUserButtons']);
 
 
- Route::get('/sports-inplay', [SportsController::class, 'getInplayGames']);
+Route::get('/sports-inplay', [SportsController::class, 'getInplayGames']);
 // Route::get('/sports-inplay', function () {
 //     return response()->json(['test' => 'API is working']);
 // });
-
-

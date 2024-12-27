@@ -6,9 +6,12 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\BetHistoryRequest;
 use App\Interfaces\IBetService;
 use Illuminate\Http\Request;
+use App\Traits\ApiResponseTrait;
+
 
 class BetApiController extends Controller
 {
+    use ApiResponseTrait;
     protected $_betService;
 
     public function __construct(IBetService $betService)
@@ -21,26 +24,12 @@ class BetApiController extends Controller
      *
      * @return \Illuminate\Http\JsonResponse
      */
-    public function getUnsettledBets()
+    //New
+    public function getUnsettledBet(Request $request)
     {
-        $data = $this->_betService->getBetData('unsettled_bet.json');
+        $data = $this->_betService->getUnsettledBet($request->all());
 
-        if (isset($data['error_message'])) {
-            return response()->json($data, 400);
-        }
-
-        return response()->json($data, 200);
-    }
-
-    public function unsettledBet(Request $request)
-    {
-        $data = $this->_betService->unsettledBet($request->all());
-
-        if (isset($data['error_message'])) {
-            return response()->json($data, 400);
-        }
-
-        return response()->json($data, 200);
+        return $this->sendResponse($data, 200);
     }
 
     /**

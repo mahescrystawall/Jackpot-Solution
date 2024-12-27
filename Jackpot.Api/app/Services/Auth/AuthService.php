@@ -13,7 +13,6 @@ class AuthService implements IAuthService
 {
     public function login($data)
     {
-        // dd($data);
         // Define the key and IV (they must match the frontend)
         $key = 'hdgh6372dhbshdg637wyqb27t28syb2q';  // 32-byte key (same as frontend)
         $iv = '8g2wg2mnw01b6w7w';  // 16-byte IV (same as frontend)
