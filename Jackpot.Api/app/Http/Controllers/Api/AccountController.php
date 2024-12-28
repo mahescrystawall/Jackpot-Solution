@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Interfaces\IAccountStatementService;
 use App\Traits\ApiResponseTrait;
+use Illuminate\Support\Facades\Log;
 class AccountController extends Controller
 {
     use ApiResponseTrait;
@@ -46,6 +47,7 @@ class AccountController extends Controller
                 200
             );
         } catch (\Throwable $th) {
+            Log::channel('procedure_log')->error('An error occurred in the custom log.'.$th);
             return $this->sendError($th);
         }
     }
