@@ -30,13 +30,22 @@
                         {{ \Carbon\Carbon::parse($statement['created_on'])->format('Y-m-d') }}
                     </td>
                     <td class="text-center">
-                        {{ $statement['current_balance'] > 0 ? number_format($statement['current_balance'], 2) : '0.00' }}
+                        @if ($statement['transaction_type'] == 'debit')
+                            -
+                        @else
+                            {{ $statement['amount'] ? number_format($statement['amount'], 2) : '0.00' }}
+                        @endif
                     </td>
+
                     <td class="text-red-600 text-center">
-                        {{ $statement['bet_stake'] ? number_format($statement['bet_stake'], 2) : '0.00' }}
+                        @if ($statement['transaction_type'] == 'debit')
+                            {{ $statement['amount'] ? number_format($statement['amount'], 2) : '0.00' }}
+                        @else
+                        -
+                        @endif
                     </td>
                     <td class="text-green-500 text-center">
-                        {{ $statement['bet_potential_payout'] ? number_format($statement['bet_potential_payout'], 2) : '0.00' }}
+                        {{ $statement['current_balance'] ? number_format($statement['current_balance'], 2) : '0.00' }}
                     </td>
                     <td class="text-center">{{ $statement['bet_event_name'] }}</td>
                     <td class="text-ellipsis overflow-hidden whitespace-nowrap text-center">
