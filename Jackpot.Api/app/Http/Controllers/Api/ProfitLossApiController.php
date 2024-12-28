@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Interfaces\IProfitLossService;
 use Illuminate\Http\Request;
 use App\Traits\ApiResponseTrait;
+use Illuminate\Support\Facades\Log;
 class ProfitLossApiController extends Controller
 {
     use ApiResponseTrait;
@@ -34,6 +35,7 @@ class ProfitLossApiController extends Controller
                 200
             );
         } catch (\Throwable $th) {
+            Log::channel('procedure_log')->error('An error occurred in the custom log.'.$th);
             return $this->sendError($th);
         }
     }
