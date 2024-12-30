@@ -64,9 +64,10 @@ return [
             'level' => env('LOG_LEVEL', 'debug'),
             'replace_placeholders' => true,
         ],
-        'api_log' => [
+
+        'error_logs' => [
             'driver' => 'single',
-            'path' => storage_path('logs/api_log.log'),
+            'path' => storage_path('logs/error_logs.log'),
             'level' => env('LOG_LEVEL', 'debug'),
             'replace_placeholders' => true,
         ],

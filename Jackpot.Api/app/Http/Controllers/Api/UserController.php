@@ -26,7 +26,8 @@ class UserController extends Controller
     public function UpdateUserStaus(ToggleUserFeatureRequest $request)
     {
          try {
-            Log::channel('api_log')->info('User toggle api called');
+
+            Log::channel('error_logs')->info('User toggle api called');
             $result = $this->_userService->changeUserStatus($request->all());
 
             return $this->sendResponse(
@@ -34,9 +35,10 @@ class UserController extends Controller
                 "User status toggled successfully.",
                 200
             );
-        } catch (Exception $e) {
-            Log::channel('api_log')->error('An error occurred in the custom log.'.$e->getMessage());
-            return $this->sendError($e);
+
+        } catch (\Throwable $th) {
+            Log::channel('error_logs')->error('An error occurred in the custom log.'.$th);
+            return $this->sendError($th);
         }
     }
 
