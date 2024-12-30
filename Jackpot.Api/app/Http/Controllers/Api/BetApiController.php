@@ -38,20 +38,51 @@ class BetApiController extends Controller
      * @param BetHistoryRequest $request
      * @return \Illuminate\Http\JsonResponse
      */
-    public function getBetHistory(BetHistoryRequest $request)
+    public function getBetHistory(Request $request)
     {
         // Use BetHistoryRequest to get validated and formatted date range
-        $dateRange = $request->getDateRange();
-        $startDate = $dateRange['startDate'];
-        $endDate = $dateRange['endDate'];
-        $postData = $dateRange['postData'];
+        // $dateRange = $request->getDateRange();
+        // $startDate = $dateRange['startDate'];
+        // $endDate = $dateRange['endDate'];
+        // $postData = $dateRange['postData'];
 
-        $data = $this->_betService->getBetHistoryData('bet_history.json', $postData, $startDate, $endDate);
+        $userID = $request->user_id;
+        $page = $request->page;
+        $page_size = $request->page_size;
+        $orderBy = 'created_on';
+        $orderDirection = 'ASC';
+        $eventTypeId = $request->event_type_id ?? 1;
+        $status = $request->is_mathched ?? 'matched';
+        $startDate = $request->start_date;
+        $endDate = $request->end_date;
 
-        if (isset($data['error_message'])) {
-            return response()->json($data, 400);
+        $params = [
+            'user_id' => $userID,
+            'page' => $page,
+            'page_size' => $page_size,
+            'order_by' => $orderBy,
+            'order_direction' => $orderDirection,
+            'event_type_id' => $eventTypeId,
+            // 'FilterStatus' => $status,
+            'start_date' => $startDate,
+            'end_date' => $endDate
+
+        ];
+
+
+        // $data = $this->_betService->getBetHistoryData($request->all());
+
+
+        try {
+            $result = $this->_betService->getBetHistoryData($request->all());
+
+            return $this->sendResponse(
+                $result,
+                "msg",
+                200
+            );
+        } catch (\Throwable $th) {
+            return $this->sendError($th);
         }
-
-        return response()->json($data, 200);
     }
 }

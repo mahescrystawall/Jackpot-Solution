@@ -18,7 +18,10 @@ class UserService implements IUserService
     public function changeUserStatus($request)
     {
         $response = $this->userRepository->toggleUserStatus($request);
-        if (!$response['success']) throw new \Exception($response['message']);
+        if (!$response['success'])
+        return $response['message'];
+        //throw new \Exception($response['message']);
+        Log::channel('api_log')->error('An error occurred in the custom log.'.$response['message']);
         return $response['result'];
     }
 

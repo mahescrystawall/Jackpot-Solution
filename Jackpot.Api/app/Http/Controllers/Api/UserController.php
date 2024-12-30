@@ -4,6 +4,8 @@ namespace App\Http\Controllers\Api;
 
 use App\Interfaces\IUserService;
 use App\Traits\ApiResponseTrait;
+use App\Http\Requests\UpdateButtonValueRequest;
+use Exception;
 use Illuminate\Support\Facades\Log;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
@@ -27,7 +29,8 @@ class UserController extends Controller
      */
     public function UpdateUserStaus(ToggleUserFeatureRequest $request)
     {
-        try {
+
+         try {
             Log::channel('error_logs')->info('User toggle api called');
             $result = $this->_userService->changeUserStatus($request->all());
 
@@ -36,6 +39,7 @@ class UserController extends Controller
                 "User status toggled successfully.",
                 200
             );
+
         } catch (\Throwable $th) {
             Log::channel('error_logs')->error('An error occurred in the custom log.' . $th);
             return $this->sendError($th);

@@ -64,6 +64,7 @@ return [
             'level' => env('LOG_LEVEL', 'debug'),
             'replace_placeholders' => true,
         ],
+
         'error_logs' => [
             'driver' => 'single',
             'path' => storage_path('logs/error_logs.log'),
