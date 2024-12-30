@@ -46,6 +46,7 @@ class AccountController extends Controller
                 "Account Statement report fetched successfully.",
                 200
             );
+
         } catch (\Throwable $th) {
             Log::channel(env('LOG_CHANNEL'))->error('An error occurred in the custom log.'.$th);
             return $this->sendError($th);
