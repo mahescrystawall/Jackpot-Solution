@@ -11,6 +11,6 @@ interface IUserService
      * @param string $procedure_name The name of the procedure to execute.
      * @return mixed The result of the procedure execution.
      */
-    public function changeUserStatus(int $user_id, string $procedure_name);
+    public function changeUserStatus(array $request);
     public function updateButtonValue(int $user_id,string $title,string $amount,$updated_at);
 }

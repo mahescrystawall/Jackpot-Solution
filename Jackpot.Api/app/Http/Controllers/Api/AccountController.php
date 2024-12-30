@@ -5,9 +5,11 @@ namespace App\Http\Controllers\Api;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Interfaces\IAccountStatementService;
-
+use App\Traits\ApiResponseTrait;
+use Illuminate\Support\Facades\Log;
 class AccountController extends Controller
 {
+    use ApiResponseTrait;
     protected $accountStatementService;
 
     // Inject StakeService into the controller
@@ -17,31 +19,48 @@ class AccountController extends Controller
     }
     public function getStatementData(Request $request)
     {
-        $filters = [
-            'start_date' => $request->input('start_date'),
-            'end_date' => $request->input('end_date'),
-            'category' => $request->input('category', 'ALL'), // Default to "ALL" if no category is provided
-        ];
-    
-        $fileName = 'account_statement.json';
-        $data = $this->accountStatementService->getAccountStatement($fileName, $filters);
-    
-        if (isset($data['error_message'])) {
-            return response()->json($data, 400);
+        // $filters = [
+        //     'start_date' => $request->input('start_date'),
+        //     'end_date' => $request->input('end_date'),
+        //     'category' => $request->input('category', 'ALL'), // Default to "ALL" if no category is provided
+        // ];
+
+        // $fileName = 'account_statement.json';
+        // $data = $this->accountStatementService->getAccountStatement($fileName, $filters);
+
+        // if (isset($data['error_message'])) {
+        //     return response()->json($data, 400);
+        // }
+
+        // return response()->json($data, 200);
+
+
+
+
+        try {
+
+            $result = $this->accountStatementService->getAccountStatement($request->all());
+
+            return $this->sendResponse(
+                $result,
+                "Account Statement report fetched successfully.",
+                200
+            );
+        } catch (\Throwable $th) {
+            Log::channel('procedure_log')->error('An error occurred in the custom log.'.$th);
+            return $this->sendError($th);
         }
-    
-        return response()->json($data, 200);
     }
 
-    public function getBetData()
-    {       
-            $data = $this->accountStatementService->getBetList('bet_list.json');
-            if (isset($data['error_message'])) {
-                return response()->json($data, 400);
-            }
-            return response()->json($data, 200);
-    }
+    // public function getBetData()
+    // {
+    //         $data = $this->accountStatementService->getBetList('bet_list.json');
+    //         if (isset($data['error_message'])) {
+    //             return response()->json($data, 400);
+    //         }
+    //         return response()->json($data, 200);
+    // }
 
-    
- 
+
+
 }

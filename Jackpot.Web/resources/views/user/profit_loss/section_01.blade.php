@@ -21,12 +21,12 @@
         </thead>
 
         <!-- Table Body -->
-        <tbody class="table-td" id="data-table-body">    
+        <tbody class="table-td" id="data-table-body">
 
             @include('user.profit_loss.section_table_body')
-         
-           
+
+
         </tbody>
     </table>
-    @include('pagination.index')
+    <!-- need to include pagination.index -->
 </div>

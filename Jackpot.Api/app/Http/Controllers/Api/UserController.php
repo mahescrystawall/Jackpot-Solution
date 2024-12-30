@@ -7,7 +7,7 @@ use App\Http\Requests\ToggleUserFeatureRequest;
 use App\Interfaces\IUserService;
 use App\Traits\ApiResponseTrait;
 use App\Http\Requests\UpdateButtonValueRequest;
-
+use Illuminate\Support\Facades\Log;
 class UserController extends Controller
 {
     use ApiResponseTrait;
@@ -22,38 +22,23 @@ class UserController extends Controller
     /**
      * Handle the toggle of user features (status, can_bet).
      */
-    public function toggleUserFeature(ToggleUserFeatureRequest $request)
+    public function UpdateUserStaus(ToggleUserFeatureRequest $request)
     {
-        // The validation is already handled by the custom request
-
-        $userId = $request->input('user_id');
-        $featureType = $request->input('feature_type');
-
-        $procedureName = $this->getProcedureNameForFeature($featureType);
-
-        try {
-            $result = $this->_userService->changeUserStatus($userId, $procedureName);
+         try {
+            Log::channel('procedure_log')->info('User toggle api called');
+            $result = $this->_userService->changeUserStatus($request->all());
 
             return $this->sendResponse(
                 $result,
-                "User $featureType toggled successfully.",
-                "Failed to toggle user $featureType."
+                "User status toggled successfully.",
+                200
             );
         } catch (\Throwable $th) {
+            Log::channel('procedure_log')->error('An error occurred in the custom log.'.$th);
             return $this->sendError($th);
         }
     }
 
-     /**
-     * Get the procedure name based on the feature type.
-     */
-    private function getProcedureNameForFeature(string $featureType): string
-    {
-        return match ($featureType) {
-            'can_bet' => 'Toggle_User_Can_Bet',
-            'status' => 'Toggle_User_Status',
-        };
-    }
 
      /**
      * Handle creating user button value.

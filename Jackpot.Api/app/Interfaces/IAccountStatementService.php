@@ -4,8 +4,8 @@ namespace App\Interfaces;
 
 interface IAccountStatementService
 {
-    public function getAccountStatement(string $fileName, array $filters): array; 
+    public function getAccountStatement(array $filters);
 
-     public function getBetList(string $fileName): array;
+    //  public function getBetList(string $fileName): array;
 
 }

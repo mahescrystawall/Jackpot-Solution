@@ -5,104 +5,112 @@
         border: 0.5px solid #393E46 !important;
     }
 </style>
+
 <div class="overflow-x-auto mt-5">
-    <table class="w-full text-xs text-white border-collapse ">
+    <table class="w-full text-xs text-white border-collapse">
         <!-- Table Header -->
         <thead class="text-sm table-th">
             <tr>
-                <th class=" w-[47px]">No.</th>
-                <th class=" w-[114px]">Date</th>
-                <th class=" w-[111px]">Credit</th>
-                <th class=" w-[109px]">Debit</th>
-                <th class=" w-[111px]">Balance</th>
-                <th class=" w-[136px]">Sports</th>
-                <th class="">Remark</th>
+                <th class="w-[47px] text-center">No.</th>
+                <th class="w-[114px] text-center">Date</th>
+                <th class="w-[111px] text-center">Credit</th>
+                <th class="w-[109px] text-center">Debit</th>
+                <th class="w-[111px] text-center">Balance</th>
+                <th class="w-[136px] text-center">Sports</th>
+                <th class="text-center">Remark</th>
             </tr>
         </thead>
+
         <!-- Table Body -->
-        <tbody class="table-td">
-            @forelse ($paginationData['data'] ?? [] as $index => $statement)
-            <tr class="border border-jcolor1 px-4 py-2">
-                <td class="text-center">{{ $loop->iteration }}</td>
-                <td class="overflow-hidden whitespace-nowrap">{{ \Carbon\Carbon::parse($statement['created_at'])->format('Y-m-d') }}</td>
-                <td class=" text-center">{{ $statement['total'] > 0 ? $statement['total'] : '0.00' }}</td>
-                <td class="text-red-600 text-center">{{ $statement['total'] < 0 ? abs($statement['total']) : '0.00' }}</td>
-                <td class="text-green-500 text-center">{{ $statement['balance'] }}</td>
-                @php
-                $menuItem = collect($menuData)->firstWhere('id', $statement['event_type_id']);
-                @endphp
-                <td class="text-center">{{ $menuItem['name'] ?? 'N/A' }}</td>
-                <td class="text-ellipsis overflow-hidden whitespace-nowrap">
-                    <a data-modal-target="custom-modal"
-                        data-description="Here is some sample content that will appear in the modal."
-                        onclick="openPopup(this)"
-                        class="block text-jblue1 hover:underline cursor-pointer" 
-                       >
-                        {{ $statement['description'] }}
-                    </a>
-
-                    <!-- Include Modal Component -->
-                    <x-modal id="custom-modal" />
-
-
-                </td>
-
-            </tr>
+        <tbody id="data-table-body" class="table-td">
+            @forelse ($menuData['data'] as $statement)
+                <tr class="border border-jcolor1 px-4 py-2">
+                    <td class="text-center">{{ $loop->iteration }}</td>
+                    <td class="overflow-hidden whitespace-nowrap text-center">
+                        {{ \Carbon\Carbon::parse($statement['created_on'])->format('Y-m-d') }}
+                    </td>
+                    <td class="text-center">
+                        {{ $statement['current_balance'] > 0 ? number_format($statement['current_balance'], 2) : '0.00' }}
+                    </td>
+                    <td class="text-red-600 text-center">
+                        {{ $statement['bet_stake'] ? number_format($statement['bet_stake'], 2) : '0.00' }}
+                    </td>
+                    <td class="text-green-500 text-center">
+                        {{ $statement['bet_potential_payout'] ? number_format($statement['bet_potential_payout'], 2) : '0.00' }}
+                    </td>
+                    <td class="text-center">{{ $statement['bet_event_name'] }}</td>
+                    <td class="text-ellipsis overflow-hidden whitespace-nowrap text-center">
+                        <a data-modal-target="custom-modal"
+                           data-description="{{ $statement['transaction_status'] }}"
+                           onclick="openPopup(this)"
+                           class="block text-jblue1 hover:underline cursor-pointer">
+                            {{ $statement['transaction_status'] }}
+                        </a>
+                        <!-- Include Modal Component -->
+                        <x-modal id="custom-modal" />
+                    </td>
+                </tr>
             @empty
-            <tr>
-                <td colspan="7" class="text-center">No records found for the selected filters.</td>
-            </tr>
+                <tr>
+                    <td colspan="7" class="text-center">No records found for the selected filters.</td>
+                </tr>
             @endforelse
-
         </tbody>
     </table>
 </div>
 
-<div class="pagination flex justify-center mt-3">
-    @if ($paginationData['total_pages'] > 1)
-    <nav aria-label="Page navigation example">
-        <ul class="inline-flex -space-x-px text-sm">
-            <!-- Previous Page Button -->
-            <li>
-                <a href="{{ $paginationData['prev_page'] ? route('account-statement', [
-                            'page' => $paginationData['prev_page'],
-                            'start_date' => request('start_date'),
-                            'end_date' => request('end_date'),
-                            'category' => request('category')
-                        ]) : '#' }}"
-                    class="flex items-center justify-center px-3 h-8 ms-0 leading-tight text-gray-500 bg-white border border-e-0 border-gray-300 rounded-s-lg hover:bg-gray-100 hover:text-gray-700 {{ !$paginationData['prev_page'] ? 'opacity-50 cursor-not-allowed' : '' }}">
-                    Previous
-                </a>
-            </li>
+<script>
+    // Example JavaScript for dynamic AJAX content loading
+    function loadData(page, startDate, endDate) {
+        $.ajax({
+            url: `${API_URL}/api/report/account-statement`,
+            method: "POST",
+            data: {
+                page: page || 1,
+                user_id: userId,
+                page_size: DEFAULT_PAGE_SIZE,
+                order_direction: DEFAULT_ORDER_DIRECTION,
+                order_by: DEFAULT_ORDER_BY,
+                start_date: startDate,
+                end_date: endDate
+            },
+            success: function(response) {
+                const data = response.data || [];
 
-            <!-- Page Numbers -->
-            @for ($i = 1; $i <= $paginationData['total_pages']; $i++)
-                <li>
-                <a href="{{ route('account-statement', [
-                                'page' => $i,
-                                'start_date' => request('start_date'),
-                                'end_date' => request('end_date'),
-                                'category' => request('category')
-                            ]) }}"
-                    class="flex items-center justify-center px-3 h-8 leading-tight border border-gray-300 {{ $paginationData['current_page'] == $i ? 'text-blue-600 bg-blue-50 hover:bg-blue-100 hover:text-blue-700' : 'text-gray-500 bg-white hover:bg-gray-100 hover:text-gray-700' }}">
-                    {{ $i }}
-                </a>
-                </li>
-                @endfor
+                if (data.length > 0) {
+                    const rows = data.map((item, index) => `
+                        <tr class="border border-jcolor1 px-4 py-2">
+                            <td class="text-center">${index + 1}</td>
+                            <td class="text-center">${item.created_on}</td>
+                            <td class="text-center">${item.current_balance ? parseFloat(item.current_balance).toFixed(2) : '0.00'}</td>
+                            <td class="text-red-600 text-center">${item.bet_stake ? parseFloat(item.bet_stake).toFixed(2) : '0.00'}</td>
+                            <td class="text-green-500 text-center">${item.bet_potential_payout ? parseFloat(item.bet_potential_payout).toFixed(2) : '0.00'}</td>
+                            <td class="text-center">${item.bet_event_name}</td>
+                            <td class="text-center">
+                                <a data-modal-target="custom-modal"
+                                   data-description="${item.transaction_status}"
+                                   onclick="openPopup(this)"
+                                   class="block text-jblue1 hover:underline cursor-pointer">
+                                    ${item.transaction_status}
+                                </a>
+                            </td>
+                        </tr>`).join('');
+                    $('#data-table-body').html(rows);
+                } else {
+                    $('#data-table-body').html('<tr><td colspan="7" class="text-center">No records found for the selected filters.</td></tr>');
+                }
+            },
+            error: function(xhr, status, error) {
+                console.error("Error loading data: " + error);
+                $('#data-table-body').html('<tr><td colspan="7" class="text-center">Error loading data</td></tr>');
+            }
+        });
+    }
 
-                <!-- Next Page Button -->
-                <li>
-                    <a href="{{ $paginationData['next_page'] ? route('account-statement', [
-                            'page' => $paginationData['next_page'],
-                            'start_date' => request('start_date'),
-                            'end_date' => request('end_date'),
-                            'category' => request('category')
-                        ]) : '#' }}"
-                        class="flex items-center justify-center px-3 h-8 leading-tight text-gray-500 bg-white border border-gray-300 rounded-e-lg hover:bg-gray-100 hover:text-gray-700 {{ !$paginationData['next_page'] ? 'opacity-50 cursor-not-allowed' : '' }}">
-                        Next
-                    </a>
-                </li>
-        </ul>
-    </nav>
-    @endif
-</div>
+    function openPopup(element) {
+        const description = element.getAttribute('data-description');
+        const modal = document.querySelector('#custom-modal');
+        modal.querySelector('.modal-content').textContent = description;
+        modal.classList.add('open');
+    }
+</script>

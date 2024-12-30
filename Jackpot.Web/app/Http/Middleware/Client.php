@@ -15,9 +15,13 @@ class Client
      */
     public function handle(Request $request, Closure $next): Response
     {
-        if (!session()->has('access_token')) {
-            return redirect()->route('login')->withErrors(['error' => 'Please login first.']);
+        // Check if both auth_token exists and role_id is 3
+        if (!session()->has('auth_token') || session()->get('role_id') != 3) {
+            // If either condition is not met, redirect to login with an error
+            session()->flush();
+            return redirect()->route('login')->withErrors(['error' => 'Please login with the correct permissions.']);
         }
-        return $next($request);
+
+        return $next($request); // Continue if both conditions are met
     }
 }

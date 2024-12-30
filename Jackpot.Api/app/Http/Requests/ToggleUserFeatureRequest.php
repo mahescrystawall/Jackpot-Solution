@@ -26,7 +26,7 @@ class ToggleUserFeatureRequest extends FormRequest
     {
         return [
             'user_id' => 'required|integer',
-            'feature_type' => 'required|string|in:can_bet,status',
+            'field' => 'required|string|in:is_locked,is_blocked',
         ];
     }
 
