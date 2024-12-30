@@ -1,24 +1,24 @@
 @extends('layouts.app')
 @section('content')
 
-<div class="mt-200 text-white">
-    <div class="p-2 pt-6 sm:ml-64 mt-14 h-screen">
+    <div class="mt-200 text-white">
+        <div class="p-2 pt-6 sm:ml-64 mt-14 h-screen">
 
-        @include('layouts.marquee')
+            @include('layouts.marquee')
 
-        <section class="w-full ">
-            <div class="flex flex-row w-full py-2 mb-2 bg-gradient-to-r from-[#00ADB5] via-[#00ADB5] to-[#1B1B1B]">
-                <div class="flex items-center gap-2 text-white text-sm w-full px-2">
-                    <h2>Bet History</h2>
+            <section class="w-full ">
+                <div class="flex flex-row w-full py-2 mb-2 bg-gradient-to-r from-[#00ADB5] via-[#00ADB5] to-[#1B1B1B]">
+                    <div class="flex items-center gap-2 text-white text-sm w-full px-2">
+                        <h2>Bet History</h2>
+                    </div>
                 </div>
-            </div>
-            {{-- Filter --}}
-            @include('user.bet_history.search_filter')
-            @include('user.bet_history.section_01')
-
-        </section>
+                {{-- Filter --}}
+                @include('user.bet_history.search_filter')
+                @include('user.bet_history.section_01')
+                
+            </section>  
+        </div>
     </div>
-</div>
 @endsection
 
 
@@ -31,15 +31,9 @@
             event.preventDefault();
             const startDate = $('#start_date').val();
             const endDate = $('#end_date').val();
-            const eventTypeSelect = $('#event_type_id').val();
-            const betStatusSelect = $('is_matched').val();
-            const type = "ALL";
-            // const startDateInput = document.querySelector('input[name="start_date"]');
-            // const endDateInput = document.querySelector('input[name="end_date"]');
-
-            // alert(startDate);
+           // alert(startDate);
             // Trigger AJAX call to get the data with the selected dates
-            getData('', startDate, endDate, eventTypeSelect, betStatusSelect, type);
+            getData('', startDate, endDate);
         });
 
         // Handle pagination link clicks
@@ -49,29 +43,24 @@
             const page = $(this).data('page');
             const startDate = $('#start_date').val();
             const endDate = $('#end_date').val();
-            const eventTypeSelect = $('#event_type_id').val();
-            const betStatusSelect = $('is_matched').val();
-            const type = "ALL";
+
             // Trigger AJAX call to get data for the clicked page
-            getData(page, startDate, endDate, eventTypeSelect, betStatusSelect, type);
+            getData(page, startDate, endDate);
         });
 
         // Function to fetch data based on page, start date, and end date
-        function getData(page, startDate, endDate, eventTypeSelect, betStatusSelect, type) {
+        function getData(page, startDate, endDate) {
             $.ajax({
-                url: "{{route('bet-history')}}", // Adjust to your controller's route
+                url: "{{route('profit-loss')}}", // Adjust to your controller's route
                 method: "GET",
                 data: {
                     page: page,
                     start_date: startDate,
-                    end_date: endDate,
-                    eventTypeSelect: eventTypeSelect,
-                    betStatusSelect: betStatusSelect,
-                    type: type,
+                    end_date: endDate
                 },
                 success: function(response) {
 
-                    // console.log(response.data);
+                   // console.log(response.data);
                     // Update the table with the new data
                     $('#data-table-body').html(response.data); // Populate the table
                     // Update the pagination
