@@ -47,7 +47,7 @@ class AccountController extends Controller
                 200
             );
         } catch (\Throwable $th) {
-            Log::channel('procedure_log')->error('An error occurred in the custom log.'.$th);
+            Log::channel('error_logs')->error('An error occurred in the custom log.'.$th);
             return $this->sendError($th);
         }
     }
