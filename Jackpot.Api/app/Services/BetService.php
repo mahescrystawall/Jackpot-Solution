@@ -26,7 +26,7 @@ class BetService implements IBetService
      * @param Carbon $endDate
      * @return array
      */
-    public function getBetHistoryData(string $fileName, array $queryParams = [],  $startDate = null,  $endDate = null): array
+    public function getBetHistoryData1(string $fileName, array $queryParams = [],  $startDate = null,  $endDate = null): array
     {
         $filePath = storage_path('json/' . $fileName);
 
@@ -67,6 +67,24 @@ class BetService implements IBetService
         return $filteredData; // Return the filtered data
     }
 
+
+
+    public function getBetHistoryData($data)
+    {
+        // return $data;
+
+
+        $response = Procedure::ExecuteProcedure('Get_Bet_History', $data);
+        if (!$response['success'])  throw new \Exception($response['message']);
+        return $response['result'];
+    }
+        // try {
+        //     $data = Procedure::ExecuteProcedure('Get_Bet_History', $data);
+
+        //     return collect($data);
+        // } catch (\Throwable $th) {
+        //     return $th->getMessage();
+        // }
     //NEW
     public function getUnsettledBet($data)
     {

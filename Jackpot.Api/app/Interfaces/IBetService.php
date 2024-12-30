@@ -43,5 +43,6 @@ interface IBetService
      * @return array
      */
     public function settleBet(array $data): array;
-
+    public function getBetHistoryData1(string $fileName, array $queryParams = [], Carbon $startDate = null, Carbon $endDate = null): array;
+    public function getBetHistoryData(array $data);
 }
