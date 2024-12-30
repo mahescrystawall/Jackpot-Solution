@@ -1,10 +1,12 @@
 <?php
 namespace App\Http\Controllers\Api;
 
-use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Storage;
 use App\Services\BetService;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Log;
+use App\Http\Controllers\Controller;
+use App\Http\Requests\CreateBetRequest;
+use Illuminate\Support\Facades\Storage;
 
 class BetController extends Controller
 {
@@ -47,4 +49,24 @@ class BetController extends Controller
         }
         return response()->json($data, 200);
     }
+
+    /**
+     * Create bet
+     *
+     * @param Request $request
+     * @return \Illuminate\Http\JsonResponse|void
+     */
+    public function createBet(CreateBetRequest $request)
+    {
+        $data = $this->betService->createBet($request->all());
+        if (!$data['success']) {
+            Log::channel('error_log')->error('Error creating bet: ' . $data['message']);
+            return;
+        }
+
+        return response()->json($data, 200);
+    }
+
+
+
 }

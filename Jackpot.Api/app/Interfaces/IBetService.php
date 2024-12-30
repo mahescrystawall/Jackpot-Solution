@@ -27,4 +27,12 @@ interface IBetService
      * @return array
      */
     public function getBetHistoryData(string $fileName, array $queryParams = [], Carbon $startDate = null, Carbon $endDate = null): array;
+
+    /**
+     * Create a new bet with the specified data.
+     *
+     * @param array $data
+     * @return array
+     */
+    public function createBet(array $data): array;
 }

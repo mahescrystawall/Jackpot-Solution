@@ -73,4 +73,10 @@ class BetService implements IBetService
         $unsettledData = BetRepository::getUnsettledBet($data);
         return collect($unsettledData);
     }
+
+    public function createBet(array $data): array
+    {
+        $bet = BetRepository::createBet($data);
+        return $bet;
+    }
 }
