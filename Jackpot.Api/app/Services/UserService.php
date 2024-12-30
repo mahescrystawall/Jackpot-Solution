@@ -3,6 +3,7 @@
 namespace App\Services;
 
 use App\Interfaces\IUserService;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
 use App\Repositories\UserRepository;
 
@@ -45,6 +46,8 @@ class UserService implements IUserService
     public function createClientUser($request)
     {
         try {
+            DB::beginTransaction();
+
             $response = $this->userRepository->createClientUser($request);
             if (!$response['success']) {
                 Log::channel('error_logs')->error('An error occurred in user create: ' . $response['message']);
@@ -56,8 +59,17 @@ class UserService implements IUserService
                 Log::channel('error_logs')->error('An error occurred in creating default buttons: ' . $buttonsResponse['message']);
                 return $buttonsResponse['message'];
             }
+
+            $chipResponse = $this->createDefaultChip($response['result']?->first()?->new_user_id);
+            if (!$chipResponse['success']) {
+                Log::channel('error_logs')->error('An error occurred in creating default chip: ' . $chipResponse['message']);
+                return $chipResponse['message'];
+            }
+
+            DB::commit();
             return $response['result'];
         } catch (\Throwable $e) {
+            DB::rollBack();
             Log::channel('error_logs')->error('An exception occurred: ' . $e->getMessage());
             return $e->getMessage();
         }
@@ -68,16 +80,25 @@ class UserService implements IUserService
      */
     public function createDefaultButtons($userId)
     {
-        try {
-            $response = $this->userRepository->createDefaultButtons(["user_id" => $userId, "created_by" => 1]);
-            if (!$response['success']) {
-                Log::channel('error_logs')->error('An error occurred in creating default buttons: ' . $response['message']);
-                return $response['message'];
-            }
+
+        $response = $this->userRepository->createDefaultButtons(["user_id" => $userId, "created_by" => 1]);
+        if (!$response['success']) {
+            Log::channel('error_logs')->error('An error occurred in creating default buttons: ' . $response['message']);
             return $response;
-        } catch (\Throwable $e) {
-            Log::channel('error_logs')->error('An exception occurred: ' . $e->getMessage());
-            return $e->getMessage();
         }
+        return $response;
+    }
+
+    /**
+     * Create default chip
+     */
+    public function createDefaultChip($userId)
+    {
+        $response = $this->userRepository->createDefaultChip(["user_id" => $userId, "created_by" => 1]);
+        if (!$response['success']) {
+            Log::channel('error_logs')->error('An error occurred in creating default chip: ' . $response['message']);
+            return $response;
+        }
+        return $response;
     }
 }
