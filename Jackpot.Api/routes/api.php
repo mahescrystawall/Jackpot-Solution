@@ -68,3 +68,4 @@ Route::get('/sports-inplay', [SportsController::class, 'getInplayGames']);
 // });
 
 Route::post('/create-bet', [BetController::class, 'createBet']);
+Route::post('/settle-bet', [BetController::class, 'settleBet']);

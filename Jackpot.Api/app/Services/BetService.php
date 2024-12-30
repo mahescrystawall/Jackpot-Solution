@@ -79,4 +79,14 @@ class BetService implements IBetService
         $bet = BetRepository::createBet($data);
         return $bet;
     }
+
+    /**
+     * settle bet
+     */
+    public function settleBet(array $data): array
+    {
+        $bet = BetRepository::settleBet($data);
+        return $bet;
+    }
+    
 }

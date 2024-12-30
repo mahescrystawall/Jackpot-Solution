@@ -33,4 +33,17 @@ class BetRepository
         }
     }
 
+    /**
+     * settle bet
+     */
+    static public function settleBet(array $data)
+    {
+        try {
+            $data =  Procedure::ExecuteProcedure(ProcedureNames::SETTLE_BET, $data);
+
+            return $data;
+        } catch (\Throwable $th) {
+            return $th->getMessage();
+        }
+    }
 }

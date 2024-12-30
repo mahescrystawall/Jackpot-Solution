@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\CreateBetRequest;
+use App\Http\Requests\SettleBetRequest;
 use Illuminate\Support\Facades\Storage;
 
 class BetController extends Controller
@@ -67,6 +68,20 @@ class BetController extends Controller
         return response()->json($data, 200);
     }
 
+    /**
+     * Settle bet
+     *
+     * @param Request $request
+     * @return \Illuminate\Http\JsonResponse|void
+     */
+    public function settleBet(SettleBetRequest $request)
+    {
+        $data = $this->betService->settleBet($request->all());
+        if (!$data['success']) {
+            Log::channel('error_log')->error('Error settling bet: ' . $data['message']);
+            return;
+        }
 
-
+        return response()->json($data, 200);
+    }
 }

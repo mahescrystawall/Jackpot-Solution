@@ -35,4 +35,13 @@ interface IBetService
      * @return array
      */
     public function createBet(array $data): array;
+
+    /**
+     * Settle the specified bet.
+     *
+     * @param array $data
+     * @return array
+     */
+    public function settleBet(array $data): array;
+
 }
