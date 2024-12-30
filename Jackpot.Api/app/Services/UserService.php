@@ -19,9 +19,9 @@ class UserService implements IUserService
     {
         $response = $this->userRepository->toggleUserStatus($request);
         if (!$response['success'])
-        return $response['message'];
+            return $response['message'];
         //throw new \Exception($response['message']);
-        Log::channel('api_log')->error('An error occurred in the custom log.'.$response['message']);
+        Log::channel('api_log')->error('An error occurred in the custom log.' . $response['message']);
         return $response['result'];
     }
 
@@ -44,11 +44,40 @@ class UserService implements IUserService
      */
     public function createClientUser($request)
     {
-        $response = $this->userRepository->createClientUser($request);
-        if (!$response['success']) {
-            Log::channel('error_logs')->error('An error occurred in user create.'.$response['message']);
-            return $response['message'];
+        try {
+            $response = $this->userRepository->createClientUser($request);
+            if (!$response['success']) {
+                Log::channel('error_logs')->error('An error occurred in user create: ' . $response['message']);
+                return $response['message'];
+            }
+
+            $buttonsResponse = $this->createDefaultButtons($response['result']?->first()?->new_user_id);
+            if (!$buttonsResponse['success']) {
+                Log::channel('error_logs')->error('An error occurred in creating default buttons: ' . $buttonsResponse['message']);
+                return $buttonsResponse['message'];
+            }
+            return $response['result'];
+        } catch (\Throwable $e) {
+            Log::channel('error_logs')->error('An exception occurred: ' . $e->getMessage());
+            return $e->getMessage();
         }
-        return $response['result'];
+    }
+
+    /**
+     * Create default buttons
+     */
+    public function createDefaultButtons($userId)
+    {
+        try {
+            $response = $this->userRepository->createDefaultButtons(["user_id" => $userId, "created_by" => 1]);
+            if (!$response['success']) {
+                Log::channel('error_logs')->error('An error occurred in creating default buttons: ' . $response['message']);
+                return $response['message'];
+            }
+            return $response;
+        } catch (\Throwable $e) {
+            Log::channel('error_logs')->error('An exception occurred: ' . $e->getMessage());
+            return $e->getMessage();
+        }
     }
 }
