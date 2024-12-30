@@ -4,7 +4,6 @@ namespace App\Http\Controllers\Api;
 
 use App\Interfaces\IUserService;
 use App\Traits\ApiResponseTrait;
-use App\Http\Requests\UpdateButtonValueRequest;
 use Exception;
 use Illuminate\Support\Facades\Log;
 use App\Http\Controllers\Controller;
