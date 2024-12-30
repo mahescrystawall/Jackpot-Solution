@@ -65,3 +65,5 @@ Route::get('/sports-inplay', [SportsController::class, 'getInplayGames']);
 // Route::get('/sports-inplay', function () {
 //     return response()->json(['test' => 'API is working']);
 // });
+
+Route::get('/client-list', [UserController::class, 'getClientList']);

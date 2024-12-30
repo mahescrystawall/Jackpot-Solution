@@ -7,8 +7,9 @@ use App\Http\Requests\ToggleUserFeatureRequest;
 use App\Interfaces\IUserService;
 use App\Traits\ApiResponseTrait;
 use App\Http\Requests\UpdateButtonValueRequest;
-use Exception;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
+
 class UserController extends Controller
 {
     use ApiResponseTrait;
@@ -25,8 +26,7 @@ class UserController extends Controller
      */
     public function UpdateUserStaus(ToggleUserFeatureRequest $request)
     {
-         try {
-
+        try {
             Log::channel('error_logs')->info('User toggle api called');
             $result = $this->_userService->changeUserStatus($request->all());
 
@@ -35,15 +35,13 @@ class UserController extends Controller
                 "User status toggled successfully.",
                 200
             );
-
         } catch (\Throwable $th) {
-            Log::channel('error_logs')->error('An error occurred in the custom log.'.$th);
+            Log::channel('error_logs')->error('An error occurred in the custom log.' . $th);
             return $this->sendError($th);
         }
     }
 
-
-     /**
+    /**
      * Handle creating user button value.
      */
     public function updateButtonValue(UpdateButtonValueRequest $request)
@@ -66,6 +64,28 @@ class UserController extends Controller
                 "Failed to create button value."
             );
         } catch (\Throwable $th) {
+            return $this->sendError($th);
+        }
+    }
+
+    /**
+     * Get the list of clients by parent ID with pagination.
+     */
+    public function getClientList(Request $request)
+    {
+        $parentId = $request->input('user_id');
+
+
+        try {
+            $result = $this->_userService->getUsersByParentIdPaginated($parentId);
+
+            return $this->sendResponse(
+                $result,
+                "Client list retrieved successfully.",
+                200
+            );
+        } catch (\Throwable $th) {
+            Log::channel('error_logs')->error('An error occurred while retrieving client list: ' . $th);
             return $this->sendError($th);
         }
     }

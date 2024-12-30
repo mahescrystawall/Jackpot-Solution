@@ -40,4 +40,19 @@ class UserService implements IUserService
         if (!$response['success']) throw new \Exception($response['message']);
         return $response['result'];
     }
+
+    public function getUsersByParentIdPaginated($parentId)
+    {
+        $data = [
+            'parent_id' => $parentId
+        ];
+
+        $response = $this->userRepository->getUsersByParentIdPaginated($data);
+        if (!$response['success']) {
+            Log::channel('api_log')->error('An error occurred in the custom log.' . $response['message']);
+            return $response['message'];
+        }
+
+        return $response['result'];
+    }
 }

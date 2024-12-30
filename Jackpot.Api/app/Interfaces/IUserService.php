@@ -13,4 +13,5 @@ interface IUserService
      */
     public function changeUserStatus(array $request);
     public function updateButtonValue(int $user_id,string $title,string $amount,$updated_at);
+    public function getUsersByParentIdPaginated($parentId);
 }
