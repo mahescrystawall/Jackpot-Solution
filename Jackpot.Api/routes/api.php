@@ -1,20 +1,21 @@
 <?php
 
-use App\Http\Controllers\Api\ButtonController;
-use App\Http\Controllers\Api\Auth\AuthController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Api\BetController;
+use App\Http\Controllers\Api\UserController;
 use App\Http\Controllers\Api\BetApiController;
-use App\Http\Controllers\Api\PriceValueApiController;
+use App\Http\Controllers\Api\ButtonController;
+use App\Http\Controllers\Api\SportsController;
+use App\Http\Controllers\Api\AccountController;
 use App\Http\Controllers\Api\MenuApiController;
 use App\Http\Controllers\Api\EventApiController;
-use App\Http\Controllers\Api\ProfitLossApiController;
 use App\Http\Controllers\Api\LoginApiController;
-use App\Http\Controllers\Api\AccountController;
-use App\Http\Controllers\Api\Auth\AuthController as APIAuthController;
+use App\Http\Controllers\Api\Auth\AuthController;
 use App\Http\Controllers\Api\IntCasinoApiController;
-use App\Http\Controllers\Api\UserController;
-use App\Http\Controllers\Api\SportsController;
+use App\Http\Controllers\Api\PriceValueApiController;
+use App\Http\Controllers\Api\ProfitLossApiController;
+use App\Http\Controllers\Api\Auth\AuthController as APIAuthController;
 
 
 
@@ -65,3 +66,6 @@ Route::get('/sports-inplay', [SportsController::class, 'getInplayGames']);
 // Route::get('/sports-inplay', function () {
 //     return response()->json(['test' => 'API is working']);
 // });
+
+Route::post('/create-bet', [BetController::class, 'createBet']);
+Route::post('/settle-bet', [BetController::class, 'settleBet']);
