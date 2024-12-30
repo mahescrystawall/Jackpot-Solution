@@ -53,6 +53,8 @@ class UserService implements IUserService
             Log::channel('api_log')->error('An error occurred in the custom log.' . $response['message']);
             return $response['message'];
         }
+
+        return $response['result'];
     }
     /**
      * Create client user
