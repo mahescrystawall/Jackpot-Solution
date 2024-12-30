@@ -13,4 +13,12 @@ interface IUserService
      */
     public function changeUserStatus(array $request);
     public function updateButtonValue(int $user_id,string $title,string $amount,$updated_at);
+
+    /**
+     * Create a client user.
+     *
+     * @param array $request The request data.
+     * @return mixed The result of the procedure execution.
+     */
+    public function createClientUser(array $request);
 }

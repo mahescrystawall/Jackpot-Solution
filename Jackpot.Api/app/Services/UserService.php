@@ -3,8 +3,8 @@
 namespace App\Services;
 
 use App\Interfaces\IUserService;
-use App\Repositories\UserRepository;
 use Illuminate\Support\Facades\Log;
+use App\Repositories\UserRepository;
 
 class UserService implements IUserService
 {
@@ -36,6 +36,19 @@ class UserService implements IUserService
         ];
         $response = $this->userRepository->updateButtonValue($data);
         if (!$response['success']) throw new \Exception($response['message']);
+        return $response['result'];
+    }
+
+    /**
+     * Create client user
+     */
+    public function createClientUser($request)
+    {
+        $response = $this->userRepository->createClientUser($request);
+        if (!$response['success']) {
+            Log::channel('error_logs')->error('An error occurred in user create.'.$response['message']);
+            return $response['message'];
+        }
         return $response['result'];
     }
 }
