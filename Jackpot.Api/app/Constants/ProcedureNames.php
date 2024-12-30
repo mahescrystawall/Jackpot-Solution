@@ -11,4 +11,9 @@ class ProcedureNames
     public const GET_UNSETTLED_BETS = 'Get_Unsettled_Bets';
 
     public const GET_USERS_BY_PARENT_ID_PAGINATED = 'Get_Users_By_Parent_Id_Paginated';
+    public const CREATE_BET = 'Create_Bet';
+    public const SETTLE_BET = 'Settle_Bet';
+    public const CREATE_USER = 'Create_User';
+
+
 }

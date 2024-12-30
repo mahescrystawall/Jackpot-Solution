@@ -22,10 +22,13 @@ class UserRepository
     {
         return Procedure::ExecuteProcedure(ProcedureNames::GET_ACCOUNT_STATEMENT, $data);
     }
-
     public function getUsersByParentIdPaginated(array $data,$page   = 1, $perPage = 15)
     {
         return Procedure::ExecuteProcedure(ProcedureNames::GET_USERS_BY_PARENT_ID_PAGINATED, $data, $page, $perPage);
+    }
+    public function createClientUser(array $data)
+    {
+        return Procedure::ExecuteProcedure(ProcedureNames::CREATE_USER, $data);
     }
 
 

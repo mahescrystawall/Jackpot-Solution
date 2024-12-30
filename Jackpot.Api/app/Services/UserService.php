@@ -3,8 +3,8 @@
 namespace App\Services;
 
 use App\Interfaces\IUserService;
-use App\Repositories\UserRepository;
 use Illuminate\Support\Facades\Log;
+use App\Repositories\UserRepository;
 
 class UserService implements IUserService
 {
@@ -41,6 +41,7 @@ class UserService implements IUserService
         return $response['result'];
     }
 
+
     public function getUsersByParentIdPaginated($parentId)
     {
         $data = [
@@ -52,7 +53,17 @@ class UserService implements IUserService
             Log::channel('api_log')->error('An error occurred in the custom log.' . $response['message']);
             return $response['message'];
         }
-
+    }
+    /**
+     * Create client user
+     */
+    public function createClientUser($request)
+    {
+        $response = $this->userRepository->createClientUser($request);
+        if (!$response['success']) {
+            Log::channel('error_logs')->error('An error occurred in user create.' . $response['message']);
+            return $response['message'];
+        }
         return $response['result'];
     }
 }
