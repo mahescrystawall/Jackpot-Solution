@@ -32,6 +32,8 @@ export default {
             'dark': '#000000',
             'jwhite1': '#EEEEEE',
             'jwhite2': '#FAFAFC',
+            'jgreen1': '#5eef00',
+            'jred1': '#cf0000',
             'jback1': '#4C84FF',
             'jback2': '#2B6DD8',
             'jlay1': '#FF4C4C',
