@@ -23,5 +23,10 @@ class UserRepository
         return Procedure::ExecuteProcedure(ProcedureNames::GET_ACCOUNT_STATEMENT, $data);
     }
 
+    public function createClientUser(array $data)
+    {
+        return Procedure::ExecuteProcedure(ProcedureNames::CREATE_USER, $data);
+    }
+
 
 }
