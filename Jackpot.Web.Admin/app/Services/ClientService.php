@@ -13,9 +13,9 @@ class ClientService
         $this->baseUrl = env('API_URL');
     }
 
-    public function create_client($params){
+    public function createClient(array $params){
 
-        $url = $this->baseUrl.'api/create-client-user';
+        $url = $this->baseUrl.'/api/create-client-user';
 
         $response = Http::timeout(60)->post($url, $params);
         //  dd($response);
@@ -24,5 +24,10 @@ class ClientService
             return $response->json();
         }
         return ['error' => 'Failed to fetch data'];
+    }
+
+    public function getClientLists()
+    {
+        $url = $this->baseUrl.'/api/get-client-lists';
     }
 }

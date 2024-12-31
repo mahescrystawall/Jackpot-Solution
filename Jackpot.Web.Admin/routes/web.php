@@ -11,4 +11,6 @@ Route::get('/dummy', function () {
 
 Route::get('/home', [HomeController::class, 'home']);
 
-Route::get('/create-client', [ClientController::class, 'newClient']);
+Route::get('/create-client', [ClientController::class, 'newClient'])->name('create-client');
+
+Route::post('/add-client',[ClientController::class,'addClient'])->name('add-Client');
