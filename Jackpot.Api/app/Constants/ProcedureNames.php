@@ -12,6 +12,8 @@ class ProcedureNames
     public const CREATE_BET = 'Create_Bet';
     public const SETTLE_BET = 'Settle_Bet';
     public const CREATE_USER = 'Create_User';
+    public const CREATE_DEFAULT_BUTTONS = 'Create_Default_Buttons';
+    public const CREATE_DEFAULT_CHIPS = 'Create_Default_Chips';
 
 
 }

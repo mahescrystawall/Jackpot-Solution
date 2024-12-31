@@ -28,5 +28,21 @@ class UserRepository
         return Procedure::ExecuteProcedure(ProcedureNames::CREATE_USER, $data);
     }
 
+    /**
+     * Create default buttons
+     */
+    public function createDefaultButtons(array $data)
+    {
+        return Procedure::ExecuteProcedure(ProcedureNames::CREATE_DEFAULT_BUTTONS, $data);
+    }
+
+    /**
+     * Create chips
+     */
+    public function createDefaultChip(array $data)
+    {
+        return Procedure::ExecuteProcedure(ProcedureNames::CREATE_DEFAULT_CHIPS, $data);
+    }
+
 
 }

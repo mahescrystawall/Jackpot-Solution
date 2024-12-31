@@ -21,4 +21,10 @@ interface IUserService
      * @return mixed The result of the procedure execution.
      */
     public function createClientUser(array $request);
+
+    /**
+     * Create default buttons
+     */
+    public function createDefaultButtons(int $user_id);
+
 }
