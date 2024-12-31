@@ -2,12 +2,16 @@
 
 namespace App\Http\Controllers\Api;
 
-use App\Http\Controllers\Controller;
-use App\Http\Requests\ToggleUserFeatureRequest;
 use App\Interfaces\IUserService;
 use App\Traits\ApiResponseTrait;
-use App\Http\Requests\UpdateButtonValueRequest;
+use Exception;
 use Illuminate\Support\Facades\Log;
+use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Auth;
+use App\Http\Requests\CreateClientUserRequest;
+use App\Http\Requests\ToggleUserFeatureRequest;
+use App\Http\Requests\UpdateButtonValueRequest;
+
 class UserController extends Controller
 {
     use ApiResponseTrait;
@@ -24,8 +28,9 @@ class UserController extends Controller
      */
     public function UpdateUserStaus(ToggleUserFeatureRequest $request)
     {
+
          try {
-            Log::channel('procedure_log')->info('User toggle api called');
+            Log::channel('error_logs')->info('User toggle api called');
             $result = $this->_userService->changeUserStatus($request->all());
 
             return $this->sendResponse(
@@ -33,14 +38,15 @@ class UserController extends Controller
                 "User status toggled successfully.",
                 200
             );
+
         } catch (\Throwable $th) {
-            Log::channel('procedure_log')->error('An error occurred in the custom log.'.$th);
+            Log::channel('error_logs')->error('An error occurred in the custom log.' . $th);
             return $this->sendError($th);
         }
     }
 
 
-     /**
+    /**
      * Handle creating user button value.
      */
     public function updateButtonValue(UpdateButtonValueRequest $request)
@@ -65,5 +71,46 @@ class UserController extends Controller
         } catch (\Throwable $th) {
             return $this->sendError($th);
         }
+    }
+
+    /**
+     * Create client user.
+     */
+    public function createClientUser(CreateClientUserRequest $request)
+    {
+        // The validation is already handled by the custom request
+
+        $data = $request->except('password_confirmation');
+        $data['role_id'] = 3;
+        $data['parent_id'] = 1; // static for now;
+        $data['is_blocked'] = 0;
+        $data['is_locked'] = 0;
+        $data['remember_token'] = null;
+        $data['created_by'] = 1; // static for now;
+
+        // Hash the password before saving
+        if (isset($data['password'])) {
+            $data['password'] = bcrypt($data['password']);
+        }
+
+        if (isset($data['withdrawal_password'])) {
+            $data['withdrawal_password'] = bcrypt($data['withdrawal_password']);
+        }
+
+        // return $data;
+
+        // try {
+            // Execute the procedure
+            $result = $this->_userService->createClientUser($data);
+
+            // Return response using the ApiResponseTrait
+            return $this->sendResponse(
+                $result,
+                "Client User successfully created.",
+                200
+            );
+        // } catch (\Throwable $th) {
+        //     return $this->sendError($th);
+        // }
     }
 }

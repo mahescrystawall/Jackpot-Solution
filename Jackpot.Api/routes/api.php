@@ -1,20 +1,21 @@
 <?php
 
-use App\Http\Controllers\Api\ButtonController;
-use App\Http\Controllers\Api\Auth\AuthController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Api\BetController;
+use App\Http\Controllers\Api\UserController;
 use App\Http\Controllers\Api\BetApiController;
-use App\Http\Controllers\Api\PriceValueApiController;
+use App\Http\Controllers\Api\ButtonController;
+use App\Http\Controllers\Api\SportsController;
+use App\Http\Controllers\Api\AccountController;
 use App\Http\Controllers\Api\MenuApiController;
 use App\Http\Controllers\Api\EventApiController;
-use App\Http\Controllers\Api\ProfitLossApiController;
 use App\Http\Controllers\Api\LoginApiController;
-use App\Http\Controllers\Api\AccountController;
-use App\Http\Controllers\Api\Auth\AuthController as APIAuthController;
+use App\Http\Controllers\Api\Auth\AuthController;
 use App\Http\Controllers\Api\IntCasinoApiController;
-use App\Http\Controllers\Api\UserController;
-use App\Http\Controllers\Api\SportsController;
+use App\Http\Controllers\Api\PriceValueApiController;
+use App\Http\Controllers\Api\ProfitLossApiController;
+use App\Http\Controllers\Api\Auth\AuthController as APIAuthController;
 
 
 
@@ -70,6 +71,9 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
     // Client
 
     Route::post('/getUnsettledBet',  [BetApiController::class, 'getUnsettledBet']);
+  Route::post('/create-bet', [BetController::class, 'createBet']);
+Route::post('/settle-bet', [BetController::class, 'settleBet']);
+Route::post('create-client-user', [UserController::class, 'createClientUser']);
 
     // Route::group(['controller' => BetApiController::class], function () {
     //     //Unsettled bets- client NEW
@@ -79,10 +83,7 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
         Route::patch('/updatePassword', 'updatePassword');
     });
 
-
-
-
-
     // logout
     Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 });
+
