@@ -20,12 +20,14 @@ class AccountStatementService
 
         try {
             // Send a POST request to the backend API with filters
-            $response = Http::timeout(60)->post($this->baseUrl . '/api/report/account-statement', $filters);
+            $response = Http::withToken(session('auth_token'))
+                ->timeout(60)
+                ->post($this->baseUrl . '/api/report/account-statement', $filters);
             Log::info('API Response', ['response' => $response->json()]);
             // Check if the response is successful
             if ($response->successful()) {
                 $data = $response->json();
-                Log::info('API Response',$data);
+                Log::info('API Response', $data);
                 // Validate the response structure
                 if (isset($data['data']) && is_array($data['data'])) {
                     $transactions = $data['data'];
@@ -42,7 +44,7 @@ class AccountStatementService
 
                     // Paginate the data
                     $pagedData = array_slice($transactions, $offset, $perPage);
-                    $menuData= $menu;
+                    $menuData = $menu;
 
                     return [
                         'data' => $transactions,

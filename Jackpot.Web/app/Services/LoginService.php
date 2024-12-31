@@ -65,4 +65,21 @@ class LoginService
             ->post($url, $data + ['user_id' => session('user_id')]);
         return $response->json();
     }
+
+    public function logout()
+    {
+        $url = $this->baseUrl . '/api/logout';
+        try {
+            $response = Http::withToken(session('auth_token'))
+                ->post($url);
+
+            return $response->successful()
+                ? ['success' => true, 'message' => 'Logout successful.']
+                : ['success' => false, 'message' => 'Failed to log out from API.'];
+        } catch (\Exception $e) {
+            Log::error('Logout error: ' . $e->getMessage());
+
+            return ['success' => false, 'message' => 'An error occurred during logout.'];
+        }
+    }
 }

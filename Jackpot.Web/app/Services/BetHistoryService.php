@@ -37,10 +37,13 @@ class BetHistoryService
         // $queryParams['end_date']  = "2024-12-11";
 
         //dd($params);
-        $response = Http::timeout(60)->post($url, $params);
+        $response = Http::withToken(session('auth_token'))
+            ->timeout(60)
+            ->post($url, $params);
+        // $response = Http::timeout(60)->post($url, $params);
         //  dd($response);
         if ($response->successful()) {
-           // dd($response->json());
+            // dd($response->json());
             return $response->json();
         }
         return ['error' => 'Failed to fetch data'];

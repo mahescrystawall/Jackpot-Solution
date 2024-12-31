@@ -50,10 +50,18 @@ class AuthController extends Controller
 
     public function logout()
     {
+        $response = $this->loginservice->logout();
+        // dd($response);
+        if (!$response['success']) {
+            return redirect('/home')->with('error', $response['message']);
+        }
 
         session()->flush();
-        return redirect('/login');
+
+
+        return redirect('/login')->with('success', $response['message']);
     }
+
 
     public function changePassword()
     {
