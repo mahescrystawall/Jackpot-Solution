@@ -53,20 +53,39 @@ Route::post('/login', [APIAuthController::class, 'login']);
 // Route for fetching int casino games list
 Route::get('/int-casino', [IntCasinoApiController::class, 'getCasinoGames']);
 
-//Unsettled bets- client NEW
-Route::post('/getUnsettledBet', [BetApiController::class, 'getUnsettledBet']);
+
+// Route::post('/getUnsettledBet', [BetApiController::class, 'getUnsettledBet']);
 
 Route::put('/user/status', [UserController::class, 'UpdateUserStaus']);
 
 Route::post('/user/buttons', [UserController::class, 'UpdateButtonValue']);
 Route::get('/user-buttons', [ButtonController::class, 'getUserButtons']);
 
-
 Route::get('/sports-inplay', [SportsController::class, 'getInplayGames']);
 // Route::get('/sports-inplay', function () {
 //     return response()->json(['test' => 'API is working']);
 // });
 
-Route::post('/create-bet', [BetController::class, 'createBet']);
+Route::group(['middleware' => ['auth:sanctum']], function () {
+
+    // Client
+
+    Route::post('/getUnsettledBet',  [BetApiController::class, 'getUnsettledBet']);
+  Route::post('/create-bet', [BetController::class, 'createBet']);
 Route::post('/settle-bet', [BetController::class, 'settleBet']);
 Route::post('create-client-user', [UserController::class, 'createClientUser']);
+  Route::get('/client-list', [UserController::class, 'getClientList']);
+Route::post('/create-bet', [BetController::class, 'createBet']);
+
+    // Route::group(['controller' => BetApiController::class], function () {
+    //     //Unsettled bets- client NEW
+
+    // });
+    Route::group(['controller' => AuthController::class], function () {
+        Route::patch('/updatePassword', 'updatePassword');
+    });
+
+    // logout
+    Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
+});
+

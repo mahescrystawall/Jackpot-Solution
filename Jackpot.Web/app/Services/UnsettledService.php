@@ -49,22 +49,24 @@ class UnsettledService
     //     return ['error' => 'Failed to fetch data'];
     // }
 
-    public function getBetHistoryData($status)
+    public function getBetHistoryData()
     {
-
+        // dd(session('auth_token'));
         // The endpoint URL
         $url = $this->baseUrl . '/api/getUnsettledBet';
-        // dd(session('user_id'));
-        // Send the POST request with the parameters
-        $response = Http::post($url, [
 
-            'user_id'        => session('user_id'),
-            'PageNumber'     => 1,  // should be from incoming data
-            'PageSize'       => 10, // should be from incoming data
-            'OrderBy'        => 'created_on',
-            'OrderDirection' => 'ASC',
-        ]);
-      
+
+        $response = Http::withToken(session('auth_token'))
+            ->post($url, [
+                'user_id'        => session('user_id'),
+                'PageNumber'     => 1,
+                'PageSize'       => 10,
+                'OrderBy'        => 'created_on',
+                'OrderDirection' => 'ASC',
+            ]);
+        // return $response;
+
+
         // Check if the response is successful
         if ($response->successful()) {
             return $response->json(); // Return the response as an array
