@@ -126,7 +126,7 @@ class UserController extends Controller
 
         // return $data;
 
-        // try {
+        try {
             // Execute the procedure
             $result = $this->_userService->createClientUser($data);
 
@@ -136,9 +136,9 @@ class UserController extends Controller
                 "Client User successfully created.",
                 200
             );
-        // } catch (\Throwable $th) {
-        //     return $this->sendError($th);
-        // }
+        } catch (\Throwable $th) {
+            return $this->sendError($th);
+        }
 
     }
 }

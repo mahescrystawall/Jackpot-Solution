@@ -16,8 +16,7 @@ use App\Http\Controllers\Api\IntCasinoApiController;
 use App\Http\Controllers\Api\PriceValueApiController;
 use App\Http\Controllers\Api\ProfitLossApiController;
 use App\Http\Controllers\Api\Auth\AuthController as APIAuthController;
-
-
+use App\Http\Controllers\Api\BalanceTransferController;
 
 // Example of a route with authentication
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
@@ -69,13 +68,12 @@ Route::get('/sports-inplay', [SportsController::class, 'getInplayGames']);
 Route::group(['middleware' => ['auth:sanctum']], function () {
 
     // Client
-
     Route::post('/getUnsettledBet',  [BetApiController::class, 'getUnsettledBet']);
-  Route::post('/create-bet', [BetController::class, 'createBet']);
-Route::post('/settle-bet', [BetController::class, 'settleBet']);
-Route::post('create-client-user', [UserController::class, 'createClientUser']);
-  Route::get('/client-list', [UserController::class, 'getClientList']);
-Route::post('/create-bet', [BetController::class, 'createBet']);
+    Route::post('/create-bet', [BetController::class, 'createBet']);
+    Route::post('/settle-bet', [BetController::class, 'settleBet']);
+    Route::post('create-client-user', [UserController::class, 'createClientUser']);
+    Route::get('/client-list', [UserController::class, 'getClientList']);
+    Route::post('/create-bet', [BetController::class, 'createBet']);
 
     // Route::group(['controller' => BetApiController::class], function () {
     //     //Unsettled bets- client NEW
@@ -89,3 +87,4 @@ Route::post('/create-bet', [BetController::class, 'createBet']);
     Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 });
 
+Route::post('/balance-transfer', [BalanceTransferController::class, 'processTransfer']);
