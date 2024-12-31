@@ -6,7 +6,7 @@ use Illuminate\Support\Facades\Log;
 
 trait HandleError
 {
-    static public function handleError($message, \Throwable $e = null)
+    static public function handle($message, \Throwable $e = null)
     {
         $backtrace = debug_backtrace();
         $caller = $backtrace[1];
