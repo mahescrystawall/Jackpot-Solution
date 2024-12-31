@@ -11,6 +11,7 @@ use Illuminate\Support\Facades\Auth;
 use App\Http\Requests\CreateClientUserRequest;
 use App\Http\Requests\ToggleUserFeatureRequest;
 
+use App\Http\Requests\UpdateButtonValueRequest;
 class UserController extends Controller
 {
     use ApiResponseTrait;
