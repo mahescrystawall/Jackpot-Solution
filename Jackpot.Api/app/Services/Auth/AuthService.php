@@ -5,18 +5,27 @@ namespace App\Services\Auth;
 use App\Interfaces\IAuthService;
 use App\Models\User;
 use App\Procedures\Procedure;
+use App\Procedures\UserProcedure;
+use App\Repositories\UserRepository;
+use Exception;
 use Illuminate\Auth\AuthenticationException; // Use AuthenticationException
 use Illuminate\Support\Facades\Crypt;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Validation\ValidationException;
 
 class AuthService implements IAuthService
 {
+    protected $userRepository;
+
+    public function __construct(UserRepository $userRepository)
+    {
+        $this->userRepository = $userRepository;
+    }
     public function login($data)
     {
-        // Define the key and IV (they must match the frontend)
-        $key = 'hdgh6372dhbshdg637wyqb27t28syb2q';  // 32-byte key (same as frontend)
-        $iv = '8g2wg2mnw01b6w7w';  // 16-byte IV (same as frontend)
-
+        $key = env("key");
+        $iv = env("iv");
+        // dd($data, $key, $iv);
         // Get the encrypted password from the request
         $encryptedPassword = $data['password'];
 
@@ -39,7 +48,7 @@ class AuthService implements IAuthService
 
         $chips = Procedure::ExecuteProcedure('Get_Chip_By_User_Id', ["user_id" => $user->id]);
         // Create a token with expiration time
-        $token = $user->createToken('authToken', ['*'], now()->addMinutes(20))->plainTextToken;
+        $token = $user->createToken('authToken', ['*'], now()->addMinutes(120))->plainTextToken;
 
         return [
             'token' => $token,
@@ -56,5 +65,49 @@ class AuthService implements IAuthService
     {
         $user->currentAccessToken()->delete();
         return ['message' => 'Logged Out Successfully'];
+    }
+
+    public function updatePassword($data)
+    {
+        try {
+            $getData = [
+                'user_id' => $data['user_id'],
+                'type' => 'password'
+            ];
+
+            $updateData = [
+                'user_id' => $data['user_id'],
+                'new_password' => Hash::make($data['password']),
+                'type' => 'password'
+            ];
+
+            $oldPassword = $this->userRepository->getPassword($getData);
+
+            if (!$oldPassword) {
+                throw new Exception("User not found");
+            }
+
+            if (!Hash::check($data['old_password'], $oldPassword)) {
+                // Handle incorrect old password error
+                return [
+                    'success' => false,
+                    'message' => "Old password doesn't match",
+                ];
+            }
+
+            $this->userRepository->updatePassword($updateData);
+
+            return [
+                'success' => true,
+                'message' => 'Password updated successfully',
+            ];
+        } catch (\Throwable $th) {
+            // Catch any unforeseen errors
+            return [
+                'success' => false,
+                'message' => 'An unexpected error occurred',
+                'errors' => $th->getMessage(),
+            ];
+        }
     }
 }

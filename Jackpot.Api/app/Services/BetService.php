@@ -89,6 +89,7 @@ class BetService implements IBetService
     public function getUnsettledBet($data)
     {
         $unsettledData = BetRepository::getUnsettledBet($data);
+        if (!$unsettledData['success']) throw new \Exception($unsettledData['message']);
         return collect($unsettledData);
     }
 }

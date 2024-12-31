@@ -39,12 +39,6 @@ class AuthController extends Controller
 
 
 
-            // dd($response['user']);
-            // Login the user using the ID from the response
-            // Auth::loginUsingId($response['user']['id']);
-
-            // dd(Auth::user());
-            // Redirect to the home page or desired location
             return redirect('/home')->with('success', 'Login successful!');
         }
 
@@ -59,5 +53,25 @@ class AuthController extends Controller
 
         session()->flush();
         return redirect('/login');
+    }
+
+    public function changePassword()
+    {
+        return view('user.password.change_password');
+    }
+
+    public function updatePassword(Request $request)
+    {
+        $response = $this->loginservice->updatePassword($request->all());
+        // Check for a failed response
+        if (!$response['success']) {
+            return redirect()->back()
+                ->withErrors($response['errors'])
+                ->with('error', $response['message'] ?? 'Invalid Credentials.');
+        }
+
+        // Successful response
+        return redirect()->back()
+            ->with('success', $response['message'] ?? 'Password updated successfully.');
     }
 }

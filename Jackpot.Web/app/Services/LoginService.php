@@ -56,4 +56,13 @@ class LoginService
             return ['error' => 'Exception occurred', 'message' => $e->getMessage()];
         }
     }
+
+    public function updatePassword(array $data)
+    {
+        $url = $this->baseUrl . '/api/updatePassword';
+        // dd($url, $data);
+        $response = Http::withToken(session('auth_token'))
+            ->post($url, $data + ['user_id' => session('user_id')]);
+        return $response->json();
+    }
 }
