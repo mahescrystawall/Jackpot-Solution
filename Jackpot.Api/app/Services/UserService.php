@@ -53,24 +53,24 @@ class UserService implements IUserService
 
             $response = $this->userRepository->createClientUser($request);
             if (!$response['success']) {
-                return HandleError::handleError($response['message']);
+                return HandleError::handle($response['message']);
             }
 
             $buttonsResponse = $this->createDefaultButtons($response['result']?->first()?->new_user_id);
             if (!$buttonsResponse['success']) {
-                return HandleError::handleError($response['message']);
+                return HandleError::handle($response['message']);
             }
 
             $chipResponse = $this->createDefaultChip($response['result']?->first()?->new_user_id);
             if (!$chipResponse['success']) {
-                return HandleError::handleError($response['message']);
+                return HandleError::handle($response['message']);
             }
 
             DB::commit();
             return $response['result'];
         } catch (\Throwable $e) {
             DB::rollBack();
-            return HandleError::handleError($e->getMessage());
+            return HandleError::handle($e->getMessage());
         }
     }
 
