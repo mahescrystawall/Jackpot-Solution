@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Api\Auth;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\LoginRequest;
+use App\Http\Requests\UpdatePasswordRequest;
 use App\Interfaces\IAuthService;
 use Illuminate\Http\Request;
 use App\Traits\ApiResponseTrait;
@@ -34,6 +35,21 @@ class AuthController extends Controller
         $response = $this->_authService->logout($request->user());
         return response()->json($response, 200);
     }
+
+    public function updatePassword(UpdatePasswordRequest $request)
+    {
+        $data = $this->_authService->updatePassword($request->all());
+
+        if (!$data['success']) {
+            return $this->sendError(
+                $data['message'],
+                404  // You can adjust the status code as needed
+            );
+        }
+        // For successful responses, return the data directly
+        return $this->sendResponse($data, $data['message'], 200);
+    }
+
 
 
     // public function login(LoginRequest $request)

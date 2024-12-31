@@ -1,5 +1,7 @@
 <?php
+
 namespace App\Repositories;
+
 use App\Procedures\Procedure;
 use App\Constants\ProcedureNames;
 
@@ -26,10 +28,37 @@ class UserRepository
     {
         return Procedure::ExecuteProcedure(ProcedureNames::GET_USERS_BY_PARENT_ID_PAGINATED, $data);
     }
+    public function getPassword(array $data)
+    {
+        // return Procedure::ExecuteProcedure(ProcedureNames::GET_PASSWORD, $data);
+        return Procedure::ExecuteProcedure(ProcedureNames::GET_PASSWORD, $data)['result']
+            ->first()
+            ->password;
+    }
+
+    public function updatePassword(array $data)
+    {
+        return Procedure::ExecuteProcedure(ProcedureNames::UPDATE_PASSWORD, $data);
+    }
+
     public function createClientUser(array $data)
     {
         return Procedure::ExecuteProcedure(ProcedureNames::CREATE_USER, $data);
     }
 
+    /**
+     * Create default buttons
+     */
+    public function createDefaultButtons(array $data)
+    {
+        return Procedure::ExecuteProcedure(ProcedureNames::CREATE_DEFAULT_BUTTONS, $data);
+    }
 
+    /**
+     * Create chips
+     */
+    public function createDefaultChip(array $data)
+    {
+        return Procedure::ExecuteProcedure(ProcedureNames::CREATE_DEFAULT_CHIPS, $data);
+    }
 }
