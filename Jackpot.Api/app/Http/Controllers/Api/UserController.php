@@ -4,13 +4,18 @@ namespace App\Http\Controllers\Api;
 
 use App\Interfaces\IUserService;
 use App\Traits\ApiResponseTrait;
+use App\Http\Requests\UpdateButtonValueRequest;
+use Illuminate\Http\Request;
 use Exception;
 use Illuminate\Support\Facades\Log;
+
+
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Requests\CreateClientUserRequest;
 use App\Http\Requests\ToggleUserFeatureRequest;
-use App\Http\Requests\UpdateButtonValueRequest;
+
+
 
 class UserController extends Controller
 {
@@ -29,7 +34,8 @@ class UserController extends Controller
     public function UpdateUserStaus(ToggleUserFeatureRequest $request)
     {
 
-         try {
+        try {
+
             Log::channel('error_logs')->info('User toggle api called');
             $result = $this->_userService->changeUserStatus($request->all());
 
@@ -38,12 +44,12 @@ class UserController extends Controller
                 "User status toggled successfully.",
                 200
             );
-
         } catch (\Throwable $th) {
             Log::channel('error_logs')->error('An error occurred in the custom log.' . $th);
             return $this->sendError($th);
         }
     }
+
 
 
     /**
@@ -74,6 +80,27 @@ class UserController extends Controller
     }
 
     /**
+     * Get the list of clients by parent ID with pagination.
+     */
+    public function getClientList(Request $request)
+    {
+        $parentId = $request->input('user_id');
+
+
+        try {
+            $result = $this->_userService->getUsersByParentIdPaginated($parentId);
+
+            return $this->sendResponse(
+                $result,
+                "Client list retrieved successfully.",
+                200
+            );
+        } catch (\Throwable $th) {
+            Log::channel('error_logs')->error('An error occurred while retrieving client list: ' . $th);
+            return $this->sendError($th);
+        }
+    }
+     /**
      * Create client user.
      */
     public function createClientUser(CreateClientUserRequest $request)
@@ -112,5 +139,6 @@ class UserController extends Controller
         // } catch (\Throwable $th) {
         //     return $this->sendError($th);
         // }
+
     }
 }

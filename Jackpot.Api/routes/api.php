@@ -74,6 +74,8 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
   Route::post('/create-bet', [BetController::class, 'createBet']);
 Route::post('/settle-bet', [BetController::class, 'settleBet']);
 Route::post('create-client-user', [UserController::class, 'createClientUser']);
+  Route::get('/client-list', [UserController::class, 'getClientList']);
+Route::post('/create-bet', [BetController::class, 'createBet']);
 
     // Route::group(['controller' => BetApiController::class], function () {
     //     //Unsettled bets- client NEW

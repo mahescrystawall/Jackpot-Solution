@@ -19,8 +19,15 @@ class UserService implements IUserService
         $this->userRepository = $userRepository;
     }
 
-    public function changeUserStatus($request)
+    public function changeUserStatus($data)
     {
+        $response = $this->userRepository->toggleUserStatus($data);
+        if (!$response['success']) {
+            //throw new \Exception($response['message']);
+            Log::channel('api_log')->error('An error occurred in the custom log.' . $response['message']);
+            return $response['message'];
+        }
+
         $response = $this->userRepository->toggleUserStatus($request);
         if (!$response['success'])
             return $response['message'];
@@ -43,6 +50,21 @@ class UserService implements IUserService
         return $response['result'];
     }
 
+
+    public function getUsersByParentIdPaginated($parentId)
+    {
+        $data = [
+            'parent_id' => $parentId
+        ];
+
+        $response = $this->userRepository->getUsersByParentIdPaginated($data);
+        if (!$response['success']) {
+            Log::channel('api_log')->error('An error occurred in the custom log.' . $response['message']);
+            return $response['message'];
+        }
+
+        return $response['result'];
+    }
     /**
      * Create client user
      */
@@ -82,6 +104,7 @@ class UserService implements IUserService
 
         $response = $this->userRepository->createDefaultButtons(["user_id" => $userId, "created_by" => 1]);
         if (!$response['success']) {
+
             Log::channel('error_logs')->error('An error occurred in creating default buttons: ' . $response['message']);
             return $response;
         }

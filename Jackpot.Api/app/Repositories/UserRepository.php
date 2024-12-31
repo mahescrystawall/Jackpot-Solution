@@ -24,6 +24,10 @@ class UserRepository
     {
         return Procedure::ExecuteProcedure(ProcedureNames::GET_ACCOUNT_STATEMENT, $data);
     }
+    public function getUsersByParentIdPaginated(array $data)
+    {
+        return Procedure::ExecuteProcedure(ProcedureNames::GET_USERS_BY_PARENT_ID_PAGINATED, $data);
+    }
     public function getPassword(array $data)
     {
         // return Procedure::ExecuteProcedure(ProcedureNames::GET_PASSWORD, $data);
