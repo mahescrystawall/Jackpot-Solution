@@ -32,7 +32,10 @@ class UnsettledBetController extends Controller
 
     public function index(Request $request)
     {
-        $unsettledBets = $this->unsettledService->getBetHistoryData($request->data);
+        // dd($request->all());
+
+        $unsettledBets = $this->unsettledService->getBetHistoryData();
+        // dd($unsettledBets);
 
         $events = $unsettledBets["data"]["result"];
 
