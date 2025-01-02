@@ -2,20 +2,18 @@
 
 namespace App\Http\Controllers\Api;
 
-use App\Interfaces\IUserService;
-use App\Traits\ApiResponseTrait;
-use App\Http\Requests\UpdateButtonValueRequest;
 use Illuminate\Http\Request;
-use Exception;
 use Illuminate\Support\Facades\Log;
-
-
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Requests\CreateClientUserRequest;
 use App\Http\Requests\ToggleUserFeatureRequest;
-
 use App\Http\Requests\UpdateButtonValueRequest;
+
+use App\Interfaces\IUserService;
+use App\Traits\ApiResponseTrait;
+
+
 class UserController extends Controller
 {
     use ApiResponseTrait;

@@ -58,6 +58,7 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-        //
+        // Load custom routes
+        $this->loadRoutesFrom(base_path('routes/json.php'));
     }
 }
