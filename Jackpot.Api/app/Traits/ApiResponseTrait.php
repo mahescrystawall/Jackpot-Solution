@@ -21,20 +21,9 @@ trait ApiResponseTrait
      */
     public function sendError($th, $code = 500)
     {
-        if ($th instanceof \Throwable) {
-            // If $th is an exception (Throwable), return its message
-            return response()->json([
-                'success' => false,
-                'message' => 'An unexpected error occurred.',
-                'error' => $th->getMessage(),
-            ], $code);
-        }
-
-        // If $th is an array (like validation errors), handle accordingly
         return response()->json([
             'success' => false,
-            'message' => 'Validation failed',
-            'errors' => $th,
-        ], 422);
+            'message' => $th,
+        ], $code);
     }
 }
