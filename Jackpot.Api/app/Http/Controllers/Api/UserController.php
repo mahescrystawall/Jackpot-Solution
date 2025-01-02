@@ -5,7 +5,6 @@ namespace App\Http\Controllers\Api;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
 use App\Http\Controllers\Controller;
-use Illuminate\Support\Facades\Auth;
 use App\Http\Requests\CreateClientUserRequest;
 use App\Http\Requests\ToggleUserFeatureRequest;
 use App\Http\Requests\UpdateButtonValueRequest;
@@ -136,5 +135,49 @@ class UserController extends Controller
         //     return $this->sendError($th);
         // }
 
+    }
+
+    /**
+     * Update user password.
+     */
+    public function updateUserResetPassword(Request $request)
+    {
+        $userId = $request->input('user_id');
+        $newPassword = bcrypt($request->input('new_password'));
+        $type = $request->input('type');
+
+        try {
+            $result = $this->_userService->updateUserResetPassword($userId, $newPassword, $type);
+
+            return $this->sendResponse(
+                $result,
+                "User password updated successfully.",
+                200
+            );
+        } catch (\Throwable $th) {
+            Log::channel('error_logs')->error('An error occurred while updating user password: ' . $th);
+            return $this->sendError($th);
+        }
+    }
+
+    /**
+     * Get the list of blocked clients.
+     */
+    public function getBlockedClients(Request $request)
+    {
+        $parentId = $request->input('parent_id');
+
+        try {
+            $result = $this->_userService->getBlockedClients($parentId);
+
+            return $this->sendResponse(
+                $result,
+                "Blocked clients retrieved successfully.",
+                200
+            );
+        } catch (\Throwable $th) {
+            Log::channel('error_logs')->error('An error occurred while retrieving blocked clients: ' . $th);
+            return $this->sendError($th);
+        }
     }
 }
