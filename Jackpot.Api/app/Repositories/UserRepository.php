@@ -2,6 +2,7 @@
 
 namespace App\Repositories;
 
+use App\Models\User;
 use App\Procedures\Procedure;
 use App\Constants\ProcedureNames;
 
@@ -30,7 +31,6 @@ class UserRepository
     }
     public function getPassword(array $data)
     {
-        // return Procedure::ExecuteProcedure(ProcedureNames::GET_PASSWORD, $data);
         return Procedure::ExecuteProcedure(ProcedureNames::GET_PASSWORD, $data)['result']
             ->first()
             ->password;
@@ -66,5 +66,21 @@ class UserRepository
     {
         return Procedure::ExecuteProcedure(ProcedureNames::CREATE_DEFAULT_CHIPS, $data);
 
+    }
+
+    /**
+     * Get Chips
+     */
+    public function getChips(array $data)
+    {
+        return Procedure::ExecuteProcedure(ProcedureNames::GET_CHIP_BY_USER_ID, $data);
+    }
+
+    /**
+     * Get User by Email
+     */
+    public function getUserByEmail(string $email)
+    {
+        return User::where('email', $email)->first() ?? null;
     }
 }
