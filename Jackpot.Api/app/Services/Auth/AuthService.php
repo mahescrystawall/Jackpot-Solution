@@ -39,7 +39,7 @@ class AuthService implements IAuthService
         $token = $user->createToken(
             'authToken',
             ['*'],
-            now()->addMinutes(env('TOKEN_EXPIRY', 120))
+            now()->addMinutes((int) env('TOKEN_EXPIRY', 120))
         )->plainTextToken;
 
         return [

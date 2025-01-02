@@ -73,8 +73,8 @@ class UserRepository
     /**
      * Get User by Email
      */
-    public function getUserByEmail(array $data)
+    public function getUserByEmail(string $email)
     {
-        return User::where('email', $data['email'])->first() ?? null;
+        return User::where('email', $email)->first() ?? null;
     }
 }
