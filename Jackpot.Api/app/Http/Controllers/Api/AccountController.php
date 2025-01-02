@@ -3,13 +3,16 @@
 namespace App\Http\Controllers\Api;
 
 use Illuminate\Http\Request;
-use App\Http\Controllers\Controller;
-use App\Interfaces\IAccountStatementService;
 use App\Traits\ApiResponseTrait;
 use Illuminate\Support\Facades\Log;
+use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Gate;
+use App\Interfaces\IAccountStatementService;
+use App\Traits\AuthorizeTrait;
+
 class AccountController extends Controller
 {
-    use ApiResponseTrait;
+    use ApiResponseTrait, AuthorizeTrait;
     protected $accountStatementService;
 
     // Inject StakeService into the controller
@@ -19,6 +22,24 @@ class AccountController extends Controller
     }
     public function getStatementData(Request $request)
     {
+        if(!$this->isOwner($request->user_id)){
+            return $this->sendError('Unauthorized', 401);
+        }
+
+        try {
+
+            $result = $this->accountStatementService->getAccountStatement($request->all());
+
+            return $this->sendResponse(
+                $result,
+                "Account Statement report fetched successfully.",
+                200
+            );
+        } catch (\Throwable $th) {
+            Log::channel(env('LOG_CHANNEL'))->error('An error occurred in the custom log.' . $th);
+            return $this->sendError($th);
+        }
+
         // $filters = [
         //     'start_date' => $request->input('start_date'),
         //     'end_date' => $request->input('end_date'),
@@ -33,24 +54,6 @@ class AccountController extends Controller
         // }
 
         // return response()->json($data, 200);
-
-
-
-
-        try {
-
-            $result = $this->accountStatementService->getAccountStatement($request->all());
-
-            return $this->sendResponse(
-                $result,
-                "Account Statement report fetched successfully.",
-                200
-            );
-
-        } catch (\Throwable $th) {
-            Log::channel(env('LOG_CHANNEL'))->error('An error occurred in the custom log.'.$th);
-            return $this->sendError($th);
-        }
     }
 
     // public function getBetData()

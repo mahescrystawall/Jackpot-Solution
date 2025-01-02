@@ -2,33 +2,34 @@
 
 namespace App\Providers;
 
-use Illuminate\Support\ServiceProvider;
-use App\Interfaces\IBetService;
 use App\Services\BetService;
-use App\Interfaces\IProfitLossService;
-use App\Services\ProfitLossService;
-use App\Interfaces\IPriceValueService;
-use App\Services\PriceValueService;
-use App\Interfaces\IMenuService;
 use App\Services\MenuService;
-use App\Interfaces\IEventService;
-use App\Services\EventService;
-use App\Interfaces\ILoginService;
-use App\Services\LoginService;
-use App\Interfaces\IAuthService;
-use App\Services\Auth\AuthService;
-use App\Interfaces\IAccountStatementService;
-use App\Interfaces\IButtonService;
-use App\Services\AccountStatementService;
-use App\Interfaces\IIntCasinoService;
-use App\Interfaces\IUserService;
-use App\Services\IntCasinoService;
-
 use App\Services\UserService;
-
-use App\Services\SportsInplayService;
-use App\Interfaces\ISportsInplayService;
+use App\Services\EventService;
+use App\Services\LoginService;
+use App\Interfaces\IBetService;
 use App\Services\ButtonService;
+use App\Interfaces\IAuthService;
+use App\Interfaces\IMenuService;
+use App\Interfaces\IUserService;
+use App\Interfaces\IEventService;
+use App\Interfaces\ILoginService;
+use App\Interfaces\IButtonService;
+use App\Services\Auth\AuthService;
+use App\Services\IntCasinoService;
+use App\Services\PriceValueService;
+use App\Services\ProfitLossService;
+use App\Interfaces\IIntCasinoService;
+use App\Services\SportsInplayService;
+use Illuminate\Support\Facades\Route;
+use App\Interfaces\IPriceValueService;
+
+use App\Interfaces\IProfitLossService;
+
+use Illuminate\Support\ServiceProvider;
+use App\Interfaces\ISportsInplayService;
+use App\Services\AccountStatementService;
+use App\Interfaces\IAccountStatementService;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -58,7 +59,7 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-        // Load custom routes
-        $this->loadRoutesFrom(base_path('routes/json.php'));
+    // Load custom routes with the "/api" prefix
+    Route::prefix('api')->group(base_path('routes/json.php'));
     }
 }
