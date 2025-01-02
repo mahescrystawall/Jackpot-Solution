@@ -18,16 +18,26 @@ class ClientService
         $url = $this->baseUrl.'/api/create-client-user';
 
         $response = Http::timeout(60)->post($url, $params);
-        //  dd($response);
         if ($response->successful()) {
-           // dd($response->json());
             return $response->json();
         }
         return ['error' => 'Failed to fetch data'];
     }
 
-    public function getClientLists()
+    public function getClientLists(array $adminID)
     {
-        $url = $this->baseUrl.'/api/get-client-lists';
+        $parentId = $adminID;
+
+        $url = $this->baseUrl.'/api/client-list';
+
+        $response = Http::timeout(60)->get($url, $parentId);
+
+        if ($response->successful()) 
+        {
+            return $response->json();
+        }
+
+        return ['error' => 'Failed to fetch data'];
+
     }
 }

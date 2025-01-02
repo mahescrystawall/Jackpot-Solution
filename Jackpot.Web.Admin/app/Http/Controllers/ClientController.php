@@ -42,8 +42,8 @@ class ClientController extends Controller
 
     public function clientLists()
     {
-        $adminId = 1;
-        $clients = $this->clientService->getClientList($adminId);
-        return view('clients.list',compact('clients'));
+        $adminId = ['user_id'=>1];
+        $clients = $this->clientService->getClientLists($adminId);
+        return view('client.list',compact('clients'));
     }
 }
