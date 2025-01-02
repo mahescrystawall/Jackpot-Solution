@@ -15,8 +15,7 @@ use Illuminate\Support\Facades\Auth;
 use App\Http\Requests\CreateClientUserRequest;
 use App\Http\Requests\ToggleUserFeatureRequest;
 
-
-
+use App\Http\Requests\UpdateButtonValueRequest;
 class UserController extends Controller
 {
     use ApiResponseTrait;
@@ -35,7 +34,6 @@ class UserController extends Controller
     {
 
         try {
-
             Log::channel('error_logs')->info('User toggle api called');
             $result = $this->_userService->changeUserStatus($request->all());
 
@@ -127,15 +125,15 @@ class UserController extends Controller
         // return $data;
 
         // try {
-            // Execute the procedure
-            $result = $this->_userService->createClientUser($data);
+        // Execute the procedure
+        $result = $this->_userService->createClientUser($data);
 
-            // Return response using the ApiResponseTrait
-            return $this->sendResponse(
-                $result,
-                "Client User successfully created.",
-                200
-            );
+        // Return response using the ApiResponseTrait
+        return $this->sendResponse(
+            $result,
+            "Client User successfully created.",
+            200
+        );
         // } catch (\Throwable $th) {
         //     return $this->sendError($th);
         // }
