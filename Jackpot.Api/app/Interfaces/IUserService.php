@@ -25,5 +25,13 @@ interface IUserService
      */
     public function createClientUser(array $request);
 
+
     public function updateUserResetPassword(int $userId, string $newPassword, string $type);
+
+    /**
+     * Create default buttons
+     */
+    public function createDefaultButtons(int $user_id);
+
+
 }

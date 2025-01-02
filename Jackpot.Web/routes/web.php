@@ -30,7 +30,8 @@ Route::middleware(['client'])->group(function () {
     Route::get('/profit-loss', [ProfitLossController::class, 'index'])->name('profit-loss');
     Route::get('/bet-history', [BetHistoryController::class, 'index'])->name('bet-history');
     Route::get('/unsettled_bets', [UnsettledBetController::class, 'index'])->name('unsettled_bets');
-    Route::get('/change-password', [LoginController::class, 'changePassword'])->name('change-password');
+    Route::get('/change-password', [AuthController::class, 'changePassword'])->name('change-password');
+    Route::patch('/update-password', [AuthController::class, 'updatePassword'])->name('update-password');
     Route::get('/change-price-value', [StakeController::class, 'showForm'])->name('change-price-value');
     Route::post('/stakes/update', [StakeController::class, 'updateStakeValue'])->name('stakes.update');
     // Route::get('/logout', [LoginController::class, 'logout'])->name('logout');

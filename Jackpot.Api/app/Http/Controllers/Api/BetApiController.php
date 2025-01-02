@@ -27,6 +27,7 @@ class BetApiController extends Controller
     //New
     public function getUnsettledBet(Request $request)
     {
+
         $data = $this->_betService->getUnsettledBet($request->all());
 
         return $this->sendResponse($data, 200);

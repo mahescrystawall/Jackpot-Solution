@@ -4,4 +4,5 @@ namespace App\Interfaces;
 interface IButtonService
 {
     public function getUserButtons(int $userId);
+    public function createDefaultButtons(int $userId);
 }
