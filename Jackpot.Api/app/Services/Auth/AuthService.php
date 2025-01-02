@@ -23,12 +23,12 @@ class AuthService implements IAuthService
     }
     public function login($data)
     {
-       
+
         // Define the key and IV (they must match the frontend)
         $key = env('AES_KEY');  // 32-byte key (same as frontend)
         $iv = env('AES_IV');  // 16-byte IV (same as frontend)
-        
-       // $key = 'hdgh6372dhbshdg637wyqb27t28syb2q';  // 32-byte key (same as frontend)
+
+        // $key = 'hdgh6372dhbshdg637wyqb27t28syb2q';  // 32-byte key (same as frontend)
         // $iv = '8g2wg2mnw01b6w7w';  // 16-byte IV (same as frontend)
         // Get the encrypted password from the request
         $encryptedPassword = $data['password'];
