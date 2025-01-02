@@ -25,7 +25,7 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 });
 
 // Route for fetching account_statement
-Route::post('/report/account-statement', [AccountController::class, 'getStatementData']);
+
 
 // Route for fetching bet_list
 Route::get('/bet_list', [AccountController::class, 'getBetData']);
@@ -41,10 +41,8 @@ Route::get('/events', [EventApiController::class, 'getEvents']);
 
 //Route::get('/profit-loss', [ProfitLossApiController::class, 'getProfitLoss']);
 
-Route::post('/profit-loss', [ProfitLossApiController::class, 'getProfitLoss']);
 
 
-Route::post('/bet_history', [BetApiController::class, 'getBetHistory']);
 
 Route::get('/login-data', [LoginApiController::class, 'getLoginData']);
 
@@ -71,11 +69,16 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
     // Client
 
     Route::post('/getUnsettledBet',  [BetApiController::class, 'getUnsettledBet']);
-  Route::post('/create-bet', [BetController::class, 'createBet']);
+
+    Route::post('/create-bet', [BetController::class, 'createBet']);
+    Route::post('/settle-bet', [BetController::class, 'settleBet']);
+    Route::post('create-client-user', [UserController::class, 'createClientUser']);
+    Route::post('/report/account-statement', [AccountController::class, 'getStatementData']);
+    Route::post('/bet_history', [BetApiController::class, 'getBetHistory']);
+    Route::post('/profit-loss', [ProfitLossApiController::class, 'getProfitLoss']);
 Route::post('/settle-bet', [BetController::class, 'settleBet']);
 Route::post('create-client-user', [UserController::class, 'createClientUser']);
   Route::get('/client-list', [UserController::class, 'getClientList']);
-Route::post('/create-bet', [BetController::class, 'createBet']);
 
     // Route::group(['controller' => BetApiController::class], function () {
     //     //Unsettled bets- client NEW
@@ -83,9 +86,9 @@ Route::post('/create-bet', [BetController::class, 'createBet']);
     // });
     Route::group(['controller' => AuthController::class], function () {
         Route::patch('/updatePassword', 'updatePassword');
+        Route::post('/logout', 'logout');
     });
 
     // logout
-    Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
-});
 
+});
