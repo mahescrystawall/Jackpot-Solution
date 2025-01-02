@@ -54,6 +54,7 @@ Route::post('/create-bet', [BetController::class, 'createBet']);
         Route::post('/user/buttons', 'UpdateButtonValue');
         Route::post('/reset-user-password', 'updateUserResetPassword');
         Route::put('/user/status', 'UpdateUserStaus');
+        Route::post('/get_blocked_clients', 'getBlockedClients');
     });
 
     // ButtonController
@@ -67,4 +68,3 @@ Route::post('/create-bet', [BetController::class, 'createBet']);
 
 
 });
-Route::post('/get_blocked_clients', [UserController::class, 'getBlockedClients']);
