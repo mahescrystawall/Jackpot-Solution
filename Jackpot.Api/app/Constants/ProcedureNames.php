@@ -17,4 +17,5 @@ class ProcedureNames
     public const CREATE_USER = 'Create_User';
     public const CREATE_DEFAULT_BUTTONS = 'Create_Default_Buttons';
     public const CREATE_DEFAULT_CHIPS = 'Create_Default_Chips';
+    public const GET_CHIP_BY_USER_ID = 'Get_Chip_By_User_Id';
 }
