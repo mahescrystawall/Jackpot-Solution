@@ -8,10 +8,11 @@ use Illuminate\Support\Facades\Log;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Gate;
 use App\Interfaces\IAccountStatementService;
+use App\Traits\AuthorizeTrait;
 
 class AccountController extends Controller
 {
-    use ApiResponseTrait;
+    use ApiResponseTrait, AuthorizeTrait;
     protected $accountStatementService;
 
     // Inject StakeService into the controller
@@ -21,8 +22,8 @@ class AccountController extends Controller
     }
     public function getStatementData(Request $request)
     {
-        if (Gate::denies('owner', $request->user_id)) {
-            return $this->sendError('Unauthorized', 403);
+        if(!$this->isOwner($request->user_id)){
+            return $this->sendError('Unauthorized', 401);
         }
 
         try {
