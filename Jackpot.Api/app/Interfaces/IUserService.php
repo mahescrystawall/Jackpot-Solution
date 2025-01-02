@@ -33,5 +33,5 @@ interface IUserService
      */
     public function createDefaultButtons(int $user_id);
 
-
+    public function getBlockedClients($parentId);
 }

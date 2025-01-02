@@ -140,4 +140,19 @@ class UserService implements IUserService
 
         return $response['result'];
     }
+
+    public function getBlockedClients($parentId)
+    {
+        $data = [
+            'parent_id' => $parentId
+        ];
+
+        $response = $this->userRepository->getBlockedClients($data);
+        if (!$response['success']) {
+            Log::channel('api_log')->error('An error occurred in the custom log.' . $response['message']);
+            return $response['message'];
+        }
+
+        return $response['result'];
+    }
 }

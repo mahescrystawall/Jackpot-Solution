@@ -11,7 +11,6 @@ use App\Http\Controllers\Api\ProfitLossApiController;
 use App\Http\Controllers\Api\Auth\AuthController as APIAuthController;
 
 
-
 Route::post('/login', [APIAuthController::class, 'login']);
 
 Route::group(['middleware' => ['auth:sanctum']], function () {
@@ -65,4 +64,7 @@ Route::post('/create-bet', [BetController::class, 'createBet']);
 
     // ProfitLossApiController
     Route::post('/profit-loss', [ProfitLossApiController::class, 'getProfitLoss']);
+
+
 });
+Route::post('/get_blocked_clients', [UserController::class, 'getBlockedClients']);

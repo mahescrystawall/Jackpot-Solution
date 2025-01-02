@@ -5,6 +5,7 @@ namespace App\Repositories;
 use App\Models\User;
 use App\Procedures\Procedure;
 use App\Constants\ProcedureNames;
+use Illuminate\Support\Facades\DB;
 
 class UserRepository
 {
@@ -82,5 +83,10 @@ class UserRepository
     public function getUserByEmail(string $email)
     {
         return User::where('email', $email)->first() ?? null;
+    }
+
+    public function getBlockedClients(array $data)
+    {
+        return Procedure::ExecuteProcedure(ProcedureNames::GET_BLOCKED_CLIENTS, $data);
     }
 }

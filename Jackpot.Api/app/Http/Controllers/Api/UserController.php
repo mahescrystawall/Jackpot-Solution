@@ -159,4 +159,25 @@ class UserController extends Controller
             return $this->sendError($th);
         }
     }
+
+    /**
+     * Get the list of blocked clients.
+     */
+    public function getBlockedClients(Request $request)
+    {
+        $parentId = $request->input('parent_id');
+
+        try {
+            $result = $this->_userService->getBlockedClients($parentId);
+
+            return $this->sendResponse(
+                $result,
+                "Blocked clients retrieved successfully.",
+                200
+            );
+        } catch (\Throwable $th) {
+            Log::channel('error_logs')->error('An error occurred while retrieving blocked clients: ' . $th);
+            return $this->sendError($th);
+        }
+    }
 }
