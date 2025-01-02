@@ -16,16 +16,21 @@ class Procedure
     static public function ExecuteProcedure($procedureName, $values = [])
     {
         // Check if the values array is associative
-        if (!is_array($values) || empty($values)) {
-            return "Invalid or empty values provided.";
-        }
+        // if (!is_array($values) || empty($values)) {
+        //     return "Invalid or empty values provided.";
+        // }
+
+        $placeholdersString = null;
 
         // Build parameter placeholders with named parameters
         $placeholders = [];
-        foreach ($values as $key => $value) {
-            $placeholders[] = "@{$key} = ?";
+        
+        if(!empty($values)) {
+            foreach ($values as $key => $value) {
+                $placeholders[] = "@{$key} = ?";
+            }
+            $placeholdersString = implode(', ', $placeholders);
         }
-        $placeholdersString = implode(', ', $placeholders);
 
         // Build the EXEC statement
         $execStatement = "EXEC {$procedureName} {$placeholdersString}";
