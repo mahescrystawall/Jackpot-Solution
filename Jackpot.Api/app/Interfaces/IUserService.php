@@ -12,7 +12,10 @@ interface IUserService
      * @return mixed The result of the procedure execution.
      */
     public function changeUserStatus(array $request);
-    public function updateButtonValue(int $user_id,string $title,string $amount,$updated_at);
+    public function updateButtonValue(int $user_id, string $title, string $amount, $updated_at);
+
+    public function getUsersByParentIdPaginated($parentId);
+
 
     /**
      * Create a client user.

@@ -25,7 +25,7 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 });
 
 // Route for fetching account_statement
-Route::post('/report/account-statement', [AccountController::class, 'getStatementData']);
+
 
 // Route for fetching bet_list
 Route::get('/bet_list', [AccountController::class, 'getBetData']);
@@ -41,10 +41,8 @@ Route::get('/events', [EventApiController::class, 'getEvents']);
 
 //Route::get('/profit-loss', [ProfitLossApiController::class, 'getProfitLoss']);
 
-Route::post('/profit-loss', [ProfitLossApiController::class, 'getProfitLoss']);
 
 
-Route::post('/bet_history', [BetApiController::class, 'getBetHistory']);
 
 Route::get('/login-data', [LoginApiController::class, 'getLoginData']);
 
@@ -53,20 +51,44 @@ Route::post('/login', [APIAuthController::class, 'login']);
 // Route for fetching int casino games list
 Route::get('/int-casino', [IntCasinoApiController::class, 'getCasinoGames']);
 
-//Unsettled bets- client NEW
-Route::post('/getUnsettledBet', [BetApiController::class, 'getUnsettledBet']);
+
+// Route::post('/getUnsettledBet', [BetApiController::class, 'getUnsettledBet']);
 
 Route::put('/user/status', [UserController::class, 'UpdateUserStaus']);
 
 Route::post('/user/buttons', [UserController::class, 'UpdateButtonValue']);
 Route::get('/user-buttons', [ButtonController::class, 'getUserButtons']);
 
-
 Route::get('/sports-inplay', [SportsController::class, 'getInplayGames']);
 // Route::get('/sports-inplay', function () {
 //     return response()->json(['test' => 'API is working']);
 // });
 
-Route::post('/create-bet', [BetController::class, 'createBet']);
+Route::group(['middleware' => ['auth:sanctum']], function () {
+
+    // Client
+
+    Route::post('/getUnsettledBet',  [BetApiController::class, 'getUnsettledBet']);
+
+    Route::post('/create-bet', [BetController::class, 'createBet']);
+    Route::post('/settle-bet', [BetController::class, 'settleBet']);
+    Route::post('create-client-user', [UserController::class, 'createClientUser']);
+    Route::post('/report/account-statement', [AccountController::class, 'getStatementData']);
+    Route::post('/bet_history', [BetApiController::class, 'getBetHistory']);
+    Route::post('/profit-loss', [ProfitLossApiController::class, 'getProfitLoss']);
 Route::post('/settle-bet', [BetController::class, 'settleBet']);
 Route::post('create-client-user', [UserController::class, 'createClientUser']);
+  Route::get('/client-list', [UserController::class, 'getClientList']);
+
+    // Route::group(['controller' => BetApiController::class], function () {
+    //     //Unsettled bets- client NEW
+
+    // });
+    Route::group(['controller' => AuthController::class], function () {
+        Route::patch('/updatePassword', 'updatePassword');
+        Route::post('/logout', 'logout');
+    });
+
+    // logout
+
+});
