@@ -13,9 +13,10 @@ class ClientService
         $this->baseUrl = env('API_URL');
     }
 
-    public function createClient(array $params){
+    public function createClient(array $params)
+    {
 
-        $url = $this->baseUrl.'/api/create-client-user';
+        $url = $this->baseUrl . '/api/create-client-user';
 
         $response = Http::timeout(60)->post($url, $params);
         if ($response->successful()) {
@@ -28,16 +29,15 @@ class ClientService
     {
         $parentId = $adminID;
 
-        $url = $this->baseUrl.'/api/client-list';
+        $url = $this->baseUrl . '/api/client-list';
 
         $response = Http::timeout(60)->get($url, $parentId);
+      //  dd($response->json());
 
-        if ($response->successful()) 
-        {
+        if ($response->successful()) {
             return $response->json();
         }
 
         return ['error' => 'Failed to fetch data'];
-
     }
 }
