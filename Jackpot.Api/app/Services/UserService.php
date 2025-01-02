@@ -68,4 +68,21 @@ class UserService implements IUserService
         }
         return $response['result'];
     }
+
+    public function updateUserResetPassword(int $userId, string $newPassword, string $type)
+    {
+        $data = [
+            'user_id' => $userId,
+            'new_password' => $newPassword,
+            'type' => $type
+        ];
+
+        $response = $this->userRepository->updateUserResetPassword($data);
+        if (!$response['success']) {
+            Log::channel('api_log')->error('An error occurred in the custom log.' . $response['message']);
+            return $response['message'];
+        }
+
+        return $response['result'];
+    }
 }

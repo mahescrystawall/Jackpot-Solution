@@ -71,3 +71,4 @@ Route::get('/client-list', [UserController::class, 'getClientList']);
 Route::post('/create-bet', [BetController::class, 'createBet']);
 Route::post('/settle-bet', [BetController::class, 'settleBet']);
 Route::post('create-client-user', [UserController::class, 'createClientUser']);
+Route::post('/reset-user-password', [UserController::class, 'updateUserResetPassword']);

@@ -15,5 +15,5 @@ class ProcedureNames
     public const SETTLE_BET = 'Settle_Bet';
     public const CREATE_USER = 'Create_User';
 
-
+    public const UPDATE_USER_PASSWORD = 'Update_User_Password';
 }

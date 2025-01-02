@@ -31,5 +31,8 @@ class UserRepository
         return Procedure::ExecuteProcedure(ProcedureNames::CREATE_USER, $data);
     }
 
-
+    public function updateUserResetPassword(array $data)
+    {
+        return Procedure::ExecuteProcedure(ProcedureNames::UPDATE_USER_PASSWORD, $data);
+    }
 }

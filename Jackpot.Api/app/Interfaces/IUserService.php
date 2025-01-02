@@ -24,4 +24,6 @@ interface IUserService
      * @return mixed The result of the procedure execution.
      */
     public function createClientUser(array $request);
+
+    public function updateUserResetPassword(int $userId, string $newPassword, string $type);
 }
