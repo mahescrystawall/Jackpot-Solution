@@ -19,6 +19,12 @@ class AuthService implements IAuthService
 
     public function __construct(protected UserRepository $userRepository) {}
 
+    /**
+     * Handle user login.
+     *
+     * @param array $data The login data, typically including username and password.
+     * @return mixed The result of the login process, usually a token or user information.
+     */
     public function login($data)
     {
         $decryptedPassword = $this->decryptPassword($data['password']);

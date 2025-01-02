@@ -4,6 +4,12 @@ namespace App\Traits;
 
 trait EncryptionTrait
 {
+    /**
+     * Decrypts the given encrypted password.
+     *
+     * @param string $encryptedPassword The encrypted password to decrypt.
+     * @return string The decrypted password.
+     */
     public function decryptPassword($encryptedPassword)
     {
         $key = env('AES_KEY');
