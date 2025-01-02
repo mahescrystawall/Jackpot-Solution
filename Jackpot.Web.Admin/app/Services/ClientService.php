@@ -31,7 +31,7 @@ class ClientService
 
         $url = $this->baseUrl . '/api/client-list';
 
-        $response = Http::timeout(60)->get($url, $parentId);
+        $response = Http::withToken(session('auth_token'))->timeout(60)->get($url, $parentId);
       //  dd($response->json());
 
         if ($response->successful()) {
