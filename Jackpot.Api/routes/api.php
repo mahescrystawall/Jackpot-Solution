@@ -69,12 +69,16 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
     // Client
 
     Route::post('/getUnsettledBet',  [BetApiController::class, 'getUnsettledBet']);
+
     Route::post('/create-bet', [BetController::class, 'createBet']);
     Route::post('/settle-bet', [BetController::class, 'settleBet']);
     Route::post('create-client-user', [UserController::class, 'createClientUser']);
     Route::post('/report/account-statement', [AccountController::class, 'getStatementData']);
     Route::post('/bet_history', [BetApiController::class, 'getBetHistory']);
     Route::post('/profit-loss', [ProfitLossApiController::class, 'getProfitLoss']);
+Route::post('/settle-bet', [BetController::class, 'settleBet']);
+Route::post('create-client-user', [UserController::class, 'createClientUser']);
+  Route::get('/client-list', [UserController::class, 'getClientList']);
 
     // Route::group(['controller' => BetApiController::class], function () {
     //     //Unsettled bets- client NEW
