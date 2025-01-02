@@ -48,8 +48,8 @@
                   <li><a href="" class="block px-4 py-2 text-sm text-jwhite1 hover:bg-jblue1 px-6" role="menuitem">Bet History</a></li>
                   <li><a href="" class="block px-4 py-2 text-sm text-jwhite1 hover:bg-jblue1 px-6" role="menuitem">Unsettled Bets</a></li>
                   <li><a href="" class="block px-4 py-2 text-sm text-jwhite1 hover:bg-jblue1 px-6" role="menuitem">Set Button Values</a></li>
-                  <li><a href="" class="block px-4 py-2 text-sm text-jwhite1 hover:bg-jblue1 px-6" role="menuitem">Change Password</a></li>
-                  <li><a href="" class="block px-4 py-2 text-sm text-jwhite1 hover:bg-jblue1 px-6" role="menuitem">Sign out</a></li>
+                  <li><a href="{{route('change-password')}}" class="block px-4 py-2 text-sm text-jwhite1 hover:bg-jblue1 px-6" role="menuitem">Change Password</a></li>
+                  <li><a href="{{route('logout')}}" class="block px-4 py-2 text-sm text-jwhite1 hover:bg-jblue1 px-6" role="menuitem">Sign out</a></li>
                 </ul>
               </div>
             </div>

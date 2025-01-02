@@ -25,25 +25,24 @@ class ClientController extends Controller
     {
 
         try {
-  // Handle the valid data here, for example:
-        $validated = $request->validated();
-        // dd($request->all());
+            // Handle the valid data here, for example:
+            $validated = $request->validated();
+            // dd($request->all());
 
-        $response = $this->clientService->createClient($validated);
+            $response = $this->clientService->createClient($validated);
             // Return a success response for AJAX
             return response()->json(['message' => 'Client created successfully'], 200);
         } catch (\Exception $e) {
             // Handle error response
             return response()->json(['error' => 'Something went wrong. Please try again later.'], 500);
         }
-
-      
     }
 
     public function clientLists()
     {
-        $adminId = 1;
-        $clients = $this->clientService->getClientList($adminId);
-        return view('clients.list',compact('clients'));
+        $adminId = ['user_id' => 1];
+        $clients = $this->clientService->getClientLists($adminId);
+        $data = $clients['data'];
+        return view('client.list', compact('data'));
     }
 }

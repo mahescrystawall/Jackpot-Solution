@@ -55,7 +55,7 @@
             </button>
             <ul id="clients-id" class="hidden py-2 space-y-2">
                <li>
-                  <a href="#" class="text-sm flex items-center w-full p-2 text-jwhite1 transition duration-75 rounded-lg pl-11 group hover:bg-jblue1 hover:text-dark dark:text-white dark:hover:bg-gray-700">
+                  <a href="{{route('clients')}}" class="text-sm flex items-center w-full p-2 text-jwhite1 transition duration-75 rounded-lg pl-11 group hover:bg-jblue1 hover:text-dark dark:text-white dark:hover:bg-gray-700">
                      Clients
                   </a>
                </li>
