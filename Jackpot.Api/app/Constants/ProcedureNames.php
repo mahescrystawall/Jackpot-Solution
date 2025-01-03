@@ -15,8 +15,11 @@ class ProcedureNames
     public const CREATE_BET = 'Create_Bet';
     public const SETTLE_BET = 'Settle_Bet';
     public const CREATE_USER = 'Create_User';
+    public const UPDATE_USER_PASSWORD = 'Update_User_Password';
     public const CREATE_DEFAULT_BUTTONS = 'Create_Default_Buttons';
     public const CREATE_DEFAULT_CHIPS = 'Create_Default_Chips';
+
     public const GET_CHIP_BY_USER_ID = 'Get_Chip_By_User_Id';
     public const GET_ALL_EVENT_TYPES = 'Get_all_Event_Types';
+    public const GET_BLOCKED_CLIENTS = 'Get_Blocked_Clients';
 }

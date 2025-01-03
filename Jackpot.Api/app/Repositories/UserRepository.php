@@ -5,6 +5,7 @@ namespace App\Repositories;
 use App\Models\User;
 use App\Procedures\Procedure;
 use App\Constants\ProcedureNames;
+use Illuminate\Support\Facades\DB;
 
 class UserRepository
 {
@@ -46,6 +47,11 @@ class UserRepository
         return Procedure::ExecuteProcedure(ProcedureNames::CREATE_USER, $data);
     }
 
+
+    public function resetPassword(array $data)
+    {
+        return Procedure::ExecuteProcedure(ProcedureNames::UPDATE_USER_PASSWORD, $data);
+    }
     /**
      * Create default buttons
      */
@@ -60,6 +66,7 @@ class UserRepository
     public function createDefaultChip(array $data)
     {
         return Procedure::ExecuteProcedure(ProcedureNames::CREATE_DEFAULT_CHIPS, $data);
+
     }
 
     /**
@@ -77,9 +84,14 @@ class UserRepository
     {
         return User::where('email', $email)->first() ?? null;
     }
+
     
     public function getAllEventsTypes()
     {
         return Procedure::ExecuteProcedure(ProcedureNames::GET_ALL_EVENT_TYPES);
+
+    public function getBlockedClients(array $data)
+    {
+        return Procedure::ExecuteProcedure(ProcedureNames::GET_BLOCKED_CLIENTS, $data);
     }
 }

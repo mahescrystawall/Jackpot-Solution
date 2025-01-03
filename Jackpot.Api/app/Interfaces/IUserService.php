@@ -25,9 +25,13 @@ interface IUserService
      */
     public function createClientUser(array $request);
 
+
+    public function resetPassword(int $userId, string $newPassword, string $type);
+
     /**
      * Create default buttons
      */
     public function createDefaultButtons(int $user_id);
 
+    public function getBlockedClients($parentId);
 }
