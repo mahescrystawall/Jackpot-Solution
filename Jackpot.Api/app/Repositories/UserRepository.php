@@ -48,7 +48,7 @@ class UserRepository
     }
 
 
-    public function updateUserResetPassword(array $data)
+    public function resetPassword(array $data)
     {
         return Procedure::ExecuteProcedure(ProcedureNames::UPDATE_USER_PASSWORD, $data);
     }
@@ -85,6 +85,11 @@ class UserRepository
         return User::where('email', $email)->first() ?? null;
     }
 
+    
+    public function getAllEventsTypes()
+    {
+        return Procedure::ExecuteProcedure(ProcedureNames::GET_ALL_EVENT_TYPES);
+    }
     public function getBlockedClients(array $data)
     {
         return Procedure::ExecuteProcedure(ProcedureNames::GET_BLOCKED_CLIENTS, $data);

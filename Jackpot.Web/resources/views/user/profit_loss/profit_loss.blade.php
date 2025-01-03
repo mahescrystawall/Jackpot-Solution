@@ -3,7 +3,6 @@
 @section('content')
 <div class="mt-200 text-white">
     <div class="p-2 pt-6 sm:ml-64 mt-14 h-screen">
-
         @include('layouts.marquee')
         <section class="w-full ">
             <div class="flex flex-row w-full py-2 mb-2 bg-gradient-to-r from-[#00ADB5] via-[#00ADB5] to-[#1B1B1B]">
@@ -31,6 +30,7 @@
         const DEFAULT_ORDER_DIRECTION = "{{ \App\Constants\Constants::DEFAULT_ORDER_DIRECTION }}";
         const DEFAULT_ORDER_BY = "{{ \App\Constants\Constants::DEFAULT_ORDER_BY }}";
         const API_URL = "{{ env('API_URL') }}";
+        const authToken = "{{ session('auth_token') }}";
 
         // Handle form submission (filter by start and end date)
         $('#filter_form').on('submit', function(event) {
@@ -73,6 +73,9 @@
             $.ajax({
                 url: `${API_URL}/api/profit-loss`,
                 method: "POST",
+                headers: {
+                    Authorization: `Bearer ${authToken}`
+                },
                 data: {
                     page: page || 1,
                     user_id: userId,
@@ -127,6 +130,9 @@
             $.ajax({
                 url: `${API_URL}/api/profit-loss`,
                 method: "POST",
+                headers: {
+                    Authorization: `Bearer ${authToken}`
+                },
                 data: {
                     page: page || 1,
                     user_id: userId,

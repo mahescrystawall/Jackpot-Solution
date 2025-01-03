@@ -15,9 +15,8 @@ class BetHistoryService
 
     public function getbetHistoryData($params)
     {
-
         $url = $this->baseUrl . '/api/bet_history';
-
+        // dd($params);
 
         // if ($eventTypeId) {
         //     $queryParams['event_type_id'] = $eventTypeId;
@@ -52,10 +51,10 @@ class BetHistoryService
     public function getAllSports()
     {
 
-
-        $response = Http::timeout(60)->get($this->baseUrl . '/api/menu');
+        $response = Http::withToken(session('auth_token'))
+            ->timeout(60)->get($this->baseUrl . '/api/menu');
         if ($response->successful()) {
-            return $response->json();
+            return $response->json('result');
         }
         return ['error' => 'Failed to fetch data'];
     }

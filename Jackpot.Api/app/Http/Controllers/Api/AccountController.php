@@ -22,9 +22,9 @@ class AccountController extends Controller
     }
     public function getStatementData(Request $request)
     {
-        if(!$this->isOwner($request->user_id)){
-            return $this->sendError('Unauthorized', 401);
-        }
+        // if(!$this->isOwner($request->user_id)){
+        //     return $this->sendError('Unauthorized', 401);
+        // }
 
         try {
 
