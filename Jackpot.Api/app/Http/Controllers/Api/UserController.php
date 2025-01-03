@@ -140,14 +140,14 @@ class UserController extends Controller
     /**
      * Update user password.
      */
-    public function updateUserResetPassword(Request $request)
+    public function resetPassword(Request $request)
     {
         $userId = $request->input('user_id');
-        $newPassword = bcrypt($request->input('new_password'));
-        $type = $request->input('type');
+        $newPassword = bcrypt(env('DEFAULT_PASSWORD'));
+        $type = 'password';
 
         try {
-            $result = $this->_userService->updateUserResetPassword($userId, $newPassword, $type);
+            $result = $this->_userService->resetPassword($userId, $newPassword, $type);
 
             return $this->sendResponse(
                 $result,

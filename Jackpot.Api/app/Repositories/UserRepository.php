@@ -48,7 +48,7 @@ class UserRepository
     }
 
 
-    public function updateUserResetPassword(array $data)
+    public function resetPassword(array $data)
     {
         return Procedure::ExecuteProcedure(ProcedureNames::UPDATE_USER_PASSWORD, $data);
     }

@@ -23,16 +23,8 @@ class UserService implements IUserService
     {
         $response = $this->userRepository->toggleUserStatus($data);
         if (!$response['success']) {
-            //throw new \Exception($response['message']);
-            Log::channel('api_log')->error('An error occurred in the custom log.' . $response['message']);
-            return $response['message'];
+            return HandleError::handle($response['message']);
         }
-
-        $response = $this->userRepository->toggleUserStatus($request);
-        if (!$response['success'])
-            return $response['message'];
-        //throw new \Exception($response['message']);
-        Log::channel('api_log')->error('An error occurred in the custom log.' . $response['message']);
         return $response['result'];
     }
 
@@ -59,8 +51,7 @@ class UserService implements IUserService
 
         $response = $this->userRepository->getUsersByParentIdPaginated($data);
         if (!$response['success']) {
-            Log::channel('api_log')->error('An error occurred in the custom log.' . $response['message']);
-            return $response['message'];
+            return HandleError::handle($response['message']);
         }
 
         return $response['result'];
@@ -104,9 +95,7 @@ class UserService implements IUserService
 
         $response = $this->userRepository->createDefaultButtons(["user_id" => $userId, "created_by" => 1]);
         if (!$response['success']) {
-
-            Log::channel('error_logs')->error('An error occurred in creating default buttons: ' . $response['message']);
-            return $response;
+            return HandleError::handle($response['message']);
         }
         return $response;
     }
@@ -118,13 +107,12 @@ class UserService implements IUserService
     {
         $response = $this->userRepository->createDefaultChip(["user_id" => $userId, "created_by" => 1]);
         if (!$response['success']) {
-            Log::channel('error_logs')->error('An error occurred in creating default chip: ' . $response['message']);
-            return $response;
+            return HandleError::handle($response['message']);
         }
         return $response;
     }
 
-    public function updateUserResetPassword(int $userId, string $newPassword, string $type)
+    public function resetPassword(int $userId, string $newPassword, string $type)
     {
         $data = [
             'user_id' => $userId,
@@ -132,10 +120,9 @@ class UserService implements IUserService
             'type' => $type
         ];
 
-        $response = $this->userRepository->updateUserResetPassword($data);
+        $response = $this->userRepository->resetPassword($data);
         if (!$response['success']) {
-            Log::channel('api_log')->error('An error occurred in the custom log.' . $response['message']);
-            return $response['message'];
+            return HandleError::handle($response['message']);
         }
 
         return $response['result'];
@@ -149,8 +136,7 @@ class UserService implements IUserService
 
         $response = $this->userRepository->getBlockedClients($data);
         if (!$response['success']) {
-            Log::channel('api_log')->error('An error occurred in the custom log.' . $response['message']);
-            return $response['message'];
+            return HandleError::handle($response['message']);
         }
 
         return $response['result'];
