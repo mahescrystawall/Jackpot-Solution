@@ -32,9 +32,9 @@
                 name="start_date"
 
                 placeholder="From Date"
-              type="date"
+                type="date"
                 class="bg-transparent border border-solid border-jcolor1 text-white-900 text-sm rounded-lg focus:ring-jblue2 focus:rounded-md focus:border-jblue2 block w-full ps-10 p-2.5"
-                value="{{ old('start_date', $startDate) }}"/>
+                value="{{ old('start_date', $startDate) }}" />
         </div>
 
         <div class="relative w-[100vw] md:max-w-sm md:w-full">
@@ -44,7 +44,7 @@
                 </svg>
             </div>
             <input
-          value="{{ old('end_date', $endDate) }}"
+                value="{{ old('end_date', $endDate) }}"
                 id="datepicker-end_date"
                 name="end_date"
 
@@ -56,7 +56,7 @@
             <label for="category" class="sr-only">Category</label>
             <select id="category" class="dropdown-search gap-2.5 bg-transparent border-none text-white w-full md:w-full focus:ring-jblue2 focus:rounded-md focus:border-jblue2">
                 <option value="{ request('category') }}">All</option>
-                @foreach ($allSports['data']['menu'] as $sport)
+                @foreach ($allSports as $sport)
                 <option value="{{ $sport['id'] }}" {{ request('category') == $sport['id'] ? 'selected' : '' }}>
                     {{ $sport['name'] }}
                 </option>

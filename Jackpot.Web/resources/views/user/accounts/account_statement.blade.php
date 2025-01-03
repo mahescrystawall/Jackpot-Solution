@@ -1,91 +1,95 @@
 @extends('layouts.app')
 @section('content')
-    <div class="mt-200 text-white">
-        <div class="p-2 pt-6 sm:ml-64 mt-14 h-screen">
+<div class="mt-200 text-white">
+    <div class="p-2 pt-6 sm:ml-64 mt-14 h-screen">
 
-            @include('layouts.marquee')
+        @include('layouts.marquee')
 
-            <section class="w-full ">
-                <div class="flex flex-row w-full py-2 mb-2 bg-gradient-to-r from-[#00ADB5] via-[#00ADB5] to-[#1B1B1B]">
-                    <div class="flex items-center gap-2 text-white text-sm w-full px-2">
-                        <h2>Account Statement</h2>
-                    </div>
+        <section class="w-full ">
+            <div class="flex flex-row w-full py-2 mb-2 bg-gradient-to-r from-[#00ADB5] via-[#00ADB5] to-[#1B1B1B]">
+                <div class="flex items-center gap-2 text-white text-sm w-full px-2">
+                    <h2>Account Statement</h2>
                 </div>
-                {{-- Filter --}}
-                @include('user.accounts.search_filter')
-                @include('user.accounts.section_01')
+            </div>
+            {{-- Filter --}}
+            @include('user.accounts.search_filter')
+            @include('user.accounts.section_01')
 
-            </section>
-        </div>
+        </section>
     </div>
+</div>
 @endsection
 
 @section('js_content')
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script>
-        $(document).ready(function() {
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+    $(document).ready(function() {
+        const API_URL = "{{ env('API_URL') }}";
+        const DEFAULT_PAGE_SIZE = "{{ \App\Constants\Constants::DEFAULT_PAGE_SIZE }}";
+        const DEFAULT_ORDER_DIRECTION = "{{ \App\Constants\Constants::DEFAULT_ORDER_DIRECTION }}";
+        const DEFAULT_ORDER_BY = "{{ \App\Constants\Constants::DEFAULT_ORDER_BY }}";
+        const userId = "{{ session('user_id') }}";
+        const authToken = "{{ session('auth_token') }}";
 
-            const userId = "{{ session('user_id') }}";
-            const DEFAULT_PAGE_SIZE = {{ \App\Constants\Constants::DEFAULT_PAGE_SIZE }};
-            const DEFAULT_ORDER_DIRECTION = "{{ \App\Constants\Constants::DEFAULT_ORDER_DIRECTION }}";
-            const DEFAULT_ORDER_BY = "{{ \App\Constants\Constants::DEFAULT_ORDER_BY }}";
-            const API_URL = "{{ env('API_URL') }}";
+        // Handle form submission (filter by start and end date)
+        $('#filter_form').on('submit', function(event) {
+            event.preventDefault();
 
-            // Handle form submission (filter by start and end date)
-            $('#filter_form').on('submit', function(event) {
-                event.preventDefault();
+            const startDate = $('#datepicker-start_date').val();
+            const endDate = $('#datepicker-end_date').val();
 
-                const startDate = $('#datepicker-start_date').val();
-                const endDate = $('#datepicker-end_date').val();
+            // Perform validation
+            if (!startDate || !endDate) {
+                alert('Please select both start and end date.');
+                return;
+            }
 
-                // Perform validation
-                if (!startDate || !endDate) {
-                    alert('Please select both start and end date.');
-                    return;
-                }
+            const startDateObj = new Date(startDate);
+            const endDateObj = new Date(endDate);
 
-                const startDateObj = new Date(startDate);
-                const endDateObj = new Date(endDate);
+            // Calculate the difference between the start and end date
+            const dateDiff = Math.floor((endDateObj - startDateObj) / (1000 * 60 * 60 * 24)); // in days
+            if (dateDiff > 15) {
+                alert('Max Date Range of 15 days is allowed!');
+                return;
+            }
 
-                // Calculate the difference between the start and end date
-                const dateDiff = Math.floor((endDateObj - startDateObj) / (1000 * 60 * 60 * 24)); // in days
-                if (dateDiff > 15) {
-                    alert('Max Date Range of 15 days is allowed!');
-                    return;
-                }
+            // If validation passes, call the getData function
+            getData('', startDate, endDate, authToken, API_URL, userId);
+        });
 
-                // If validation passes, call the getData function
-                getData('', startDate, endDate);
-            });
+        // Handle pagination link clicks
+        // $(document).on('click', '.page-link', function(event) {
+        //     event.preventDefault();
+        //     const page = $(this).data('page');
+        //     const startDate = $('#datepicker-start_date').val();
+        //     const endDate = $('#datepicker-end_date').val();
+        //     getData(page, startDate, endDate);
+        // });
 
-            // Handle pagination link clicks
-            $(document).on('click', '.page-link', function(event) {
-                event.preventDefault();
-                const page = $(this).data('page');
-                const startDate = $('#datepicker-start_date').val();
-                const endDate = $('#datepicker-end_date').val();
-                getData(page, startDate, endDate);
-            });
+        function getData(page, startDate, endDate, authToken, API_URL) {
+            $.ajax({
+                url: `${API_URL}/api/report/account-statement`,
+                method: "POST",
+                headers: {
+                    Authorization: `Bearer ${authToken}`
+                },
+                data: {
+                    page: page || 1,
+                    user_id: userId,
+                    page_size: DEFAULT_PAGE_SIZE,
+                    order_direction: DEFAULT_ORDER_DIRECTION,
+                    order_by: DEFAULT_ORDER_BY,
+                    start_date: startDate,
+                    end_date: endDate
+                },
+                success: function(response) {
+                    console.log(response);
+                    const data = response.data || [];
+                    const pagination = response.pagination || '';
 
-            function getData(page, startDate, endDate) {
-    $.ajax({
-        url: `${API_URL}/api/report/account-statement`,
-        method: "POST",
-        data: {
-            page: page || 1,
-            user_id: userId,
-            page_size: DEFAULT_PAGE_SIZE,
-            order_direction: DEFAULT_ORDER_DIRECTION,
-            order_by: DEFAULT_ORDER_BY,
-            start_date: startDate,
-            end_date: endDate
-        },
-        success: function(response) {
-            const data = response.data || [];
-            const pagination = response.pagination || '';
-
-            if (data.length > 0) {
-                const rows = data.map((item, index) => `
+                    if (data.length > 0) {
+                        const rows = data.map((item, index) => `
                     <tr>
                         <td class="text-center">${index + 1}</td>
                         <td class="text-center">${item.created_on}</td>
@@ -103,21 +107,21 @@
                         </td>
                     </tr>
                 `).join('');
-                $('#data-table-body').html(rows);
-            } else {
-                $('#data-table-body').html('<tr><td colspan="7" class="text-center">No records found for the selected filters.</td></tr>');
-            }
+                        $('#data-table-body').html(rows);
+                    } else {
+                        $('#data-table-body').html('<tr><td colspan="7" class="text-center">No records found for the selected filters.</td></tr>');
+                    }
 
-            // Update the pagination links
-            $('#pagination-links').html(pagination);
-        },
-        error: function(xhr, status, error) {
-            console.error("Error loading data: " + error);
-            $('#data-table-body').html('<tr><td colspan="7" class="text-center">Error loading data</td></tr>');
+                    // Update the pagination links
+                    $('#pagination-links').html(pagination);
+                },
+                error: function(xhr, status, error) {
+                    console.error("Error loading data: " + error);
+                    $('#data-table-body').html('<tr><td colspan="7" class="text-center">Error loading data</td></tr>');
+                }
+            });
         }
-    });
-}
 
-        });
-    </script>
+    });
+</script>
 @endsection

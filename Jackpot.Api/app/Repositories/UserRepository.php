@@ -85,6 +85,11 @@ class UserRepository
         return User::where('email', $email)->first() ?? null;
     }
 
+    
+    public function getAllEventsTypes()
+    {
+        return Procedure::ExecuteProcedure(ProcedureNames::GET_ALL_EVENT_TYPES);
+
     public function getBlockedClients(array $data)
     {
         return Procedure::ExecuteProcedure(ProcedureNames::GET_BLOCKED_CLIENTS, $data);

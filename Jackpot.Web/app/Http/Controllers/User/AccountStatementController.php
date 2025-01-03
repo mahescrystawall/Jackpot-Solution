@@ -82,6 +82,7 @@ class AccountStatementController extends Controller
 
         $apiUrl = 'http://127.0.0.1:8081/api/report/account-statement';
         $allSports = $this->betHistoryService->getAllSports();
+        // dd($allSports);
         // Set up filters with defaults
         $filters = [
             'start_date' => $request->input('start_date', Carbon::now()->subDays(15)->format('Y-m-d')),
@@ -112,7 +113,7 @@ class AccountStatementController extends Controller
             'menuData' => $menuData ?? [],
             'allSports' => $allSports,
             'pagination' => $menuData['pagination'] ?? null,
+            'API_URL' => $apiUrl,
         ]);
-
     }
 }

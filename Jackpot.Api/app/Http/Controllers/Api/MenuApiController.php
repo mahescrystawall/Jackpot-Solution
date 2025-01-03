@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
@@ -20,7 +21,7 @@ class MenuApiController extends Controller
      */
     public function getMenu()
     {
-        $data = $this->_menuService->getMenuData();
+        $data = $this->_menuService->getAllEventsTypes();
 
         if (isset($data['message']) && $data['message'] === 'File not found') {
             return response()->json($data, 404);

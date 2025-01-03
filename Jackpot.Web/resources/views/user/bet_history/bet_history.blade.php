@@ -32,50 +32,41 @@
             const startDate = $('#start_date').val();
             const endDate = $('#end_date').val();
             const eventTypeSelect = $('#event_type_id').val();
-            const betStatusSelect = $('is_matched').val();
-            const type = "ALL";
-            // const startDateInput = document.querySelector('input[name="start_date"]');
-            // const endDateInput = document.querySelector('input[name="end_date"]');
-
-            // alert(startDate);
-            // Trigger AJAX call to get the data with the selected dates
-            getData('', startDate, endDate, eventTypeSelect, betStatusSelect, type);
+            console.log(startDate, endDate);
+            getData(startDate, endDate, eventTypeSelect);
         });
 
         // Handle pagination link clicks
-        $(document).on('click', '.page-link', function(event) {
-            event.preventDefault();
+        // $(document).on('click', '.page-link', function(event) {
+        //     event.preventDefault();
 
-            const page = $(this).data('page');
-            const startDate = $('#start_date').val();
-            const endDate = $('#end_date').val();
-            const eventTypeSelect = $('#event_type_id').val();
-            const betStatusSelect = $('is_matched').val();
-            const type = "ALL";
-            // Trigger AJAX call to get data for the clicked page
-            getData(page, startDate, endDate, eventTypeSelect, betStatusSelect, type);
-        });
+        //     const page = $(this).data('page');
+        //     const startDate = $('#start_date').val();
+        //     const endDate = $('#end_date').val();
+        //     const eventTypeSelect = $('#event_type_id').val();
+        //     const betStatusSelect = $('is_matched').val();
+        //     const type = "ALL";
+        //     // Trigger AJAX call to get data for the clicked page
+        //     getData(page, startDate, endDate, eventTypeSelect, betStatusSelect, type);
+        // });
 
         // Function to fetch data based on page, start date, and end date
-        function getData(page, startDate, endDate, eventTypeSelect, betStatusSelect, type) {
+        function getData(startDate, endDate, eventTypeSelect) {
             $.ajax({
                 url: "{{route('bet-history')}}", // Adjust to your controller's route
                 method: "GET",
                 data: {
-                    page: page,
                     start_date: startDate,
                     end_date: endDate,
-                    eventTypeSelect: eventTypeSelect,
-                    betStatusSelect: betStatusSelect,
-                    type: type,
+                    event_type_id: eventTypeSelect,
+                    _token: '{{ csrf_token() }}'
                 },
                 success: function(response) {
 
-                    // console.log(response.data);
                     // Update the table with the new data
                     $('#data-table-body').html(response.data); // Populate the table
                     // Update the pagination
-                    $('#pagination-links').html(response.pagination); // Populate pagination links
+                    // $('#pagination-links').html(response.pagination); // Populate pagination links
                 },
                 error: function(xhr, status, error) {
                     console.error("Error loading data: " + error);
