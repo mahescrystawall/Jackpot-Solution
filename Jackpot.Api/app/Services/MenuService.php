@@ -1,29 +1,26 @@
 <?php
+
 namespace App\Services;
 
 use App\Interfaces\IMenuService;
+use App\Repositories\UserRepository;
 
 class MenuService implements IMenuService
 {
+    protected $userRepository;
+    public function __construct(UserRepository $userRepository)
+    {
+        $this->userRepository = $userRepository;
+    }
     /**
      * Fetch the menu data from the JSON file.
      *
      * @return array
      */
-    public function getMenuData(): array
+    public function getAllEventsTypes()
     {
-        // Path to the JSON file
-        $path = storage_path('json/menu.json');
-
-        // Check if file exists
-        if (file_exists($path)) {
-            // Read the file content
-            $json = file_get_contents($path);
-
-            // Decode JSON to array
-            return json_decode($json, true);
-        }
-
-        return ['message' => 'File not found'];
+        $eventTypes = $this->userRepository->getAllEventsTypes();
+        if (!$eventTypes['success']) throw new \Exception($eventTypes['message']);
+        return collect($eventTypes);
     }
 }

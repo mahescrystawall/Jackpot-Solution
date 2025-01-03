@@ -28,20 +28,20 @@
                 @endforeach
             </select>
         </div>
-        <div class="flex gap-10  justify-between items-start rounded-md border border-1 border-jcolor1 w-full md:w-60">
+        <!-- <div class="flex gap-10  justify-between items-start rounded-md border border-1 border-jcolor1 w-full md:w-60">
             <select class="dropdown-search gap-2.5 bg-transparent border-none text-white  focus:ring-jblue2 focus:rounded-md focus:border-jblue2 w-full md:w-60" name="reportType" id="is_matched">
                 <option value="" disabled="disabled">Bet Status</option>
-                <option value="1">Matched</option>
-                <option value="0">UnMatched</option>
+                <option value="matched">Matched</option>
+                <option value="unmatched">UnMatched</option>
             </select>
-        </div>
+        </div> -->
         <!-- <div class="relative w-[100vw] md:w-60">
             <div class="absolute inset-y-0 start-0 flex items-center ps-3 pointer-events-none w-full md:w-60">
 
             </div>
             <input id="datepicker-fromDate" name="start_date"  placeholder="From Date" type="text" value="{{ old('start_date', $startDate) }}" class="bg-transparent border border-solid border-jcolor1 text-gray-900 text-sm rounded-lg focus:ring-jblue2 focus:rounded-md focus:border-jblue2 block w-full ps-10 p-2.5 datepicker-input"> -->
 
-            <!-- <input type="date" name="start_date" id="start_date" placeholder="Start Date" datepicker  value="{{ old('start_date', $startDate) }}" class="datepicker-picker bg-transparent border border-solid border-jcolor1 text-gray-900 text-sm rounded-lg focus:ring-jblue2 focus:rounded-md focus:border-jblue2 block ps-10 p-2.5 w-full md:w-60"> -->
+        <!-- <input type="date" name="start_date" id="start_date" placeholder="Start Date" datepicker  value="{{ old('start_date', $startDate) }}" class="datepicker-picker bg-transparent border border-solid border-jcolor1 text-gray-900 text-sm rounded-lg focus:ring-jblue2 focus:rounded-md focus:border-jblue2 block ps-10 p-2.5 w-full md:w-60"> -->
         <!-- </div>
         <div class="relative w-[100vw] md:w-60">
             <div class="absolute inset-y-0 start-0 flex items-center ps-3 pointer-events-none w-full md:w-60">
@@ -74,7 +74,7 @@
                 </svg>
             </div>
             <input
-            value="{{ request('end_date') }}"
+                value="{{ request('end_date') }}"
                 id="end_date"
                 name="end_date"
                 datepicker

@@ -77,4 +77,9 @@ class UserRepository
     {
         return User::where('email', $email)->first() ?? null;
     }
+    
+    public function getAllEventsTypes()
+    {
+        return Procedure::ExecuteProcedure(ProcedureNames::GET_ALL_EVENT_TYPES);
+    }
 }
