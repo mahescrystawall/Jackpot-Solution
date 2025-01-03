@@ -52,7 +52,7 @@ Route::post('/create-bet', [BetController::class, 'createBet']);
         Route::post('create-client-user', 'createClientUser');
         Route::get('/client-list', 'getClientList');
         Route::post('/user/buttons', 'UpdateButtonValue');
-        Route::post('/reset-user-password', 'updateUserResetPassword');
+        Route::post('/reset-user-password', 'resetPassword');
         Route::put('/user/status', 'UpdateUserStaus');
         Route::post('/get_blocked_clients', 'getBlockedClients');
     });
